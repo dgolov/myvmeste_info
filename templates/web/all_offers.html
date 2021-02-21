@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="section_without_color">
+        <div class="container mb-5 mt-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <nav aria-label="breadcrumb">
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'home' %}">Главная</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Офферы</li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-md-6">
+                        {% include 'web/inc/search_form.html' %}
+                </div>
+                <div class="col-md-6"><h1>Офферы</h1></div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    {% for category in categories %}
+                        {% include 'web/inc/category_card.html' %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <section class="section_without_color" id="about">
+    <div class="container mb-5 mt-4"><h1>Поддержка | Контакты</h1></div>
+        <!--begin container-->
+        <div class="container">
+            <!--begin row-->
+            <div class="row">
+                <div class="col-md-6">
+                    <ul class="freelancer-details">
+{#                        <li class="bold">ИП Мартынюк А.В.</li>#}
+                        <li><span class="bold">Адрес:</span>
+                            <span class="freelancer-second-details">
+                                Нижегородская обл. г. Дзержинск ул. Самохвалова д. 8Б
+                            </span>
+                        </li>
+{#                        <li><span class="freelancer-main-details">ИНН:</span>#}
+{#                            <span class="freelancer-second-details">В разработке</span>#}
+{#                        </li>#}
+{#                        <li><span class="freelancer-main-details">ОГРН:</span>#}
+{#                            <span class="freelancer-second-details">В разработке</span>#}
+{#                        </li>#}
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <ul class="freelancer-details">
+                        <li><span class="bold">E-mail:</span>
+                            <span class="freelancer-second-details myemail">mail@myvmeste.info</span></li>
+                        <li><span class="bold">Telegram:</span>
+                            <a href="#" target="_blank">
+                                <span class="freelancer-second-details">@myvmeste</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                {% if user.is_authenticated %}
+                    <div class="col-md-12 margin-top-20">
+                        <h3>Обратная связь</h3>
+                        <form method="post">
+                            <select class="form-select mb-3" name="question_category">
+                                <option selected>Укажите категорию вопроса</option>
+                                <option>Вопрос по выплатам денежных средств</option>
+                                <option>Вопрос по технической части</option>
+                                <option>Другой вопрос</option>
+                            </select>
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="submit" class="btn btn-primary" style="float: right; margin-top: 10px;">
+                                Отправить
+                            </button>
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

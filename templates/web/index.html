@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {{ title }} {% endblock %}
+{% block content %}
+    <section class="home-section" id="home">
+        <div class="home-section-overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="hero-text">МЫ СФОРМИРОВАЛИ НОВОЕ ПРЕДСТАВЛЕНИЕ О ДОХОДЕ</p>
+                    <h1>ПРОЕКТ <span class="red">«МЫВМЕСТЕ»</span></h1>
+                    <p class="hero-text">Стань участником нашей команды и начни воплощать свои цели в реальность.</p>
+                    <div class="container popup-gallery-wrapper">
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-8">
+                                <div class="popup-gallery">
+                                    <a class="popup4 video-icon" href="">
+                                        <i class="fa fa-play"></i></a>
+                                </div>
+                                <div class="popup-video-text" >Посмотреть видео презентацию проекта</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <main>
+	    <section class="section_without_color">
+	        <div class="container">
+	            <div class="row">
+	                <div class="col">
+	                    <h3>МЫ РАДЫ ПРИВЕТСТВОВАТЬ ВАС НА УНИКАЛЬНОМ ПРОЕКТЕ <span class="red">«МЫВМЕСТЕ»</span></h3>
+	                    <p class="word-spacing-align">
+	                        "МЫВМЕСТЕ" - это первая в России площадка-агрегатор банковских продуктов с функцией выплаты
+	                        вознаграждений. Наша команда с 2016 года работает в сфере рекламы финансовых продуктов, и мы
+	                        создали этот проект чтобы каждый из вас смог начать зарабатывать вместе с нами. Все просто!
+	                        Банки платят за то, что вы становитесь их клиентом и пользуетесь их продуктами. Например, за то
+	                        что вы оформляете дебетовые или кредитные карты, микрозаймы и даже страховку, рекламодатели
+	                        (банки, микрофинансовые организации, страховые) платят за это вознаграждения до 4 тысяч рублей за
+	                        один продукт. Очень многие об этом даже и не подозревают. И за ваши
+	                        <span class="red">действия</span> получают деньги другие люди (сотрудники банков, вэб-мастера и
+	                        т.д.), но не ВЫ. Наш проект призван поменять данную несправедливость.
+	                    </p>
+	                    <p class="word-spacing-align">Более того! Развивая проект <span class="red">"МЫВМЕСТЕ"</span>
+	                        каждый сможет зарабатывать десятки, сотни и даже миллионы рублей. Многие активные участники уже
+	                        давно нигде не работают и имеют очень хороший доход только с нашей площадки. И мы гарантируем,
+	                        что любой участник нашего проекта сможет так же!
+	                    </p>
+                        <img src="{% static 'img/main-icons.svg' %}" width="100%" style="margin: 5% 0;">
+	                </div>
+	            </div>
+	        </div>
+	    </section>
+	    <section class="small-home-section">
+	        <div class="container">
+	            <div class="row">
+	                <div class="col-md-10">
+	                    <h6>СТАНЬ УЧАСТНИКОМ, РАССКАЖИ О ПРОЕКТЕ ПЯТИ ДРУЗЬЯМ И ЗАРАБОТАЙ 750 ТЫСЯЧ РУБЛЕЙ УЖЕ ЧЕРЕЗ ДВА МЕСЯЦА.</h6>
+	                </div>
+	                {% if user.is_anonymous %}
+		                <div class="col-md-2 small-home-section-button">
+		                    <a href="{% url 'signup' %}" class="btn btn-danger">Зарегистрироваться</a>
+		                </div>
+		            {% endif %}
+	            </div>
+	        </div>
+	    </section>
+        <section id="marketing">
+            <div class="services-wrapper margin-top-70">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <h2>МАРКЕТИНГ</h2>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="popup-gallery">
+                                <a class="popup4 video-icon-red" href="">
+                                    <i class="fa fa-play"></i></a>
+                            </div>
+                            <div class="popup-video-text-dark" >Посмотреть видео-описание маркетинга</div>
+                        </div>
+                    </div>
+                    {% include 'web/inc/marketing.html' %}
+                </div>
+            </div>
+        </section>
+	    <section class="small-home-section">
+	        <div class="container">
+	            <div class="row">
+	                <div class="col-md-10">
+	                    <h6>БУДЬ АКТИВНЫМ, РАЗВИВАЙ ПРОЕКТ, ПРИГЛАШАЙ НОВЫХ УЧАСТНИКОВ И ЗАРАБАТЫВАЙ МИЛЛИОНЫ.</h6>
+	                </div>
+	                {% if user.is_anonymous %}
+		                <div class="col-md-2 small-home-section-button">
+		                    <a href="{% url 'signup' %}" class="btn btn-danger">Зарегистрироваться</a>
+		                </div>
+		            {% endif %}
+	            </div>
+	        </div>
+	    </section>
+	    <section id="marketing" class="margin-bottom-50">
+	        <div class="services-wrapper margin-top-70">
+	            <div class="container">
+	                <div class="row">
+	                    <div class="col-md-12 margin-bottom-20">
+	                        <h2 class="center">ДЛЯ УЧАСТИЯ В ПРОЕКТЕ НЕОБХОДИМО:</h2>
+	                    </div>
+	                    <div class="col-md-3">
+	                        <h3><span class="home-numbers">1</span></h3>
+	                        <h5>ПРОЙТИ РЕГИСТРАЦИЮ НА САЙТЕ</h5>
+	                    </div>
+	                    <div class="col-md-3">
+	                        <h3><span class="home-numbers">2</span></h3>
+	                        <h5>ИЗУЧИТЬ ПРАВИЛА ПРОЕКТА И ПОДПИСАТЬСЯ НА НАШ TELEGRAM КАНАЛ</h5>
+	                    </div>
+	                    <div class="col-md-3">
+	                        <h3><span class="home-numbers">3</span></h3>
+	                        <h5>ОФОРМИТЬ СЕБЕ ЛЮБОЙ ПРОДУКТ</h5>
+	                        <ul>
+	                            <li class="small">- Выберите банковский продукт в разделе "Офферы".</li>
+	                            <li class="small">- Нажмите на кнопку "Оформить  заявку".</li>
+	                            <li class="small">- Оформите продукт и выполните по нему целевое действие.</li>
+	                        </ul>
+	                    </div>
+	                    <div class="col-md-3">
+	                        <h3><span class="home-numbers">4</span></h3>
+	                        <h5>ПРИГЛАСИТЬ НОВЫХ УЧАСТНИКОВ</h5>
+	                        <p class="small">После оформления приглашайте новых участников в проект  по своей
+	                            реферальной ссылке</p>
+	                    </div>
+	                    <div class="col-md-12">
+	                        <div class="popup-gallery">
+	                            <a class="popup4 video-icon-red" href="">
+	                                <i class="fa fa-play"></i></a>
+	                        </div>
+	                        <div class="popup-video-text-dark" >Посмотреть видео-обучение</div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </section>
+	    <section class="margin-bottom-50">
+	        <div class="container">
+	            <div class="row">
+	                <div class="col-md-12">
+	                    <h3>ПОЧЕМУ ИНТЕРЕСНО ЗАРАБАТЫВАТЬ ИМЕННО У НАС</h3>
+                        <img src="{% static 'img/down_block.svg' %}" width="100%" style="margin: 5% 0;">
+                        {% if user.is_anonymous %}
+                            <div class="down-home-section-button">
+                                <a href="{% url 'signup' %}" class="btn btn-danger">Начать зарабатывать</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </section>
+	</main>
+{% endblock content %}

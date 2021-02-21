@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <section class="section_without_color">
+        <div class="container mb-5 mt-4">
+            <p>Вы вышли из системы</p>
+            <a href="{% url 'login' %}">Войти снова</a>
+        </div>
+    </section>
+
+{% endblock %}

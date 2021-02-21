@@ -1,0 +1,60 @@
+{% load static %}
+<div class="container">
+    <a class="navbar-brand" href="{% url 'home' %}">
+        <img src="{% static 'img/logo2.svg' %}" width="251" height="30" style="margin-right: 25px;"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 8%;">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+            <li class="nav-item" style="margin-left: 5%;">
+                <a class="nav-link" aria-current="page" href="{% url 'home' %}" style="color: whitesmoke">Главная</a>
+            </li>
+            <li class="nav-item" style="margin-left: 5%;">
+                <a class="nav-link" href="{% url 'offers' %}" style="color: whitesmoke">Офферы</a>
+            </li>
+            <li class="nav-item" style="margin-left: 5%;">
+                <a class="nav-link" href="{% url 'faq' %}" style="color: whitesmoke">FAQ</a>
+            </li>
+            <li class="nav-item" style="margin-left: 5%;">
+                <a class="nav-link" href="{% url 'regulations' %}" style="color: whitesmoke">Правила</a>
+            </li>
+            <li class="nav-item" style="margin-left: 5%;">
+                <a class="nav-link" href="{% url 'contacts' %}" style="color: whitesmoke">Поддержка</a>
+            </li>
+        </ul>
+        {% if user.is_authenticated %}
+            <ul class=" navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown"
+                       aria-expanded="false" style="color: whitesmoke">
+                        {% if user.first_name %}
+                            {{ user.get_full_name }}
+                        {% else %}
+                            Личный кабинет
+                        {% endif %}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'profile' %}" style="color: black">Личный кабинет</a>
+                        </li>
+                        <li><a class="dropdown-item" href="{% url 'settings' %}" style="color: black">Настройки</a></li>
+                        {% if user.is_superuser %}
+                            <li><a class="dropdown-item" href="/myvmeste_admin/" style="color: black">Админка</a></li>
+                        {% endif %}
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="{% url 'logout' %}" style="color: black">Выход</a></li>
+                    </ul>
+                </li>
+            </ul>
+        {% else %}
+            <div class="nav-link btn-group">
+                <a href="{% url 'login' %}" class="btn btn-outline-light">Вход</a>
+                <a href="{% url 'signup' %}" class="btn btn-outline-light">Регистрация</a>
+            </div>
+        {% endif %}
+    </div>
+</div>

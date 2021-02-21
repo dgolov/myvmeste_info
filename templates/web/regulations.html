@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <section class="section_without_color" id="regulations">
+        <div class="container mb-5 mt-4">
+            <h1>Правила программы</h1>
+            <div class="row mt-5">
+                {% include 'web/inc/regulations_navbar.html' %}
+                <div class="col-md-9">
+                    <h2>МАРКЕТИНГ</h2>
+                    {% include 'web/inc/marketing.html' %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

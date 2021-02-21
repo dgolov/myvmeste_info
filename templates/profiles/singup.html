@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <link rel="stylesheet"
+          type="text/css" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <section class="section_without_color">
+        <div class="container mb-5 mt-4">
+            {% if referred_user %}
+                <p class="center margin-bottom-30"> Вас пригласисл <strong>{{ referred_user.get_full_name }}</strong>
+                    г. <strong>{{ referred_user.profile.location }}</strong>
+                    телефон: <strong>
+                        <a href="tel:{{ referred_user.profile.phone }}">{{ referred_user.profile.phone }}</a></strong>
+                </p>
+            {% endif %}
+            <div class="d-flex justify-content-center h-100">
+                <div class="registration_card">
+                    <div class="d-flex justify-content-center">
+                        <h3 id="form-title">Регистрация</h3>
+                    </div>
+                    <div class="d-flex justify-content-center form_container">
+                        <form action="." method="post">
+                            {% if form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                {{ form.non_field_errors }}
+                            </div>
+                            {% endif %}
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-append">
+                                    <span class="input-group-icon">
+                                        <img src="{% static 'img/icons/person-fill.svg' %}">
+                                    </span>
+                                </div>
+                                {{ form.username }}
+                            </div>
+                            {% if form.username.errors %}
+                            <div class="alert alert-danger">
+                                {{ form.username.errors }}
+                            </div>
+                            {% endif %}
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-append">
+                                    <span class="input-group-icon">
+                                        <img src="{% static 'img/icons/envelope-fill.svg' %}">
+                                    </span>
+                                </div>
+                                {{ form.email }}
+                            </div>
+                            {% if form.email.errors %}
+                                <div class="alert alert-danger">
+                                    {{ form.email.errors }}
+                                </div>
+                            {% endif %}
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-append">
+                                    <span class="input-group-icon">
+                                        <img src="{% static 'img/icons/person-fill.svg' %}">
+                                    </span>
+                                </div>
+                                {{ form.first_name }}
+                            </div>
+                            {% if form.first_name.errors %}
+                            <div class="alert alert-danger">
+                                {{ form.first_name.errors }}
+                            </div>
+                            {% endif %}
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-append">
+                                    <span class="input-group-icon">
+                                        <img src="{% static 'img/icons/person-fill.svg' %}">
+                                    </span>
+                                </div>
+                                {{ form.last_name }}
+                            </div>
+                            {% if form.last_name.errors %}
+                            <div class="alert alert-danger">
+                                {{ form.last_name.errors }}
+                            </div>
+                            {% endif %}
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-append">
+                                    <span class="input-group-icon">
+                                        <img src="{% static 'img/icons/building-white.svg' %}">
+                                    </span>
+                                </div>
+                                {{ form.location }}
+                            </div>
+                            {% if form.location.errors %}
+                            <div class="alert alert-danger">
+                                {{ form.location.errors }}
+                            </div>
+                            {% endif %}
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-append">
+                                    <span class="input-group-icon">
+                                        <img src="{% static 'img/icons/telephone-fill.svg' %}" width="16">
+                                    </span>
+                                </div>
+                                {{ form.phone }}
+                            </div>
+                            <div class="mb-3">Введите корректный номер телефона через +7 (например +79998887766)</div>
+                            {% if form.phone.errors %}
+                            <div class="alert alert-danger">
+                                {{ form.phone.errors }}
+                            </div>
+                            {% endif %}
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-append">
+                                    <span class="input-group-icon">
+                                        <img src="{% static 'img/icons/key-fill.svg' %}">
+                                    </span>
+                                </div>
+                                {{ form.password1 }}
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-append">
+                                    <span class="input-group-icon">
+                                        <img src="{% static 'img/icons/key-fill.svg' %}">
+                                    </span>
+                                </div>
+                                {{ form.password2 }}
+                            </div>
+                            <div class="mb-3">
+                                Пароль должен содержать не менее 8 символов и состоять из букв и цифр
+                            </div>
+                            {% if form.password2.errors %}
+                                <div class="alert alert-danger">
+                                    {{ form.password2.errors }}
+                                </div>
+                            {% endif %}
+
+                            <div class="form-check" style="margin-bottom: 20px;">
+                                <input type="checkbox" class="form-check-input" id="RegulationsCheck" required>
+                                <label class="form-check-label" for="RegulationsCheck">
+                                    С <a href="{% url 'regulations' %}">правилами проекта</a> согласен и ознакомлен.
+                                </label>
+                            </div>
+                            {% csrf_token %}
+                            <p align="center">
+                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Регистрация</button>
+                            </p>
+                        </form>
+                    </div>
+                    <div class="mt-4">
+                        <div class="d-flex justify-content-center links">
+                            У уже вас есть аккаунт? <a href="{% url 'login' %}" class="ml-2">&nbsp;Войти</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

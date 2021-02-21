@@ -1,0 +1,218 @@
+<div class="col-md-6" align="center">
+    <div class="offer-card" align="left">
+        <div class="offer-card-bank-name">
+            <div class="row">
+                <div class="col-md-6" style="text-align: left">{{ product.bank_name }}</div>
+                <div class="col-md-6" style="text-align: right">{{ product.category }}</div>
+            </div>
+        </div>
+        <a href="#" data-toggle="modal" data-target="#ProductModal{{ product.pk }}">
+            <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.card_name }}">
+        </a>
+        <div class="offer-cart-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <h5 class="card-title">
+                        <a href="#" data-toggle="modal" data-target="#ProductModal{{ product.pk }}">
+                            {% if product.card_name %}
+                                {{ product.card_name }}
+                            {% else %}
+                                {{ product.bank_name }}
+                            {% endif %}
+                        </a>
+                    </h5>
+                </div>
+                <div class="col-md-4 offer-card-reward">
+                    <p align="center">{{ product.reward }} рублей</p>
+                </div>
+            </div>
+
+            <div class="container mt-3">
+                <div class="row">
+                    <div class="col-md-6">
+                        {% if product.category.name == 'Рассчетно кассовое обслуживание' %}
+                            <p>Платежи</p>
+                            <h6>от {{ product.payments }} ₽</h6>
+                        {% else %}
+                            <p>Возраст</p>
+                            <h6>c {{ product.age }} лет</h6>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        {% if product.card_name %}
+                            <p style="margin-bottom: auto; line-height: normal;">Доставка</p>
+                            {% if product.delivery %}
+                                <h6>Да</h6>
+                            {% else %}
+                                <h6>Нет</h6>
+                            {% endif %}
+                        {% elif product.category.name == 'МФО' %}
+                            <p style="margin-bottom: auto; line-height: normal;">Сумма займа</p>
+                            <h6>от {{ product.sum }} ₽</h6>
+                        {% elif product.category.name == 'Потребительские кредиты' or product.category.name == 'Рефинансирование' %}
+                            <p style="margin-bottom: auto; line-height: normal;">Кредитный лимит</p>
+                            <h6>до {{ product.limit }} ₽</h6>
+                        {% elif product.category.name == 'Ипотечные кредиты' %}
+                            <p style="margin-bottom: auto; line-height: normal;">Кредитный лимит</p>
+                            <h6>от {{ product.limit }} ₽</h6>
+                        {% elif product.category.name == 'Рассчетно кассовое обслуживание' %}
+                            <p style="margin-bottom: auto; line-height: normal;">Внесение наличных</p>
+                            <h6>от {{ product.cash_deposit }} ₽/мес.</h6>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        {% if product.category.name == 'Дебетовые карты' or product.category.name == 'Рассчетно кассовое обслуживание' %}
+                            <p style="margin-bottom: auto; line-height: normal;">Стоимость обслуживания</p>
+                            {% if product.service_cost > 1 %}
+                                <h6>от {{ product.service_cost }} ₽</h6>
+                            {% elif product.service_cost == 1%}
+                                <h6>Может быть бесплатно</h6>
+                            {% else %}
+                                <h6>Бесплатно</h6>
+                            {% endif %}
+                        {% elif product.category.name == 'Кредитные карты' %}
+                            {% if product.installment_plan %}
+                                <p style="margin-bottom: auto; line-height: normal;">Рассрочка</p>
+                                <h6>До {{ product.installment_plan }} месяцев</h6>
+                            {% else %}
+                                <p style="margin-bottom: auto; line-height: normal;">Льготный период</p>
+                                <h6>До {{ product.grace_period }} дней</h6>
+                            {% endif %}
+                        {% elif product.category.name == 'МФО' %}
+                            <p style="margin-bottom: auto; line-height: normal;">Срок займа</p>
+                            <h6>от {{ product.term }} дней</h6>
+                        {% elif product.category.name == 'Потребительские кредиты' or product.category.name == 'Рефинансирование' %}
+                            <p style="margin-bottom: auto; line-height: normal;">Требуемые документы</p>
+                            <h6>{{ product.documents }}</h6>
+                        {% elif product.category.name == 'Ипотечные кредиты' %}
+                            <p style="margin-bottom: auto; line-height: normal;">Требования</p>
+                            <h6>{{ product.documents }}</h6>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        {% if product.category.name == 'Дебетовые карты' %}
+                            <p style="margin-bottom: auto; line-height: normal;">Кэшбэк</p>
+                            {% if product.cash_back %}
+                                <h6>До {{ product.cash_back }} %</h6>
+                            {% else %}
+                                <h6>Нет</h6>
+                            {% endif %}
+                        {% elif product.category.name == 'Кредитные карты' %}
+                            <p style="margin-bottom: auto; line-height: normal;">Кредитный лимит</p>
+                            <h6>До {{ product.limit }} ₽</h6>
+                        {% elif product.category.name == 'Рассчетно кассовое обслуживание' %}
+                            <p style="margin-bottom: auto; line-height: normal;">Снятие наличных</p>
+                            <h6>До {{ product.cash_withdrawal }} ₽/мес.</h6>
+                        {% elif product.category.name == 'МФО' or product.category.name == 'Потребительские кредиты' or product.category.name == 'Рефинансирование' or product.category.name == 'Ипотечные кредиты'%}
+                            <p style="margin-bottom: auto; line-height: normal;">Процентная ставка</p>
+                            <h6>от {{ product.percents }} %</h6>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <hr>
+            {% if user.is_authenticated %}
+                <form action="{% url 'redirect_offer' ct_model=product.category.slug product_id=product.pk %}"
+                      method="get">
+                    <div class="padding-bottom-10" align="center">
+                        {% csrf_token %}
+                        <p>
+                            <button type="submit" class="btn btn-primary" formtarget="_blank">Оформить заявку</button>
+                        </p>
+                    </div>
+                </form>
+            {% endif %}
+        </div>
+
+        {% if user.is_authenticated %}
+            <div class="modal fade mt-5 mb-5" id="ProductModal{{ product.pk }}" tabindex="-1" role="dialog"
+             aria-labelledby="ProductModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="container">
+                            <button type="button" class="close-message" data-dismiss="modal" aria-label="Close"
+                                    style="float: right;">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <h4 class="modal-title" id="ProductModalLabel">
+                                        {% if product.card_name %}
+                                            {{ product.card_name }}
+                                        {% else %}
+                                            {{ product.bank_name }}
+                                        {% endif %}
+                                    </h4>
+                                </div>
+                                <div class="col-md-4">
+                                    <p class="mt-2 mr-3" align="right">{{ product.category }}</p>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                                {% comment %}
+                                <div class="col-md-4 modal-top-buttons">
+                                    <form action="{% url 'redirect_offer' ct_model=product.category.slug product_id=product.pk %}"
+                                          method="get">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-primary">Оформить заявку</button>
+                                    </form>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
+                                </div>
+                                {% endcomment %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container mb-4 mt-3">
+                            <h5>Целевое действие</h5>
+                            <p>{{ product.short_condition }}</p>
+                        </div>
+                        <hr>
+                        {% if product.main_characteristics %}
+                            <div class="container mb-5 mt-5">
+                                <h5>Основные характеристики</h5>
+                                {% autoescape off %}
+                                    {{ product.main_characteristics }}
+                                {% endautoescape %}
+                            </div>
+                        {% endif %}
+                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header" id="flush-heading{{ product.pk }}">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#flush-collapse{{ product.pk }}" aria-expanded="false"
+                                            aria-controls="flush-collapse{{ product.pk }}">
+                                        Описание продукта
+                                    </button>
+                                </h5>
+                                <div id="flush-collapse{{ product.pk }}" class="accordion-collapse collapse"
+                                     aria-labelledby="flush-heading{{ product.pk }}"
+                                     data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        {% autoescape off %}
+                                            {{ product.condition }}
+                                        {% endautoescape %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer mb-5">
+                        {% if user.is_authenticated %}
+                            <form action="{% url 'redirect_offer' ct_model=product.category.slug product_id=product.pk %}"
+                                  method="get">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary" formtarget="_blank">
+                                    Оформить заявку
+                                </button>
+                            </form>
+                        {% endif %}
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>

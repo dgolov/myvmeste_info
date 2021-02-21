@@ -1,0 +1,58 @@
+<div class="col-md-6" align="center">
+    <div class="category-card">
+        <div class="row">
+            <div class="col-md-4 mr-5">
+                <a href="{{ category.slug }}">
+                    <img src="{{ category.image.url }}" width="150" height="150" alt="{{ category.name }}">
+                </a>
+            </div>
+            <div class="col-md-8">
+                <h5 class="card-title">
+                    <a href="{{ category.slug }}">{{ category.name }}</a>
+                </h5>
+                <div class="category-card-body">
+                    <table class="table mt-4">
+                        <tr>
+                            <td>
+                                {% if category.name == 'Дебетовые карты' %}
+                                    <p>Выплата до {{ debit_cards.reward__max }} ₽</p>
+                                {% elif category.name == 'Кредитные карты' %}
+                                    <p>Выплата до {{ credit_cards.reward__max }} ₽</p>
+                                {% elif category.name == 'МФО' %}
+                                    <p>Выплата до {{ mfo.reward__max }} ₽</p>
+                                {% elif category.name == 'Потребительские кредиты' %}
+                                    <p>Выплата до {{ credits.reward__max }} ₽</p>
+                                {% elif category.name == 'Ипотечные кредиты' %}
+                                    <p>Выплата до {{ ipoteka.reward__max }} ₽</p>
+                                {% elif category.name == 'Рассчетно кассовое обслуживание' %}
+                                    <p>Выплата до {{ rko.reward__max }} ₽</p>
+                                {% elif category.name == 'Рефинансирование' %}
+                                    <p>Выплата до {{ refenancing.reward__max }} ₽</p>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                {% if category.name == 'Дебетовые карты' %}
+                                    <p>Кэшбэк до {{ debit_cards.cash_back__max }} %</p>
+                                {% elif category.name == 'Кредитные карты' %}
+                                    <p>Кредитный лимит до {{ credit_cards.limit__max }} ₽</p>
+                                {% elif category.name == 'МФО' %}
+                                    <p>Процентная ставка от {{ mfo.percents__min }} %</p>
+                                {% elif category.name == 'Потребительские кредиты' %}
+                                    <p>Процентная ставка от {{ credits.percents__min }} %</p>
+                                {% elif category.name == 'Ипотечные кредиты' %}
+                                    <p>Процентная ставка от {{ ipoteka.percents__min }} %</p>
+                                {% elif category.name == 'Рассчетно кассовое обслуживание' %}
+                                    <p>Стоимость обслуживания от {{ rko.service_cost__min }} ₽</p>
+                                {% elif category.name == 'Рефинансирование' %}
+                                    <p>Процентная ставка от {{ refenancing.reward__max }} %</p>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="section_without_color">
+        <div class="container mt-5 mb-5">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                             class="bi bi-patch-question" viewBox="0 0 16 16">
+                            <path d="M8.05 9.6c.336 0 .504-.24.554-.627.04-.534.198-.815.847-1.26.673-.475 1.049-1.09 1.049-1.986 0-1.325-.92-2.227-2.262-2.227-1.02 0-1.792.492-2.1 1.29A1.71 1.71 0 0 0 6 5.48c0 .393.203.64.545.64.272 0 .455-.147.564-.51.158-.592.525-.915 1.074-.915.61 0 1.03.446 1.03 1.084 0 .563-.208.885-.822 1.325-.619.433-.926.914-.926 1.64v.111c0 .428.208.745.585.745z"/>
+                            <path d="M10.273 2.513l-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911l-1.318.016z"/>
+                            <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0z"/>
+                        </svg> &#160;Часто задаваемые вопросы
+                    </h3>
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingOne">
+                                <button class="accordion-button collapsed" type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                        aria-controls="flush-collapseOne">
+                                    Нужно ли вкладывать денежные средства для участия в проекте «МыВместе»?
+                                </button>
+                            </h2>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                 aria-labelledby="flush-headingOne"
+                                 data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <p>Регистрация в проекте и оформление любой заявки не предусматривает за
+                                        собой никаких
+                                        финансовых вложений. Вы ничем не рискуете.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingTwo">
+                                <button class="accordion-button collapsed" type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseTwo" aria-expanded="false"
+                                        aria-controls="flush-collapseTwo">
+                                    Где оформляется заявка на оформление банковского продукта и указываются
+                                    паспортные
+                                    данные?
+                                </button>
+                            </h2>
+                            <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                                 aria-labelledby="flush-headingTwo"
+                                 data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <p>Банковские продукты предоставленные на нашем сайте оформляются строго на
+                                        площадке самого банка, на которых шифруются все передаваемые вами данные
+                                        и остаются не доступны третьимлицам. После нажатия на кнопку «Оформить
+                                        заявку» и заполнения краткой формы с ФИО и номером телефона человека на
+                                        которого оформляется карта, вы будете автоматически перенаправлены на
+                                        страницу банка для продолжения оформления заявки. Данные с краткой формы
+                                        мы собираем для предотвращения конфликтных ситуаций, например, если банк
+                                        не выплатит деньги, мы сможем предоставить ему эти данные и
+                                        урегулировать все вопросы.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingThree">
+                                    <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#flush-collapseThree" aria-expanded="false"
+                                            aria-controls="flush-collapseThree">
+                                        Откуда берутся деньги?
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseThree" class="accordion-collapse collapse"
+                                     aria-labelledby="flush-headingThree"
+                                     data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <p>Банки и МФО выделяют огромные денежные средства на рекламный бюджет и
+                                            привлечение к себе новых клиентов. Это десятки миллиардов рублей. Мы
+                                            сотрудничаем с банками и за каждый продукт оформленный через нашу
+                                            площадку платится вознаграждение, которое распределяется по
+                                            маркетинговым линиям.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingFour">
+                                    <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#flush-collapseFour" aria-expanded="false"
+                                            aria-controls="flush-collapseFour">
+                                        Когда я получу ссылку для приглашения новых участников программы?
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseFour" class="accordion-collapse collapse"
+                                     aria-labelledby="flush-headingFour"
+                                     data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <p>Реферальная ссылка будет доступна в разделе «Личный кабинет» в
+                                            течении суток после того как вы оформите любой банковский продукт и
+                                            совершите по нему целевое действие.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingFive">
+                                    <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#flush-collapseFive" aria-expanded="false"
+                                            aria-controls="flush-collapseFive">
+                                        Когда я смогу получить первые деньги?
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseFive" class="accordion-collapse collapse"
+                                     aria-labelledby="flush-headingFive"
+                                     data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <p>Минимальная сумма вывода составляет 1000 рублей. Выплаты производятся
+                                            один раз в неделю. Информацию о вашем балансе вы можете посмотреть в
+                                            личном
+                                            кабинете.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingSix">
+                                    <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#flush-collapseSix" aria-expanded="false"
+                                            aria-controls="flush-collapseSix">
+                                        Я оформил заявку, а деньги не появились на рассмотрении
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseSix" class="accordion-collapse collapse"
+                                     aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <p>Баланс обновляется раз в сутки, как только мы получим отчет от банка,
+                                        деньги сразу же поступят на ваш баланс. </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

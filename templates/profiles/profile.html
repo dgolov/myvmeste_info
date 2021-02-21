@@ -1,0 +1,299 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% load static %}
+
+    <section class="section_without_color">
+        <div class="container mb-5 mt-4">
+            <div class="row">
+
+                {% include 'profiles/inc/profile_navbar.html' %}
+
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-12">
+                            {% if user.first_name %}
+                                <h3>{{ user.get_full_name }}</h3>
+                            {% else %}
+                                <h3><a href="{% url 'settings' %}">Введите свои данные</a></h3>
+                            {% endif %}
+                        </div>
+                        {% include 'profiles/inc/messages.html' %}
+                    </div>
+
+                    <hr>
+
+                    <div class="row" style="margin-left:10px;">
+                        <div class="col-md-4">
+                            <p><img src="{% static 'img/icons/building.svg' %}"> &#160;Город</p></div>
+                        <div class="col-md-8"><p><strong>{{ user.profile.location }}</strong></p></div>
+
+                        <div class="col-md-4">
+                            <p><img src="{% static 'img/icons/telephone.svg' %}"> &#160;Номер телефона:</p>
+                        </div>
+                        <div class="col-md-8"><p><strong>{{ user.profile.phone }}</strong></p></div>
+                        <div class="col-md-4">
+                            <p>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-envelope-fill" viewBox="0 0 16 16">
+                                    <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"/>
+                                </svg> &#160;E-mail
+                            </p>
+                        </div>
+                        <div class="col-md-8"><p><strong>{{ user.email }}</strong></p></div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row" style="margin-left:10px;">
+                        <h4>Наставник:</h4>
+                        <div class="col-md-12"><p><strong>{{ user.profile.referred.get_full_name }}</strong></p></div>
+                        <div class="col-md-4">
+                            <p><img src="{% static 'img/icons/building.svg' %}"> &#160;Город</p>
+                        </div>
+                        <div class="col-md-8"><p><strong>{{ user.profile.referred.profile.location }}</strong></p></div>
+                        <div class="col-md-4">
+                            <p><img src="{% static 'img/icons/telephone.svg' %}"> &#160;Номер телефона</p>
+                        </div>
+                        <div class="col-md-8"><p><strong>{{ user.profile.referred.profile.phone }}</strong></p></div>
+                        <div class="col-md-4">
+                            <p>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-envelope-fill" viewBox="0 0 16 16">
+                                    <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"/>
+                                </svg> &#160;E-mail
+                            </p>
+                        </div>
+                        <div class="col-md-8"><p><strong>{{ user.profile.referred.email }}</strong></p></div>
+                    </div>
+
+                    <hr>
+
+                    <div class="mt-5 mb-5">
+                        <h2>Баланс</h2>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Сумма</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">На рассмотрении:</th>
+                                <td>{{ user.profile.balance.under_consideration }} ₽</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Средства на балансе:</th>
+                                <td>{{ user.profile.balance.available }} ₽</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Зарезервировано к выплате:</th>
+                                <td>{{ user.profile.balance.reserved }} ₽</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Начислено:</th>
+                                <td>{{ user.profile.balance.accrued }} ₽</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Выплачено:</th>
+                                <td>{{ user.profile.balance.paid_out }} ₽</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="mt-5 mb-5">
+                        <h3>Структура</h3>
+                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingOne">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                            aria-controls="flush-collapseOne">
+                                        {% if struct1|length == 0 %}
+                                            Линия 1
+                                        {% else %}
+                                            Линия 1 (Партнеров: {{ struct1|length }})
+                                        {% endif %}
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                     aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <table width="95%" align="center">
+                                            <tr>
+                                                <td style="font-weight: bold;">Имя</td>
+                                                <td style="font-weight: bold;">Номер телефона</td>
+                                                <td style="font-weight: bold;">Город</td>
+                                                <td style="font-weight: bold;">Наставник</td>
+                                            </tr>
+                                            {% for u in struct1 %}
+                                                <tr>
+                                                    <td>{{ u.get_full_name }}</td>
+                                                    <td>{{ u.profile.phone }}</td>
+                                                    <td>{{ u.profile.location }}</td>
+                                                    <td>{{ u.profile.referred.get_full_name }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#flush-collapseTwo" aria-expanded="false"
+                                            aria-controls="flush-collapseTwo">
+                                        {% if struct2|length == 0 %}
+                                            Линия 2
+                                        {% else %}
+                                            Линия 2 (Партнеров: {{ struct2|length }})
+                                        {% endif %}
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                                     aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <table width="95%" align="center">
+                                            <tr>
+                                                <td style="font-weight: bold;">Имя</td>
+                                                <td style="font-weight: bold;">Номер телефона</td>
+                                                <td style="font-weight: bold;">Город</td>
+                                                <td style="font-weight: bold;">Наставник</td>
+                                            </tr>
+                                            {% for u in struct2 %}
+                                                <tr>
+                                                    <td>{{ u.get_full_name }}</td>
+                                                    <td>{{ u.profile.phone }}</td>
+                                                    <td>{{ u.profile.location }}</td>
+                                                    <td>{{ u.profile.referred.get_full_name }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#flush-collapseThree" aria-expanded="false"
+                                            aria-controls="flush-collapseThree">
+                                        {% if struct3|length == 0 %}
+                                            Линия 3
+                                        {% else %}
+                                            Линия 3 (Партнеров: {{ struct3|length }})
+                                        {% endif %}
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseThree" class="accordion-collapse collapse"
+                                     aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <table width="95%" align="center">
+                                            <tr>
+                                                <td style="font-weight: bold;">Имя</td>
+                                                <td style="font-weight: bold;">Номер телефона</td>
+                                                <td style="font-weight: bold;">Город</td>
+                                                <td style="font-weight: bold;">Наставник</td>
+                                            </tr>
+                                            {% for u in struct3 %}
+                                                <tr>
+                                                    <td>{{ u.get_full_name }}</td>
+                                                    <td>{{ u.profile.phone }}</td>
+                                                    <td>{{ u.profile.location }}</td>
+                                                    <td>{{ u.profile.referred.get_full_name }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingFour">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#flush-collapseFour" aria-expanded="false"
+                                            aria-controls="flush-collapseFour">
+                                        {% if struct4|length == 0 %}
+                                            Линия 4
+                                        {% else %}
+                                            Линия 4 (Партнеров: {{ struct4|length }})
+                                        {% endif %}
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseFour" class="accordion-collapse collapse"
+                                     aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <table width="95%" align="center">
+                                            <tr>
+                                                <td style="font-weight: bold;">Имя</td>
+                                                <td style="font-weight: bold;">Номер телефона</td>
+                                                <td style="font-weight: bold;">Город</td>
+                                                <td style="font-weight: bold;">Наставник</td>
+                                            </tr>
+                                            {% for u in struct4 %}
+                                                <tr>
+                                                    <td>{{ u.get_full_name }}</td>
+                                                    <td>{{ u.profile.phone }}</td>
+                                                    <td>{{ u.profile.location }}</td>
+                                                    <td>{{ u.profile.referred.get_full_name }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingFive">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#flush-collapseFive" aria-expanded="false"
+                                            aria-controls="flush-collapseFive">
+                                        {% if struct5|length == 0 %}
+                                            Линия 5
+                                        {% else %}
+                                            Линия 5 (Партнеров: {{ struct5|length }})
+                                        {% endif %}
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseFive" class="accordion-collapse collapse"
+                                     aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <table width="95%" align="center">
+                                            <tr>
+                                                <td style="font-weight: bold;">Имя</td>
+                                                <td style="font-weight: bold;">Номер телефона</td>
+                                                <td style="font-weight: bold;">Город</td>
+                                                <td style="font-weight: bold;">Наставник</td>
+                                            </tr>
+                                            {% for u in struct5 %}
+                                                <tr>
+                                                    <td>{{ u.get_full_name }}</td>
+                                                    <td>{{ u.profile.phone }}</td>
+                                                    <td>{{ u.profile.location }}</td>
+                                                    <td>{{ u.profile.referred.get_full_name }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function CopySlug() {
+            /* Get the text field */
+            var copyText = document.getElementById("SlugInput");
+
+            /* Select the text field */
+            copyText.select();
+
+            /* Copy the text inside the text field */
+            document.execCommand("copy");
+        }
+    </script>
+
+{% endblock %}

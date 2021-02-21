@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <link rel="stylesheet" type="text/css"
+          href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <section class="section_without_color">
+        <div class="container mb-5 mt-4">
+            <div class="row">
+
+                {% include 'profiles/inc/profile_navbar.html' %}
+
+                <div class="col-md-9">
+
+                    {% if user.is_authenticated %}
+                        <div class="col-md-12">
+                            <h3>Обратная связь</h3>
+                            <form method="post">
+                                <select class="form-select mb-3" name="question_category">
+                                    <option selected>Укажите категорию вопроса</option>
+                                    <option>Вопрос по выплатам денежных средств</option>
+                                    <option>Вопрос по технической части</option>
+                                    <option>Другой вопрос</option>
+                                </select>
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <button type="submit" class="btn btn-primary" style="float: right; margin-top: 10px;">
+                                    Отправить
+                                </button>
+                            </form>
+                        </div>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

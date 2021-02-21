@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="section_without_color">
+        <div class="container mb-5 mt-4">
+
+            <div class="row">
+                <div class="col"><h2>{{ product.bank_name }}</h2></div>
+                <div class="col">
+                        {% include 'web/inc/search_form.html' %}
+                </div>
+            </div>
+
+            {% if product.card_name %}
+                <p>{{ product.card_name }}</p>
+            {% endif %}
+            <img src="{{ product.image.url }}">
+        </div>
+    </section>
+
+{% endblock %}

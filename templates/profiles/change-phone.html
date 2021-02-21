@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <section class="section_without_color">
+        <div class="container mb-5 mt-4">
+            <h4>Изменить номер телефона</h4>
+            <form method="post">
+                <div class="row">
+                    <div class="col-md-8 mb-4">
+                        {% csrf_token %}
+                        {{ form.phone }}
+                    </div>
+                    <div class="col-md-4">
+                        <div class="d-flex pt-1">
+                            <button class="btn btn-outline-success" type="submit">Изменить</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+{% endblock %}

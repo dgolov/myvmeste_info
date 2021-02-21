@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <link rel="stylesheet" type="text/css"
+          href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <section class="section_without_color">
+        <div class="container mb-5 mt-4">
+            <div class="row">
+
+                {% include 'profiles/inc/profile_navbar.html' %}
+
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Настройки</h3>
+                        </div>
+                        {% include 'profiles/inc/messages.html' %}
+                    </div>
+
+                    <hr>
+
+                    <form action="." method="post">
+                        <p>Имя: {{user.first_name}} {{ settings_form.first_name }}</p>
+                        <p>Фамилия: {{user.last_name}} {{ settings_form.last_name }}</p>
+                        <p>Город: {{user.profile.location}} {{ settings_form.location }}</p>
+                        <p>E-mail: {{user.email}} {{ settings_form.email }}</p>
+                        {% if settings_form.email.errors %}
+                            <div class="alert alert-danger">
+                                {{ settings_form.email.errors }}
+                            </div>
+                        {% endif %}
+                        {% csrf_token %}
+                        <div class="d-flex mt-3">
+                            <button class="btn btn-primary btn-lg" type="submit">Изменить</button>
+                        </div>
+                    </form>
+
+                    <hr>
+
+                    <div style="margin-top: 50px;">
+                        <table width="100%">
+                            <tr>
+                                <td width="40%"><p>Телефон:</p></td>
+                                <td width="30%"><p class="center">{{ request.user.profile.phone }}</p></td>
+                                <td width="30%"><p><a href="{% url 'change_phone' %}">Изменить номер</a></p></td>
+                            </tr>
+                            <tr>
+                                <td width="40%"><p>Пароль:</p></td>
+                                <td width="30%"><p class="center">************</p></td>
+                                <td width="30%"><p><a href="{% url 'password_change' %}">Изменить пароль</a></p></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <hr>
+
+                    <h4 style="margin-top: 50px;">Список карт для вывода денежных средств:</h4>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Номер карты</th>
+                            <th>Действие</th>
+                        </tr>
+                        </thead>
+                        {% for card in cards %}
+                        <tr>
+                            <td><p>{{ forloop.counter }}</p></td>
+                            <td><p>{{ card.card }}</p></td>
+                            <td>
+                                <a href="{% url 'remove_card' pk=card.pk %}">
+                                  <button class="btn btn-outline-danger my-2 my-sm-0">Удалить карту</button>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+
+                    <!-- Кнопка запуска модального окна -->
+                    <p><button type="button" class="btn btn-primary btn-lg" data-toggle="modal"
+                               data-target="#CardModal">
+                      Добавить карту
+                    </button></p>
+
+                    <!-- Модальное окно -->
+                    <div class="modal fade mt-5" id="CardModal" tabindex="-1" role="dialog"
+                         aria-labelledby="CardModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="CardModalLabel">Добавить новую карту</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="post">
+                                        {% csrf_token %}
+                                        {{ card_form.as_p }}
+                                        <button type="submit" class="btn btn-primary mt-3">Добавить</button>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

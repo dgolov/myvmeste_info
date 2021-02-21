@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="section_without_color">
+        <div class="container mb-5 mt-4">
+
+            <div class="row">
+                <div class="col"><h1>Поиск</h1></div>
+                <div class="col">
+                        {% include 'web/inc/search_form.html' %}
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    {% if none %}
+                        <p>{{ none }}</p>
+                    {% endif %}
+                    {% if debit_cards %}
+                        {% for product in debit_cards %}
+                                {% include 'web/inc/offers_card.html' %}
+                        {% endfor %}
+                    {% endif %}
+                    {% if credit_cards %}
+                        {% for product in credit_cards %}
+                                {% include 'web/inc/offers_card.html' %}
+                        {% endfor %}
+                    {% endif %}
+                    {% if credits %}
+                        {% for product in credits %}
+                                {% include 'web/inc/offers_card.html' %}
+                        {% endfor %}
+                    {% endif %}
+                    {% if mfo %}
+                        {% for product in mfo %}
+                                {% include 'web/inc/offers_card.html' %}
+                        {% endfor %}
+                    {% endif %}
+                    {% if ipoteka %}
+                        {% for product in ipoteka %}
+                                {% include 'web/inc/offers_card.html' %}
+                        {% endfor %}
+                    {% endif %}
+                    {% if refinancing %}
+                        {% for product in refinancing %}
+                                {% include 'web/inc/offers_card.html' %}
+                        {% endfor %}
+                    {% endif %}
+                    {% if rko %}
+                        {% for product in rko %}
+                                {% include 'web/inc/offers_card.html' %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

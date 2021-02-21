@@ -1,0 +1,18 @@
+.nav {
+	/*background-color: #382e42;*/
+	background: linear-gradient(to right, #1e0037, #1d9b8f);
+	position: fixed;
+	opacity: 98%;
+}
+
+.nav li a{
+	color: whitesmoke;
+}
+
+.nav li a:hover {
+	color: #06D0BE !important;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+}
