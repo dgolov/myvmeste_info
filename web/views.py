@@ -97,8 +97,12 @@ class OffersRedirectView(UserMixin, View):
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
-        if self.user:
+        if self.user.profile.struct == 1:
             url = '{}?aff_sub1={}'.format(self.offer.referral_slug, self.user.pk)
+            # message = f'Переход по ссылке на {self.offer}'
+            # add_to_user_history_list(self.user, message)
+        if self.user.profile.struct == 2:
+            url = '{}?aff_sub1={}'.format(self.offer.referral_slug_2, self.user.pk)
             # message = f'Переход по ссылке на {self.offer}'
             # add_to_user_history_list(self.user, message)
         else:

@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.core.validators import MinValueValidator
 from phonenumber_field.formfields import PhoneNumberField
-from django.core.exceptions import NON_FIELD_ERRORS, MultipleObjectsReturned
+from django.core.exceptions import NON_FIELD_ERRORS
 from django import forms
 from .models import Orders, ApplicationsForMoney, Cards, Profile, FeedBackRequests
 

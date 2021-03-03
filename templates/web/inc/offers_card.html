@@ -65,7 +65,7 @@
                             <p style="margin-bottom: auto; line-height: normal;">Стоимость обслуживания</p>
                             {% if product.service_cost > 1 %}
                                 <h6>от {{ product.service_cost }} ₽</h6>
-                            {% elif product.service_cost == 1%}
+                            {% elif product.service_cost == 1 %}
                                 <h6>Может быть бесплатно</h6>
                             {% else %}
                                 <h6>Бесплатно</h6>
@@ -103,7 +103,7 @@
                         {% elif product.category.name == 'Рассчетно кассовое обслуживание' %}
                             <p style="margin-bottom: auto; line-height: normal;">Снятие наличных</p>
                             <h6>До {{ product.cash_withdrawal }} ₽/мес.</h6>
-                        {% elif product.category.name == 'МФО' or product.category.name == 'Потребительские кредиты' or product.category.name == 'Рефинансирование' or product.category.name == 'Ипотечные кредиты'%}
+                        {% elif product.category.name == 'МФО' or product.category.name == 'Потребительские кредиты' or product.category.name == 'Рефинансирование' or product.category.name == 'Ипотечные кредиты' %}
                             <p style="margin-bottom: auto; line-height: normal;">Процентная ставка</p>
                             <h6>от {{ product.percents }} %</h6>
                         {% endif %}
@@ -123,9 +123,7 @@
                 </form>
             {% endif %}
         </div>
-
-        {% if user.is_authenticated %}
-            <div class="modal fade mt-5 mb-5" id="ProductModal{{ product.pk }}" tabindex="-1" role="dialog"
+        <div class="modal fade mt-5 mb-5" id="ProductModal{{ product.pk }}" tabindex="-1" role="dialog"
              aria-labelledby="ProductModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -213,6 +211,5 @@
                 </div>
             </div>
         </div>
-        {% endif %}
     </div>
 </div>

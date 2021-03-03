@@ -1,21 +1,17 @@
 {% extends 'base.html' %}
-
 {% block content %}
-
     <section class="section_without_color" id="about">
     <div class="container mb-5 mt-4"><h1>Поддержка | Контакты</h1></div>
-        <!--begin container-->
         <div class="container">
-            <!--begin row-->
             <div class="row">
                 <div class="col-md-6">
                     <ul class="freelancer-details">
 {#                        <li class="bold">ИП Мартынюк А.В.</li>#}
-                        <li><span class="bold">Адрес:</span>
-                            <span class="freelancer-second-details">
-                                Нижегородская обл. г. Дзержинск ул. Самохвалова д. 8Б
-                            </span>
-                        </li>
+{#                        <li><span class="bold">Адрес:</span>#}
+{#                            <span class="freelancer-second-details">#}
+{#                                Нижегородская обл. г. Дзержинск ул. Самохвалова д. 8Б#}
+{#                            </span>#}
+{#                        </li>#}
 {#                        <li><span class="freelancer-main-details">ИНН:</span>#}
 {#                            <span class="freelancer-second-details">В разработке</span>#}
 {#                        </li>#}
@@ -35,7 +31,6 @@
                         </li>
                     </ul>
                 </div>
-
                 {% if user.is_authenticated %}
                     <div class="col-md-12 margin-top-20">
                         <h3>Обратная связь</h3>
@@ -57,5 +52,4 @@
             </div>
         </div>
     </section>
-
 {% endblock %}

@@ -74,37 +74,77 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th scope="col"></th>
-                                <th scope="col">Сумма</th>
+                                <th scope="col" style="width: 70%"></th>
+                                <th scope="col" style="width: 30%">Сумма</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
-                                <th scope="row">На рассмотрении:</th>
-                                <td>{{ user.profile.balance.under_consideration }} ₽</td>
+                                <th scope="row" style="width: 70%">Общий заработок:</th>
+                                <td style="width: 30%">
+                                    {{ user.profile.sum }} ₽
+                                </td>
                             </tr>
                             <tr>
-                                <th scope="row">Средства на балансе:</th>
-                                <td>{{ user.profile.balance.available }} ₽</td>
+                                <th scope="row" style="width: 70%">Доступно длдя выплаты:</th>
+                                <td style="width: 30%">{{ user.profile.available }} ₽</td>
                             </tr>
                             <tr>
-                                <th scope="row">Зарезервировано к выплате:</th>
-                                <td>{{ user.profile.balance.reserved }} ₽</td>
+                                <th scope="row" style="width: 70%">Зарезервировано к выплате:</th>
+                                <td style="width: 30%">{{ user.profile.balance.reserved }} ₽</td>
                             </tr>
                             <tr>
-                                <th scope="row">Начислено:</th>
-                                <td>{{ user.profile.balance.accrued }} ₽</td>
+                                <th scope="row" style="width: 70%">Начислено:</th>
+                                <td style="width: 30%">{{ user.profile.balance.accrued }} ₽</td>
                             </tr>
                             <tr>
-                                <th scope="row">Выплачено:</th>
-                                <td>{{ user.profile.balance.paid_out }} ₽</td>
+                                <th scope="row" style="width: 70%">Выплачено:</th>
+                                <td style="width: 30%">{{ user.profile.balance.paid_out }} ₽</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <h3 class="margin-top-20">Доход со структуры</h3>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col" style="width: 70%"></th>
+                                <th scope="col" style="width: 30%">Сумма</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row" style="width: 70%">На рассмотрении:</th>
+                                <td style="width: 30%">{{ user.profile.balance.under_consideration }} ₽</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width: 70%">Средства на балансе:</th>
+                                <td style="width: 30%">{{ user.profile.balance.available }} ₽</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <h3 class="margin-top-20">Личный доход</h3>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col" style="width: 70%"></th>
+                                <th scope="col" style="width: 30%">Сумма</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row" style="width: 70%">На рассмотрении:</th>
+                                <td style="width: 30%">{{ user.profile.balance.self_under_consideration }} ₽</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width: 70%">Средства на балансе:</th>
+                                <td style="width: 30%">{{ user.profile.balance.self_available }} ₽</td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
 
                     <div class="mt-5 mb-5">
-                        <h3>Структура</h3>
+                        <h2>Структура</h2>
                         <div class="accordion accordion-flush" id="accordionFlushExample">
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="flush-headingOne">

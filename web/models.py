@@ -65,7 +65,14 @@ class Offers(models.Model):
     referral_slug = models.CharField(
         max_length=250,
         db_index=True,
-        verbose_name='Реферальная ссылка на продукт',
+        verbose_name='Реферальная ссылка на продукт 1',
+        null=True,
+        blank=True
+    )
+    referral_slug_2 = models.CharField(
+        max_length=250,
+        db_index=True,
+        verbose_name='Реферальная ссылка на продукт 2',
         null=True,
         blank=True
     )

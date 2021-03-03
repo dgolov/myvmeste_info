@@ -65,7 +65,21 @@ def money_distribution(marketing_money, rest_of_money, first_user, item_user, id
             message = f'Ваша заявка {first_user["offer"]} оформлена.'
             if item_user.profile.status == 0:
                 message += f' Вам доступна реферальная ссылка для приглашения новых участников в личном кабинете.'
+            if item_user.profile.broker:
+                balance.self_under_consideration += marketing_money
+                balance.save()
+                return False
+            item_user.profile.save()
         balance.under_consideration += decimal.Decimal(to_enrollment)
+        try:
+            referral = Profile.objects.get(pk=item_user.profile.referred.profile.pk)
+            referral.active_referrals.add(item_user)
+            referral.save()
+            if referral.active_referrals.count() == 5:
+                referral.broker_status = True
+                referral.save()
+        except AttributeError:
+            pass
         if to_enrollment:
             message = f'{first_user["user"]} ({id} уровень). Оформлена заявка: {first_user["offer"]}. <br>' \
                       f'<span style="color: darkgreen; font-weight: bold;">{decimal.Decimal(to_enrollment)}</span> ' \
@@ -76,8 +90,20 @@ def money_distribution(marketing_money, rest_of_money, first_user, item_user, id
             item_user.profile.set_status(2)
             item_user.profile.save()
             message = f'Ваша заявка {first_user["offer"]} подтверждена. Вам доступна функция вывода денежных средств.'
+            if item_user.profile.broker:
+                balance.self_under_consideration -= marketing_money
+                balance.self_available += marketing_money
+                if item_user.profile.broker_status:
+                    balance.sum = balance.available
+                    balance.sum += balance.self_available
+                balance.save()
+                return False
+            item_user.profile.broker = True
         balance.under_consideration -= decimal.Decimal(to_enrollment)
         balance.available += decimal.Decimal(to_enrollment)
+        balance.sum = balance.available
+        if item_user.profile.broker_status:
+            balance.sum += balance.self_available
         if to_enrollment:
             message = f'{first_user["user"]} ({id} уровень). Заявка: {first_user["offer"]} подтверждена. <br>' \
                       f'<span style="color: darkgreen; font-weight: bold;">{decimal.Decimal(to_enrollment)}</span> ' \
@@ -88,6 +114,10 @@ def money_distribution(marketing_money, rest_of_money, first_user, item_user, id
             item_user.profile.set_status()
             item_user.profile.save()
             message = f'Ваша заявка {first_user["offer"]} <span style="color: red;">отклонена</span>.'
+            if item_user.profile.broker:
+                balance.self_under_consideration -= marketing_money
+                balance.save()
+                return False
         balance.under_consideration -= decimal.Decimal(to_enrollment)
         if to_enrollment:
             message = f'{first_user["user"]} ({id} уровень). Заявка: {first_user["offer"]} отклонена. <br>' \

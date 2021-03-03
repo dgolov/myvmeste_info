@@ -81,7 +81,7 @@ class DebitCardsAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Общее', {
             'fields': ('category', 'offer_id', 'bank_name', 'card_name', 'image', 'slug', 'main_characteristics',
-                       'condition', 'short_condition', 'referral_slug', 'reward'),
+                       'condition', 'short_condition', 'referral_slug', 'referral_slug_2', 'reward'),
         }),
         ('Характеристики', {
             'fields': ('service_cost', 'age', 'cash_back', 'miles', 'delivery', 'demands', 'recommend', 'max_pay',
@@ -100,7 +100,7 @@ class CreditCardsAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Общее', {
             'fields': ('category', 'offer_id', 'bank_name', 'card_name', 'image', 'slug', 'condition',
-                       'short_condition', 'referral_slug', 'reward'),
+                       'short_condition', 'referral_slug', 'referral_slug_2', 'reward'),
         }),
         ('Характеристики', {
             'fields': ('grace_period', 'installment_plan', 'age', 'limit', 'delivery', 'demands', 'recommend',
@@ -119,7 +119,7 @@ class PotrebCreditsAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Общее', {
             'fields': ('category', 'offer_id', 'bank_name', 'type', 'image', 'slug', 'main_characteristics',
-                       'condition', 'short_condition', 'referral_slug', 'reward'),
+                       'condition', 'short_condition', 'referral_slug', 'referral_slug_2', 'reward'),
         }),
         ('Характеристики', {
             'fields': ('age', 'limit', 'percents', 'documents', 'demands', 'recommend', 'max_pay', 'popular',
@@ -138,7 +138,7 @@ class MFOAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Общее', {
             'fields': ('category', 'offer_id', 'bank_name', 'image', 'slug', 'main_characteristics',
-                       'condition', 'short_condition', 'referral_slug', 'reward'),
+                       'condition', 'short_condition', 'referral_slug', 'referral_slug_2', 'reward'),
         }),
         ('Характеристики', {
             'fields': ('term', 'age', 'sum', 'percents', 'demands', 'recommend', 'max_pay', 'popular', 'is_active'),
@@ -156,7 +156,7 @@ class MortgagesAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Общее', {
             'fields': ('category', 'offer_id', 'bank_name', 'type', 'image', 'slug', 'main_characteristics',
-                       'condition', 'short_condition', 'referral_slug', 'reward'),
+                       'condition', 'short_condition', 'referral_slug', 'referral_slug_2', 'reward'),
         }),
         ('Характеристики', {
             'fields': ('age', 'limit', 'percents', 'documents', 'demands', 'recommend', 'max_pay', 'popular',
@@ -175,7 +175,7 @@ class RKOAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Общее', {
             'fields': ('category', 'offer_id', 'bank_name', 'image', 'slug', 'main_characteristics',
-                       'condition', 'short_condition', 'referral_slug', 'reward'),
+                       'condition', 'short_condition', 'referral_slug', 'referral_slug_2', 'reward'),
         }),
         ('Характеристики', {
             'fields': ('payments', 'cash_deposit', 'service_cost', 'cash_withdrawal', 'demands', 'recommend', 'max_pay',
@@ -194,7 +194,7 @@ class RefinancingAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Общее', {
             'fields': ('category', 'offer_id', 'bank_name', 'type', 'image', 'slug', 'main_characteristics',
-                       'condition', 'short_condition', 'referral_slug', 'reward'),
+                       'condition', 'short_condition', 'referral_slug', 'referral_slug_2', 'reward'),
         }),
         ('Характеристики', {
             'fields': ('age', 'limit', 'percents', 'documents', 'demands', 'recommend', 'max_pay', 'popular',

@@ -46,7 +46,7 @@
                                 {% elif category.name == 'Рассчетно кассовое обслуживание' %}
                                     <p>Стоимость обслуживания от {{ rko.service_cost__min }} ₽</p>
                                 {% elif category.name == 'Рефинансирование' %}
-                                    <p>Процентная ставка от {{ refenancing.reward__max }} %</p>
+                                    <p>Процентная ставка от {{ refenancing.percents__min }} %</p>
                                 {% endif %}
                             </td>
                         </tr>

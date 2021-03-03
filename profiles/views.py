@@ -88,6 +88,7 @@ class RegisterView(View):
             new_user.save()
             if referred_user:
                 new_user.profile.referred = referred_user
+                new_user.profile.struct = referred_user.profile.struct
                 new_user.save()
                 create_referral_struct(referred_user, new_user, 1)
             send_mail(

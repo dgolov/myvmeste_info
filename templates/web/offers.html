@@ -1,14 +1,10 @@
 {% extends 'base.html' %}
-
 {% block title %}
     {{ category.name }}
 {% endblock %}
-
 {% block content %}
-
     <section class="section_without_color">
         <div class="container mb-5 mt-4">
-
             <div class="row">
                 <div class="col-md-6">
                     <nav aria-label="breadcrumb">
@@ -19,14 +15,11 @@
                         </ul>
                     </nav>
                 </div>
-
                 <div class="col-md-6">
                     {% include 'web/inc/search_form.html' %}
                 </div>
-
                 <div class="col-md-6"><h2>{{ category.name }}</h2></div>
             </div>
-
             <div class="container">
                 {% if user.is_anonymous %}
                     <p class="anonymous_message">
@@ -36,15 +29,12 @@
                 {% endif %}
                 <div class="row">
                     {% for product in products %}
-
                         {% if product.is_active %}
                             {% include 'web/inc/offers_card.html' %}
                         {% endif %}
-
                     {% endfor %}
                 </div>
             </div>
         </div>
     </section>
-
 {% endblock %}

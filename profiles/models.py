@@ -13,8 +13,21 @@ class Money(models.Model):
     """ Балансы пользователей
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    sum = models.DecimalField(max_digits=7, decimal_places=2, default=0, verbose_name='Сумма')
     under_consideration = models.DecimalField(max_digits=7, decimal_places=2, default=0, verbose_name='На рассмотрении')
+    self_under_consideration = models.DecimalField(
+        max_digits=7,
+        decimal_places=2,
+        default=0,
+        verbose_name='Личный зароботок. На рассмотрении'
+    )
     available = models.DecimalField(max_digits=7, decimal_places=2, default=0, verbose_name='Средства на балансе')
+    self_available = models.DecimalField(
+        max_digits=7,
+        decimal_places=2,
+        default=0,
+        verbose_name='Личный зароботок. Средства на балансе'
+    )
     reserved = models.DecimalField(max_digits=7, decimal_places=2, default=0, verbose_name='Зарезервировано к выплате')
     accrued = models.DecimalField(max_digits=7, decimal_places=2, default=0, verbose_name='Начислено')
     paid_out = models.DecimalField(max_digits=7, decimal_places=2, default=0, verbose_name='Выплачено')
@@ -97,6 +110,15 @@ class Profile(models.Model):
     struct3 = models.ManyToManyField(User, verbose_name='Уровень 3', related_name='struct_3', blank=True)
     struct4 = models.ManyToManyField(User, verbose_name='Уровень 4', related_name='struct_4', blank=True)
     struct5 = models.ManyToManyField(User, verbose_name='Уровень 5', related_name='struct_5', blank=True)
+    struct = models.IntegerField(default=1, verbose_name='Структура')
+    broker = models.BooleanField(default=False, verbose_name='Статус брокера')
+    active_referrals = models.ManyToManyField(
+        User,
+        related_name='referrals_counts',
+        verbose_name='Активные рефералы',
+        blank=True,
+    )
+    broker_status = models.BooleanField(default=False, verbose_name='Вывод средств с личных продаж')
 
     class Meta:
         verbose_name = 'Участник'
@@ -105,12 +127,23 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.get_full_name()
 
+    def sum(self):
+        """ Сумма баланса """
+        return self.balance.available + self.balance.self_available
+
+    def available(self):
+        """ Доступно для вывода """
+        if self.broker_status:
+            return self.balance.available + self.balance.self_available
+        else:
+            return self.balance.available
+
     def set_status(self, next_status=0):
         """ Установка статуса участника программы
             Если назначаемый статус равен 0 и текущий статус равен 0, то текущий статус увеличивается на 1
             Функция с такими условиями вызывается при оформлении оффера и выполнения целевых действий и дает право
             на получение реферальной ссылки
-        :param next_status: - назначаемый статус
+            :param next_status: - назначаемый статус
         """
         if not self.status and not next_status:
             self.status += 1

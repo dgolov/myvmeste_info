@@ -37,8 +37,13 @@ class ProfileMixin(LoginRequiredMixin, View):
                 reserved = application_form.cleaned_data['reserved']
             else:
                 reserved = None
-            if reserved and user.profile.balance.available >= reserved:
+            balance = user.profile.available()
+            if reserved and balance >= reserved:
                 user.profile.balance.available -= reserved
+                if user.profile.balance.available < 0:
+                    difference = user.profile.balance.available
+                    user.profile.balance.self_available += difference
+                    user.profile.balance.available = 0
                 user.profile.balance.reserved += reserved
                 ApplicationsForMoney.objects.create(user=user, card=card, reserved=reserved)
                 user.profile.balance.save()
@@ -71,6 +76,7 @@ class ProfileMixin(LoginRequiredMixin, View):
             ex_data = load_workbook('./media/uploads/{}'.format(request.FILES['report']))
             first_sheet = ex_data.get_sheet_names()[0]
             worksheet = ex_data.get_sheet_by_name(first_sheet)
+            confirmed = {}
 
             for row in worksheet.iter_rows():
                 new_order = False
@@ -93,6 +99,8 @@ class ProfileMixin(LoginRequiredMixin, View):
                         item_user = Profile.objects.get(id=int(cell.value))
                     elif item_col == 11:
                         if not new_order and order.status != cell.value:
+                            # Отчет уже есть, но статус изменен
+                            confirmed[item_user] = cell.value
                             order.status = cell.value
                             order.save()
                             first_user = {'user': item_user.user.get_full_name(), 'offer': get_product(order)}
@@ -100,12 +108,20 @@ class ProfileMixin(LoginRequiredMixin, View):
                                                first_user=first_user, item_user=item_user.user,
                                                id=0, status=order.status)
                         elif new_order:
+                            # Отчета нет в системе, создание нового
+                            confirmed[item_user] = cell.value
                             order = IDOrders.objects.create(order_id=order_id, offer_id=offer_id, status=cell.value)
                             first_user = {'user': item_user.user.get_full_name(), 'offer': get_product(order)}
                             money_distribution(marketing_money=money.reward, rest_of_money=money.reward,
                                                first_user=first_user, item_user=item_user.user,
                                                id=0, status=order.status)
             new_upload_order.delete()
+
+            # Присвоение статуса брокера для пользователей с подтвержденными заявками
+            for user, status in confirmed.items():
+                if status == 'Подтвержден':
+                    user.broker = True
+                    user.save()
 
     def download_report_pay(self, request):
         """ Загрузка отчета выплаченных средств
