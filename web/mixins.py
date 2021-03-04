@@ -2,6 +2,7 @@ from django.views.generic.detail import SingleObjectMixin
 from django.views.generic import View
 from .models import Categories, DebitCards, CreditCards, PotrebCredits, MFO, Mortgages, RKO, Refinancing
 from profiles.models import Profile, Money, History
+from profiles.utils import get_referred_user
 import decimal
 
 
@@ -25,6 +26,7 @@ class UserMixin(View):
 
     def dispatch(self, request, *args, **kwargs):
         self.user = request.user
+        self.referred_user = get_referred_user(request)
         return super().dispatch(request, *args, **kwargs)
 
 
@@ -75,8 +77,9 @@ def money_distribution(marketing_money, rest_of_money, first_user, item_user, id
             referral = Profile.objects.get(pk=item_user.profile.referred.profile.pk)
             referral.active_referrals.add(item_user)
             referral.save()
-            if referral.active_referrals.count() == 5:
+            if referral.active_referrals.count() >= 5 and referral.broker:
                 referral.broker_status = True
+                referral.set_status(3)
                 referral.save()
         except AttributeError:
             pass
@@ -87,8 +90,9 @@ def money_distribution(marketing_money, rest_of_money, first_user, item_user, id
         balance.save()
     elif status == 'Подтвержден':
         if id == 0:
-            item_user.profile.set_status(2)
-            item_user.profile.save()
+            if item_user.profile.status == 1:
+                item_user.profile.set_status(2)
+                item_user.profile.save()
             message = f'Ваша заявка {first_user["offer"]} подтверждена. Вам доступна функция вывода денежных средств.'
             if item_user.profile.broker:
                 balance.self_under_consideration -= marketing_money

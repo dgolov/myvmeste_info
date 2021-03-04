@@ -73,9 +73,12 @@ class RegisterView(View):
         referred_user = get_referred_user(request)
         if request.user.is_authenticated:
             return HttpResponseRedirect('/profile')
-        user_form = UserRegistrationForm()
-        context = {'title': "Регистрация", 'referred_user': referred_user, 'form': user_form}
-        return render(request, 'profiles/singup.html', context)
+        if referred_user is not None:
+            user_form = UserRegistrationForm()
+            context = {'title': "Регистрация", 'referred_user': referred_user, 'form': user_form}
+            return render(request, 'profiles/singup.html', context)
+        else:
+            raise Http404("Poll does not exist")
 
     def post(self, request, *args, **kwargs):
         referred_user = get_referred_user(request)

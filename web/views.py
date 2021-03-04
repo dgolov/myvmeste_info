@@ -24,7 +24,7 @@ class MainView(UserMixin, View):
                 # return HttpResponseRedirect('/profile/signup')
             except:
                 pass
-        context = {'user': self.user, 'title': "Мы вместе"}
+        context = {'user': self.user, 'referred_user': self.referred_user, 'title': "Мы вместе"}
         return render(request, 'web/index.html', context)
 
 
@@ -39,6 +39,7 @@ class OffersView(UserMixin, ListView):
         context = super(OffersView, self).get_context_data()
         context['title'] = 'Офферы'
         context['user'] = self.user
+        context['referred_user'] = self.referred_user
         context['debit_cards'] = DebitCards.objects.filter(is_active=True).aggregate(Max('reward'), Max('cash_back'))
         context['credit_cards'] = CreditCards.objects.filter(is_active=True).aggregate(Max('reward'), Max('limit'))
         context['credits'] = PotrebCredits.objects.filter(is_active=True).aggregate(Max('reward'), Min('percents'))
@@ -64,6 +65,7 @@ class CategoryDetailView(UserMixin, CategoryDetailMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['user'] = self.user
+        context['referred_user'] = self.referred_user
         return context
 
 
@@ -101,7 +103,7 @@ class OffersRedirectView(UserMixin, View):
             url = '{}?aff_sub1={}'.format(self.offer.referral_slug, self.user.pk)
             # message = f'Переход по ссылке на {self.offer}'
             # add_to_user_history_list(self.user, message)
-        if self.user.profile.struct == 2:
+        elif self.user.profile.struct == 2:
             url = '{}?aff_sub1={}'.format(self.offer.referral_slug_2, self.user.pk)
             # message = f'Переход по ссылке на {self.offer}'
             # add_to_user_history_list(self.user, message)
@@ -117,6 +119,7 @@ class RegulationsView(UserMixin, View):
         context = {
                 'user': self.user,
                 'title': "Правила программы",
+                'referred_user': self.referred_user,
         }
         return render(request, 'web/regulations.html', context)
 
@@ -128,6 +131,7 @@ class ImportantAsView(UserMixin, View):
         context = {
             'user': self.user,
             'title': "Важно знать",
+            'referred_user': self.referred_user,
         }
         return render(request, 'web/important.html', context)
 
@@ -139,6 +143,7 @@ class FAQAsView(UserMixin, View):
         context = {
             'user': self.user,
             'title': "FAQ",
+            'referred_user': self.referred_user,
         }
         return render(request, 'web/faq.html', context)
 
@@ -174,6 +179,7 @@ class AboutAsView(CreateView, UserMixin, View):
         context = super(AboutAsView, self).get_context_data()
         context['user'] = self.user
         context['title'] = 'О проекте'
+        context['referred_user'] = self.referred_user
         return context
 
 
@@ -193,6 +199,7 @@ class SearchView(UserMixin, ListView):
         success = False
         search_text = self.request.GET.get('search')
         context['user'] = self.user
+        context['referred_user'] = self.referred_user
         context['credit_cards'] = CreditCards.objects.filter(card_name__icontains=search_text)
         context['credits'] = PotrebCredits.objects.filter(bank_name__icontains=search_text)
         context['rko'] = RKO.objects.filter(bank_name__icontains=search_text)

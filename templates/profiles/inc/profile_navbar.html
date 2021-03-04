@@ -1,48 +1,59 @@
 {% load static %}
 <div class="col-md-3" style="margin-bottom:20px;">
-
     <div align="center" style="margin-bottom:30px;">
         <img src="{% static 'img/status.png' %}" width="189" height="189"
-            style="border-radius: 100px; border: 1px solid gray; box-shadow: 0 0 7px gray;">
+             style="border-radius: 100px; border: 1px solid gray; box-shadow: 0 0 7px gray;">
+        <p style="font-size: 16px; margin-top: 20px;">
+            Статус:
+            {% if user.profile.status == 0 %}
+                <span class="bold">Новичок</span>
+            {% elif user.profile.status == 1 or user.profile.status == 2 %}
+                <span class="bold">Партнёр</span>
+            {% elif user.profile.status == 3 %}
+                <span class="bold">Брокер</span>
+            {% endif %}
+        </p>
         <hr>
     </div>
-
     <ul class="profile-list-group profile-list-group-flush">
-       <li class="profile-list-group-item profile-list-group-item-action">
-           <a href="{% url 'profile' %}"><img src="{% static 'img/icons/person.svg' %}"> &#160;Личный кабинет</a>
-       </li>
-       <li class="profile-list-group-item profile-list-group-item-action">
-           <a href="{% url 'settings' %}"><img src="{% static 'img/icons/gear.svg' %}"> &#160;Настройки профиля</a>
-       </li>
         <li class="profile-list-group-item profile-list-group-item-action">
-           <a href="#" data-toggle="modal" data-target="#ReferralModal">
-               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
-                  <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                  <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
-               </svg>
-               &#160;Пригласить партнера
-           </a>
-       </li>
-       <li class="profile-list-group-item profile-list-group-item-action">
-           <a href="{% url 'messages' %}">
-               <img src="{% static 'img/icons/clock-history.svg' %}"> &#160;История операций
-           </a>
-       </li>
-       <li class="profile-list-group-item profile-list-group-item-action">
-           <a href="#" data-toggle="modal" data-target="#ApplicationForMoneyModal">
-               <img src="{% static 'img/icons/credit-card.svg' %}"> &#160;Вывод денежных средств
-           </a>
-       </li>
+            <a href="{% url 'profile' %}"><img src="{% static 'img/icons/person.svg' %}"> &#160;Личный кабинет</a>
+        </li>
         <li class="profile-list-group-item profile-list-group-item-action">
-           <a href="{% url 'feedback' %}">
-               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-patch-question" viewBox="0 0 16 16">
-                   <path d="M8.05 9.6c.336 0 .504-.24.554-.627.04-.534.198-.815.847-1.26.673-.475 1.049-1.09 1.049-1.986 0-1.325-.92-2.227-2.262-2.227-1.02 0-1.792.492-2.1 1.29A1.71 1.71 0 0 0 6 5.48c0 .393.203.64.545.64.272 0 .455-.147.564-.51.158-.592.525-.915 1.074-.915.61 0 1.03.446 1.03 1.084 0 .563-.208.885-.822 1.325-.619.433-.926.914-.926 1.64v.111c0 .428.208.745.585.745z"/>
-                   <path d="M10.273 2.513l-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911l-1.318.016z"/>
-                   <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0z"/>
-               </svg>
-               &#160;Обратная связь
-           </a>
-       </li>
+            <a href="{% url 'settings' %}"><img src="{% static 'img/icons/gear.svg' %}"> &#160;Настройки профиля</a>
+        </li>
+        <li class="profile-list-group-item profile-list-group-item-action">
+            <a href="#" data-toggle="modal" data-target="#ReferralModal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                     class="bi bi-person-plus" viewBox="0 0 16 16">
+                    <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                    <path fill-rule="evenodd"
+                          d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+                </svg>
+                &#160;Пригласить партнера
+            </a>
+        </li>
+        <li class="profile-list-group-item profile-list-group-item-action">
+            <a href="{% url 'messages' %}">
+                <img src="{% static 'img/icons/clock-history.svg' %}"> &#160;История операций
+            </a>
+        </li>
+        <li class="profile-list-group-item profile-list-group-item-action">
+            <a href="#" data-toggle="modal" data-target="#ApplicationForMoneyModal">
+                <img src="{% static 'img/icons/credit-card.svg' %}"> &#160;Вывод денежных средств
+            </a>
+        </li>
+        <li class="profile-list-group-item profile-list-group-item-action">
+            <a href="{% url 'feedback' %}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                     class="bi bi-patch-question" viewBox="0 0 16 16">
+                    <path d="M8.05 9.6c.336 0 .504-.24.554-.627.04-.534.198-.815.847-1.26.673-.475 1.049-1.09 1.049-1.986 0-1.325-.92-2.227-2.262-2.227-1.02 0-1.792.492-2.1 1.29A1.71 1.71 0 0 0 6 5.48c0 .393.203.64.545.64.272 0 .455-.147.564-.51.158-.592.525-.915 1.074-.915.61 0 1.03.446 1.03 1.084 0 .563-.208.885-.822 1.325-.619.433-.926.914-.926 1.64v.111c0 .428.208.745.585.745z"/>
+                    <path d="M10.273 2.513l-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911l-1.318.016z"/>
+                    <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0z"/>
+                </svg>
+                &#160;Обратная связь
+            </a>
+        </li>
         {% if request.user.is_superuser %}
             <li class="profile-list-group-item profile-list-group-item-action">
                 <a href="#" data-toggle="modal" data-target="#OrderModal">
@@ -61,7 +72,6 @@
             </li>
         {% endif %}
     </ul>
-
     {% if request.user.is_superuser %}
         <div class="modal fade mt-5" id="OrderModal" tabindex="-1" role="dialog" aria-labelledby="OrderModalLabel"
              aria-hidden="true">
@@ -74,8 +84,9 @@
                         <form action="" method="post" enctype="multipart/form-data">
                             <h5>Загрузить отчет:</h5>
                             {% csrf_token %}
-                                <p>{{ order_form.report }}
-                            <button type="submit" class="btn btn-primary">Загрузить</button></p>
+                            <p>{{ order_form.report }}
+                                <button type="submit" class="btn btn-primary">Загрузить</button>
+                            </p>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -84,9 +95,8 @@
                 </div>
             </div>
         </div>
-
         <div class="modal fade mt-5" id="OrderPayModal" tabindex="-1" role="dialog" aria-labelledby="OrderPayModalLabel"
-         aria-hidden="true">
+             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -96,10 +106,10 @@
                         <form action="" method="post" enctype="multipart/form-data">
                             <h5>Загрузить отчет:</h5>
                             {% csrf_token %}
-                                <p>
-                                    {{ order_form_pay.report_pay }}
-                                    <button type="submit" class="btn btn-primary">Загрузить</button>
-                                </p>
+                            <p>
+                                {{ order_form_pay.report_pay }}
+                                <button type="submit" class="btn btn-primary">Загрузить</button>
+                            </p>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -109,7 +119,6 @@
             </div>
         </div>
     {% endif %}
-
     {% if user.profile.status > 1 %}
         <div class="modal fade mt-5" id="ApplicationForMoneyModal" tabindex="-1" role="dialog"
              aria-labelledby="ApplicationForMoneyModalLabel"
@@ -165,7 +174,6 @@
             </div>
         </div>
     {% endif %}
-
     <div class="modal fade mt-5" id="ReferralModal" tabindex="-1" role="dialog"
          aria-labelledby="ReferralModalLabel"
          aria-hidden="true">
@@ -199,7 +207,7 @@
                                 </div>
                             {% endif %}
                         </div>
-                        {% else %}
+                    {% else %}
                         <p>Для получения реферальной ссылки необходимо оформить любой банковский продукт</p>
                     {% endif %}
                 </div>

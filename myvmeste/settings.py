@@ -162,6 +162,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 
+DEFAULT_FROM_EMAIL = 'mail@myvmeste.info'
 EMAIL_HOST = 'mail.myvmeste.info'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'mail@myvmeste.info'

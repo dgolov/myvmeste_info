@@ -60,9 +60,11 @@
 	                    <h6>СТАНЬ УЧАСТНИКОМ, РАССКАЖИ О ПРОЕКТЕ ПЯТИ ДРУЗЬЯМ И ЗАРАБОТАЙ 750 ТЫСЯЧ РУБЛЕЙ УЖЕ ЧЕРЕЗ ДВА МЕСЯЦА.</h6>
 	                </div>
 	                {% if user.is_anonymous %}
-		                <div class="col-md-2 small-home-section-button">
-		                    <a href="{% url 'signup' %}" class="btn btn-danger">Зарегистрироваться</a>
-		                </div>
+                        {% if referred_user and referred_user %}
+                            <div class="col-md-2 small-home-section-button">
+                                <a href="{% url 'signup' %}" class="btn btn-danger">Зарегистрироваться</a>
+                            </div>
+                        {% endif %}
 		            {% endif %}
 	            </div>
 	        </div>
@@ -92,10 +94,10 @@
 	                <div class="col-md-10">
 	                    <h6>БУДЬ АКТИВНЫМ, РАЗВИВАЙ ПРОЕКТ, ПРИГЛАШАЙ НОВЫХ УЧАСТНИКОВ И ЗАРАБАТЫВАЙ МИЛЛИОНЫ.</h6>
 	                </div>
-	                {% if user.is_anonymous %}
-		                <div class="col-md-2 small-home-section-button">
-		                    <a href="{% url 'signup' %}" class="btn btn-danger">Зарегистрироваться</a>
-		                </div>
+	                {% if user.is_anonymous and referred_user %}
+                        <div class="col-md-2 small-home-section-button">
+                            <a href="{% url 'signup' %}" class="btn btn-danger">Зарегистрироваться</a>
+                        </div>
 		            {% endif %}
 	            </div>
 	        </div>
@@ -147,7 +149,7 @@
 	                <div class="col-md-12">
 	                    <h3>ПОЧЕМУ ИНТЕРЕСНО ЗАРАБАТЫВАТЬ ИМЕННО У НАС</h3>
                         <img src="{% static 'img/down_block.svg' %}" width="100%" style="margin: 5% 0;">
-                        {% if user.is_anonymous %}
+                        {% if user.is_anonymous and referred_user %}
                             <div class="down-home-section-button">
                                 <a href="{% url 'signup' %}" class="btn btn-danger">Начать зарабатывать</a>
                             </div>

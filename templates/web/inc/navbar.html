@@ -53,7 +53,9 @@
         {% else %}
             <div class="nav-link btn-group">
                 <a href="{% url 'login' %}" class="btn btn-outline-light">Вход</a>
-                <a href="{% url 'signup' %}" class="btn btn-outline-light">Регистрация</a>
+                {% if referred_user %}
+                    <a href="{% url 'signup' %}" class="btn btn-outline-light">Регистрация</a>
+                {% endif %}
             </div>
         {% endif %}
     </div>
