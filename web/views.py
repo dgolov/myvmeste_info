@@ -21,7 +21,7 @@ class MainView(UserMixin, View):
                 ref_code = request.GET.get('r', '')
                 referral = ReferralCodes.objects.get(code=ref_code)
                 request.session['referral'] = referral.user.username
-                # return HttpResponseRedirect('/profile/signup')
+                return HttpResponseRedirect('/profile/signup')
             except:
                 pass
         context = {'user': self.user, 'referred_user': self.referred_user, 'title': "Мы вместе"}

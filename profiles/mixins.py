@@ -2,10 +2,10 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import View
 from .models import Profile, Orders, ApplicationsForMoney, Cards
-from web.mixins import money_distribution
 from .forms import ApplicationsForMoneyForm, UploadFileForm, UploadOrderPayForm
-from web.models import IDOrders, Offers
 from .utils import get_product
+from web.mixins import money_distribution
+from web.models import IDOrders, Offers
 from openpyxl import load_workbook
 
 

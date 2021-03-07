@@ -1,0 +1,17 @@
+{% load static %}
+<tr>
+    <td>{{ u.get_full_name }}</td>
+    <td>{{ u.profile.phone }}</td>
+    <td>{{ u.profile.location }}</td>
+    <td>{{ u.profile.referred.get_full_name }}</td>
+    <td class="center">
+{#        {{ u.profile.status }}#}
+        {% if u.profile.status == 0 %}
+            <img src="{% static 'img/struct_status/st0.png' %}" width="7px">
+        {% elif u.profile.status == 1 %}
+            <img src="{% static 'img/struct_status/st1.png' %}" width="7px">
+        {% elif u.profile.status > 1 %}
+            <img src="{% static 'img/struct_status/st2.png' %}" width="7px">
+        {% endif %}
+    </td>
+</tr>

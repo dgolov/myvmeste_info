@@ -236,3 +236,14 @@ CKEDITOR_CONFIGS = {
         ]),
     }
 }
+
+CELERY_BROKER_URL = 'redis://localhost:6379'
+
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_BEAT_SCHEDULE = {
+    'second-task': {
+        'task': 'web.tasks.my_first_task',
+        'schedule': 180.0,
+    }
+}

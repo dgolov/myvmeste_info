@@ -1,14 +1,10 @@
 {% extends 'base.html' %}
-
 {% block content %}
     {% load static %}
-
     <section class="section_without_color">
         <div class="container mb-5 mt-4">
             <div class="row">
-
                 {% include 'profiles/inc/profile_navbar.html' %}
-
                 <div class="col-md-9">
                     <div class="row">
                         <div class="col-md-12">
@@ -20,14 +16,11 @@
                         </div>
                         {% include 'profiles/inc/messages.html' %}
                     </div>
-
                     <hr>
-
                     <div class="row" style="margin-left:10px;">
                         <div class="col-md-4">
                             <p><img src="{% static 'img/icons/building.svg' %}"> &#160;Город</p></div>
                         <div class="col-md-8"><p><strong>{{ user.profile.location }}</strong></p></div>
-
                         <div class="col-md-4">
                             <p><img src="{% static 'img/icons/telephone.svg' %}"> &#160;Номер телефона:</p>
                         </div>
@@ -42,9 +35,7 @@
                         </div>
                         <div class="col-md-8"><p><strong>{{ user.email }}</strong></p></div>
                     </div>
-
                     <hr>
-
                     <div class="row" style="margin-left:10px;">
                         <h4>Наставник:</h4>
                         <div class="col-md-12"><p><strong>{{ user.profile.referred.get_full_name }}</strong></p></div>
@@ -66,9 +57,7 @@
                         </div>
                         <div class="col-md-8"><p><strong>{{ user.profile.referred.email }}</strong></p></div>
                     </div>
-
                     <hr>
-
                     <div class="mt-5 mb-5">
                         <h2>Баланс</h2>
                         <table class="table">
@@ -80,7 +69,11 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <th scope="row" style="width: 70%">Общий заработок:</th>
+                                <th scope="row" style="width: 70%">
+                                    <span title="Сумма личного дохода и дохода со стректуры">
+                                        Общий заработок:
+                                    </span>
+                                </th>
                                 <td style="width: 30%">
                                     {{ user.profile.sum }} ₽
                                 </td>
@@ -113,7 +106,11 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <th scope="row" style="width: 70%">На рассмотрении:</th>
+                                <th scope="row" style="width: 70%">
+                                    <span title="Денежные средства ожидающие подтверждения целевого действия от рекламодателя">
+                                        На рассмотрении:
+                                    </span>
+                                </th>
                                 <td style="width: 30%">{{ user.profile.balance.under_consideration }} ₽</td>
                             </tr>
                             <tr>
@@ -132,7 +129,11 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <th scope="row" style="width: 70%">На рассмотрении:</th>
+                                <th scope="row" style="width: 70%">
+                                    <span title="Денежные средства ожидающие подтверждения целевого действия от рекламодателя">
+                                        На рассмотрении:
+                                    </span>
+                                </th>
                                 <td style="width: 30%">{{ user.profile.balance.self_under_consideration }} ₽</td>
                             </tr>
                             <tr>
@@ -142,7 +143,6 @@
                             </tbody>
                         </table>
                     </div>
-
                     <div class="mt-5 mb-5">
                         <h2>Структура</h2>
                         <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -162,19 +162,9 @@
                                      aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                     <div class="accordion-body">
                                         <table width="95%" align="center">
-                                            <tr>
-                                                <td style="font-weight: bold;">Имя</td>
-                                                <td style="font-weight: bold;">Номер телефона</td>
-                                                <td style="font-weight: bold;">Город</td>
-                                                <td style="font-weight: bold;">Наставник</td>
-                                            </tr>
+                                            {% include 'profiles/inc/struct_header.html' %}
                                             {% for u in struct1 %}
-                                                <tr>
-                                                    <td>{{ u.get_full_name }}</td>
-                                                    <td>{{ u.profile.phone }}</td>
-                                                    <td>{{ u.profile.location }}</td>
-                                                    <td>{{ u.profile.referred.get_full_name }}</td>
-                                                </tr>
+                                                {% include 'profiles/inc/struct_body.html' %}
                                             {% endfor %}
                                         </table>
                                     </div>
@@ -196,19 +186,9 @@
                                      aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
                                     <div class="accordion-body">
                                         <table width="95%" align="center">
-                                            <tr>
-                                                <td style="font-weight: bold;">Имя</td>
-                                                <td style="font-weight: bold;">Номер телефона</td>
-                                                <td style="font-weight: bold;">Город</td>
-                                                <td style="font-weight: bold;">Наставник</td>
-                                            </tr>
+                                            {% include 'profiles/inc/struct_header.html' %}
                                             {% for u in struct2 %}
-                                                <tr>
-                                                    <td>{{ u.get_full_name }}</td>
-                                                    <td>{{ u.profile.phone }}</td>
-                                                    <td>{{ u.profile.location }}</td>
-                                                    <td>{{ u.profile.referred.get_full_name }}</td>
-                                                </tr>
+                                                {% include 'profiles/inc/struct_body.html' %}
                                             {% endfor %}
                                         </table>
                                     </div>
@@ -230,19 +210,9 @@
                                      aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
                                     <div class="accordion-body">
                                         <table width="95%" align="center">
-                                            <tr>
-                                                <td style="font-weight: bold;">Имя</td>
-                                                <td style="font-weight: bold;">Номер телефона</td>
-                                                <td style="font-weight: bold;">Город</td>
-                                                <td style="font-weight: bold;">Наставник</td>
-                                            </tr>
+                                            {% include 'profiles/inc/struct_header.html' %}
                                             {% for u in struct3 %}
-                                                <tr>
-                                                    <td>{{ u.get_full_name }}</td>
-                                                    <td>{{ u.profile.phone }}</td>
-                                                    <td>{{ u.profile.location }}</td>
-                                                    <td>{{ u.profile.referred.get_full_name }}</td>
-                                                </tr>
+                                                {% include 'profiles/inc/struct_body.html' %}
                                             {% endfor %}
                                         </table>
                                     </div>
@@ -264,19 +234,9 @@
                                      aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
                                     <div class="accordion-body">
                                         <table width="95%" align="center">
-                                            <tr>
-                                                <td style="font-weight: bold;">Имя</td>
-                                                <td style="font-weight: bold;">Номер телефона</td>
-                                                <td style="font-weight: bold;">Город</td>
-                                                <td style="font-weight: bold;">Наставник</td>
-                                            </tr>
+                                            {% include 'profiles/inc/struct_header.html' %}
                                             {% for u in struct4 %}
-                                                <tr>
-                                                    <td>{{ u.get_full_name }}</td>
-                                                    <td>{{ u.profile.phone }}</td>
-                                                    <td>{{ u.profile.location }}</td>
-                                                    <td>{{ u.profile.referred.get_full_name }}</td>
-                                                </tr>
+                                                {% include 'profiles/inc/struct_body.html' %}
                                             {% endfor %}
                                         </table>
                                     </div>
@@ -298,19 +258,9 @@
                                      aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
                                     <div class="accordion-body">
                                         <table width="95%" align="center">
-                                            <tr>
-                                                <td style="font-weight: bold;">Имя</td>
-                                                <td style="font-weight: bold;">Номер телефона</td>
-                                                <td style="font-weight: bold;">Город</td>
-                                                <td style="font-weight: bold;">Наставник</td>
-                                            </tr>
+                                            {% include 'profiles/inc/struct_header.html' %}
                                             {% for u in struct5 %}
-                                                <tr>
-                                                    <td>{{ u.get_full_name }}</td>
-                                                    <td>{{ u.profile.phone }}</td>
-                                                    <td>{{ u.profile.location }}</td>
-                                                    <td>{{ u.profile.referred.get_full_name }}</td>
-                                                </tr>
+                                                {% include 'profiles/inc/struct_body.html' %}
                                             {% endfor %}
                                         </table>
                                     </div>
@@ -322,18 +272,11 @@
             </div>
         </div>
     </section>
-
     <script>
         function CopySlug() {
-            /* Get the text field */
             var copyText = document.getElementById("SlugInput");
-
-            /* Select the text field */
             copyText.select();
-
-            /* Copy the text inside the text field */
             document.execCommand("copy");
         }
     </script>
-
 {% endblock %}

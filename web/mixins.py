@@ -70,6 +70,7 @@ def money_distribution(marketing_money, rest_of_money, first_user, item_user, id
             if item_user.profile.broker:
                 balance.self_under_consideration += marketing_money
                 balance.save()
+                add_to_user_history_list(user=item_user, message=message)
                 return False
             item_user.profile.save()
         balance.under_consideration += decimal.Decimal(to_enrollment)
@@ -101,6 +102,7 @@ def money_distribution(marketing_money, rest_of_money, first_user, item_user, id
                     balance.sum = balance.available
                     balance.sum += balance.self_available
                 balance.save()
+                add_to_user_history_list(user=item_user, message=message)
                 return False
             item_user.profile.broker = True
         balance.under_consideration -= decimal.Decimal(to_enrollment)
@@ -121,6 +123,7 @@ def money_distribution(marketing_money, rest_of_money, first_user, item_user, id
             if item_user.profile.broker:
                 balance.self_under_consideration -= marketing_money
                 balance.save()
+                add_to_user_history_list(user=item_user, message=message)
                 return False
         balance.under_consideration -= decimal.Decimal(to_enrollment)
         if to_enrollment:
@@ -135,7 +138,7 @@ def money_distribution(marketing_money, rest_of_money, first_user, item_user, id
         # Определение следующего участника (Наставника текущего)
         referral = item_user.profile.referred
         item_user = Profile.objects.get(user=referral)
-    except:
+    except Profile.DoesNotExist:
         return False
     id += 1
     rest_of_money = marketing_money - to_enrollment

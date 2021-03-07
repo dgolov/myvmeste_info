@@ -6,12 +6,12 @@ from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import ListView, CreateView
+from datetime import datetime, date
 from .forms import *
 from .models import Profile, ApplicationsForMoney, Cards, History, FeedBackRequests
 from .mixins import ProfileMixin
 from .utils import get_referred_user, create_referral_struct
 import xlwt
-from datetime import datetime
 
 
 FEEDBACK_MESSAGE_TEMPLATE = '''Категория сообщения: "{}"
@@ -103,7 +103,7 @@ class RegisterView(View):
             )
             messages.add_message(request, messages.INFO, 'Вы успешно зарегестрировались')
             login(request, new_user)
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect('/profile')
         context = {'title': "Регистрация", 'referred_user': referred_user, 'form': user_form}
         return render(request, 'profiles/singup.html', context)
 

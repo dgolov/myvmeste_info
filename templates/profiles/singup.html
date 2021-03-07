@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
     <link rel="stylesheet"
           type="text/css" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-
     <section class="section_without_color">
         <div class="container mb-5 mt-4">
             {% if referred_user %}
-                <p class="center margin-bottom-30"> Вас пригласисл <strong>{{ referred_user.get_full_name }}</strong>
+                <p class="center margin-bottom-30"> Вас пригласил <strong>{{ referred_user.get_full_name }}</strong>
                     г. <strong>{{ referred_user.profile.location }}</strong>
-                    телефон: <strong>
-                        <a href="tel:{{ referred_user.profile.phone }}">{{ referred_user.profile.phone }}</a></strong>
+                    телефон:
+                    <strong>
+                        <a href="tel:{{ referred_user.profile.phone }}">{{ referred_user.profile.phone }}</a>
+                    </strong>
                 </p>
             {% endif %}
             <div class="d-flex justify-content-center h-100">
@@ -40,7 +40,6 @@
                                 {{ form.username.errors }}
                             </div>
                             {% endif %}
-
                             <div class="input-group mb-3">
                                 <div class="input-group-append">
                                     <span class="input-group-icon">
@@ -54,7 +53,6 @@
                                     {{ form.email.errors }}
                                 </div>
                             {% endif %}
-
                             <div class="input-group mb-3">
                                 <div class="input-group-append">
                                     <span class="input-group-icon">
@@ -68,7 +66,6 @@
                                 {{ form.first_name.errors }}
                             </div>
                             {% endif %}
-
                             <div class="input-group mb-3">
                                 <div class="input-group-append">
                                     <span class="input-group-icon">
@@ -82,7 +79,6 @@
                                 {{ form.last_name.errors }}
                             </div>
                             {% endif %}
-
                             <div class="input-group mb-3">
                                 <div class="input-group-append">
                                     <span class="input-group-icon">
@@ -96,7 +92,6 @@
                                 {{ form.location.errors }}
                             </div>
                             {% endif %}
-
                             <div class="input-group mb-3">
                                 <div class="input-group-append">
                                     <span class="input-group-icon">
@@ -111,7 +106,6 @@
                                 {{ form.phone.errors }}
                             </div>
                             {% endif %}
-
                             <div class="input-group mb-3">
                                 <div class="input-group-append">
                                     <span class="input-group-icon">
@@ -136,7 +130,6 @@
                                     {{ form.password2.errors }}
                                 </div>
                             {% endif %}
-
                             <div class="form-check" style="margin-bottom: 20px;">
                                 <input type="checkbox" class="form-check-input" id="RegulationsCheck" required>
                                 <label class="form-check-label" for="RegulationsCheck">
@@ -158,5 +151,4 @@
             </div>
         </div>
     </section>
-
 {% endblock %}
