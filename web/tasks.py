@@ -5,7 +5,7 @@ from profiles.models import Profile
 import requests
 from web.utils import automatic_report
 
-TOKEN = '9dc4f54100c92ce9f89b6bfff310f682'
+TOKEN = 'ed8d9b747dd38505c298310009c45a3f'
 URL = 'http://api.leads.su'
 LEADS_STATUS = {'pending': 'Ожидает подтверждения', 'approved': 'Подтвержден', 'rejected ': 'Отклонен'}
 today = date.today()
@@ -13,6 +13,7 @@ today = date.today()
 @shared_task
 def my_first_task():
     response = requests.get(f'{URL}/webmaster/conversions?start_date=2021-02-01&end_date={today}&token={TOKEN}')
+    print(response.json())
     for conversion in response.json()['data']:
         try:
             user = Profile.objects.get(pk=conversion['aff_sub1'])

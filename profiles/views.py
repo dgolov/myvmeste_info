@@ -27,7 +27,7 @@ E-mail: {}
 Сообщение:
 {}'''
 
-TOKEN = '9dc4f54100c92ce9f89b6bfff310f682'
+TOKEN = 'ed8d9b747dd38505c298310009c45a3f'
 URL = 'http://api.leads.su'
 LEADS_STATUS = {'pending': 'Ожидает подтверждения', 'approved': 'Подтвержден', 'rejected ': 'Отклонен'}
 today = date.today()
@@ -44,16 +44,16 @@ class ProfileView(ProfileMixin, View):
 
     def get(self, request, *args, **kwargs):
         self.get_context_data(request)
-        response = requests.get(f'{URL}/webmaster/conversions?start_date=2021-02-01&end_date={today}&token={TOKEN}')
-        for conversion in response.json()['data']:
-            try:
-                user = Profile.objects.get(pk=conversion['aff_sub1'])
-                order_id = conversion['id']
-                status = LEADS_STATUS[conversion['status']]
-                offer_id = conversion['offer_id']
-                automatic_report(order_id, user.user, status, offer_id)
-            except (Profile.DoesNotExist, ValueError):
-                continue
+        # response = requests.get(f'{URL}/webmaster/conversions?start_date=2021-02-01&end_date={today}&token={TOKEN}')
+        # for conversion in response.json()['data']:
+        #     try:
+        #         user = Profile.objects.get(pk=conversion['aff_sub1'])
+        #         order_id = conversion['id']
+        #         status = LEADS_STATUS[conversion['status']]
+        #         offer_id = conversion['offer_id']
+        #         automatic_report(order_id, user.user, status, offer_id)
+        #     except (Profile.DoesNotExist, ValueError):
+        #         continue
         return render(request, 'profiles/profile.html', self.context)
 
     def post(self, request, *args, **kwargs):
@@ -75,9 +75,9 @@ class RegisterView(View):
     """
     def __init__(self):
         super(RegisterView, self).__init__()
-        self.message = '''Уважаемый(ая) {}
+        self.message = '''Уважаемый(ая), {}
 
-        Вы успешно зарегестрировались в проекте myvmeste.info
+        Вы успешно зарегистрировались в проекте myvmeste.info
         Для того чтобы начать зарабатывать на нашей площадке необходимо:
         - Оформить любой банковский продукт в разделе "Офферы"
         - Получить реферальную ссылку в разделе "Личный кабинет"

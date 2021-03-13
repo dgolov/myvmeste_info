@@ -17,6 +17,9 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
 
 
-@app.task(bind=True)
-def debug_task(self):
-    print(f'Request: {self.request!r}')
+app.conf.beat_schedule = {
+    'applications-from-leads': {
+        'task': 'web.tasks.my_first_task',
+        'schedule': 180.0,
+    }
+}
