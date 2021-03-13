@@ -129,7 +129,7 @@ class Profile(models.Model):
 
     def sum(self):
         """ Сумма баланса """
-        return self.balance.available + self.balance.self_available
+        return self.balance.available + self.balance.self_available + self.balance.under_consideration + self.balance.self_available
 
     def available(self):
         """ Доступно для вывода """
@@ -195,7 +195,7 @@ def get_unique_referral_url():
         'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k',
         'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F',
         'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-        '0',]
+        '0', ]
     code = ''
     for _ in range(5):
         char = choice(chars)
@@ -252,7 +252,6 @@ def save_user_profile(sender, instance, created, **kwargs):
         СОХРАНЕНИЕ Профиля
     """
     instance.profile.save()
-
 
 # @receiver(post_save, sender=History)
 # def create_user_profile(sender, instance, created, **kwargs):

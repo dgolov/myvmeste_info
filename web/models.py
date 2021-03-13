@@ -97,7 +97,7 @@ class CreditCards(Offers):
     delivery = models.BooleanField(verbose_name='Доставка')
 
     class Meta:
-        ordering = ('bank_name', 'card_name',)
+        ordering = ('-recommend', 'bank_name', 'card_name',)
         verbose_name = 'Кредитная карта'
         verbose_name_plural = 'Кредитные карты'
 
@@ -116,7 +116,7 @@ class DebitCards(Offers):
     delivery = models.BooleanField(verbose_name='Доставка')
 
     class Meta:
-        ordering = ('bank_name', 'card_name',)
+        ordering = ('-recommend', 'bank_name', 'card_name',)
         verbose_name = 'Дебетовая карта'
         verbose_name_plural = 'Дебетовые карты'
 
@@ -135,7 +135,7 @@ class Credits(Offers):
     percents = models.FloatField(verbose_name='Процентная ставка')
 
     class Meta:
-        ordering = ('bank_name', 'type',)
+        ordering = ('-recommend', 'bank_name', 'type',)
         verbose_name = 'Кредит'
         verbose_name_plural = 'Кредиты'
 
@@ -152,7 +152,7 @@ class MFO(Offers):
     percents = models.FloatField(verbose_name='Ставка займа')
 
     class Meta:
-        ordering = ('bank_name',)
+        ordering = ('-recommend', 'bank_name',)
         verbose_name = 'Микрозайм'
         verbose_name_plural = 'Микрозаймы'
 
@@ -164,7 +164,7 @@ class PotrebCredits(Credits):
     """ Потребительские кредиты
     """
     class Meta:
-        ordering = ('bank_name', 'type',)
+        ordering = ('-recommend', 'bank_name', 'type',)
         verbose_name = 'Потребительский кредит'
         verbose_name_plural = 'Потребительские кредиты'
 
@@ -176,7 +176,7 @@ class Mortgages(Credits):
     """ Ипотечные кредиты
     """
     class Meta:
-        ordering = ('bank_name', 'type',)
+        ordering = ('-recommend', 'bank_name', 'type',)
         verbose_name = 'Ипотечный кредит'
         verbose_name_plural = 'Ипотечные кредиты'
 
@@ -193,7 +193,7 @@ class RKO(Offers):
     cash_withdrawal = models.FloatField(verbose_name='Снятие наличных')
 
     class Meta:
-        ordering = ('bank_name',)
+        ordering = ('-recommend', 'bank_name',)
         verbose_name = 'Рассчетно кассовое обслуживание'
         verbose_name_plural = 'Рассчетно кассовое обслуживание '
 
@@ -205,7 +205,7 @@ class Refinancing(Credits):
     """ Рефенансирование
     """
     class Meta:
-        ordering = ('bank_name', 'type',)
+        ordering = ('-recommend', 'bank_name', 'type',)
         verbose_name = 'Рифенансирование'
         verbose_name_plural = 'Рефинансирование'
 

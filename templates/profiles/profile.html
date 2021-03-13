@@ -7,13 +7,22 @@
                 {% include 'profiles/inc/profile_navbar.html' %}
                 <div class="col-md-9">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             {% if user.first_name %}
                                 <h3>{{ user.get_full_name }}</h3>
                             {% else %}
                                 <h3><a href="{% url 'settings' %}">Введите свои данные</a></h3>
                             {% endif %}
                         </div>
+                        {% if user.is_staff %}
+                        <div class="col-md-6" style="text-align: right">
+                            <img src="{% static 'img/struct_status/st0.png' %}" width="7px">
+                            <small style="margin-right: 15px">{{ users_counts.count }}</small>
+                            <img src="{% static 'img/struct_status/st2.png' %}" width="7px">
+                            <small style="margin-right: 15px">{{ active_users_counts.count }}</small>
+                            <small>Всего: {{ users_counts.count|add:active_users_counts.count }}</small>
+                        </div>
+                        {% endif %}
                         {% include 'profiles/inc/messages.html' %}
                     </div>
                     <hr>

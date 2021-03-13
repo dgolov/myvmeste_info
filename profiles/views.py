@@ -39,6 +39,8 @@ class ProfileView(ProfileMixin, View):
     def __init__(self):
         super(ProfileView, self).__init__()
         self.context['title'] = 'Личный кабинет'
+        self.context['users_counts'] = Profile.objects.filter(struct=1, status=0)
+        self.context['active_users_counts'] = Profile.objects.filter(struct=1, status__gte=1)
 
     def get(self, request, *args, **kwargs):
         self.get_context_data(request)
