@@ -1,8 +1,13 @@
 {% load static %}
-<div class="col-md-3" style="margin-bottom:20px;">
-    <div align="center" style="margin-bottom:30px;">
-        <img src="{% static 'img/status.png' %}" width="189" height="189"
-             style="border-radius: 100px; border: 1px solid gray; box-shadow: 0 0 7px gray;">
+<div class="col-md-3 margin-bottom-20">
+    <div class="profile-status">
+        {% if user.profile.status == 0 %}
+            <img src="{% static 'img/status1.png' %}">
+        {% elif user.profile.status == 1 or user.profile.status == 2 %}
+            <img src="{% static 'img/status2.png' %}">
+        {% elif user.profile.status == 3 %}
+            <img src="{% static 'img/status3.png' %}">
+        {% endif %}
         <p style="font-size: 16px; margin-top: 20px;">
             Статус:
             {% if user.profile.status == 0 %}
@@ -31,6 +36,16 @@
                           d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
                 </svg>
                 &#160;Пригласить партнера
+            </a>
+        </li>
+        <li class="profile-list-group-item profile-list-group-item-action">
+            <a href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                     class="bi bi-cash-stack" viewBox="0 0 16 16">
+                    <path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1H1zm7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+                    <path d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V5zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V7a2 2 0 0 1-2-2H3z"/>
+                </svg>
+                &#160;Личная продажа
             </a>
         </li>
         <li class="profile-list-group-item profile-list-group-item-action">

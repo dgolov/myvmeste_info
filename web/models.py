@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from profiles.models import Profile
 
 
 def get_models_for_count(*model_names):
@@ -215,9 +216,11 @@ class Refinancing(Credits):
 class IDOrders(models.Model):
     """ Отчеты с партнерской программы
     """
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE, verbose_name='Пользователь', blank=True, null=True)
     order_id = models.CharField(max_length=250, verbose_name='ID Отчета', unique=True)
     offer_id = models.PositiveIntegerField(verbose_name='ID Оффера')
     status = models.CharField(max_length=250, db_index=True, verbose_name='Статус')
+    broker = models.BooleanField(default=False, verbose_name='Брокерская заявка')
 
     class Meta:
         verbose_name = 'Отчет'

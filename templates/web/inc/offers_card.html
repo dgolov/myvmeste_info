@@ -1,5 +1,5 @@
 <div class="col-md-6" align="center">
-    <div class="offer-card" align="left">
+    <div class="offer-card" style="text-align: left">
         <div class="offer-card-bank-name">
             <div class="row">
                 <div class="col-md-6" style="text-align: left">{{ product.bank_name }}</div>
@@ -23,6 +23,7 @@
                     </h5>
                 </div>
                 <div class="col-md-4 offer-card-reward">
+                    <small class="margin-bottom-10">Ваш заработок:</small>
                     <p align="center">{{ product.reward }} рублей</p>
                 </div>
             </div>
@@ -111,17 +112,21 @@
                 </div>
             </div>
             <hr>
-            {% if user.is_authenticated %}
-                <form action="{% url 'redirect_offer' ct_model=product.category.slug product_id=product.pk %}"
-                      method="get">
-                    <div class="padding-bottom-10" align="center">
-                        {% csrf_token %}
-                        <p>
-                            <button type="submit" class="btn btn-primary" formtarget="_blank">Оформить заявку</button>
-                        </p>
-                    </div>
-                </form>
-            {% endif %}
+            <form action="{% url 'redirect_offer' ct_model=product.category.slug product_id=product.pk %}"
+                  method="get">
+                <div class="padding-bottom-10" align="center">
+                    {% csrf_token %}
+                    <a class="btn btn-primary" href="#" data-toggle="modal"
+                       data-target="#ProductModal{{ product.pk }}">
+                        Характеристики
+                    </a>
+                    {% if user.is_authenticated %}
+                        <button type="submit" class="btn btn-primary" formtarget="_blank">
+                            Оформить заявку
+                        </button>
+                    {% endif %}
+                </div>
+            </form>
         </div>
         <div class="modal fade mt-5 mb-5" id="ProductModal{{ product.pk }}" tabindex="-1" role="dialog"
              aria-labelledby="ProductModalLabel" aria-hidden="true">

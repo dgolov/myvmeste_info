@@ -63,9 +63,8 @@ class ProfileMixin(LoginRequiredMixin, View):
     def download_report(self, request):
         """ Загрузка отчета партнерки
         """
-        item_row = 0
-        item_user = 0
-        money = 0
+        item_row, item_user, money = 0, 0, 0
+        order_id, offer_id = None, None
         self.order_form = UploadFileForm(request.POST, request.FILES)
         order = IDOrders()
         new_upload_order = Orders()
@@ -89,7 +88,7 @@ class ProfileMixin(LoginRequiredMixin, View):
                     if item_col == 1:
                         try:
                             order = IDOrders.objects.get(order_id=cell.value)
-                        except:
+                        except IDOrders.DoesNotExist:
                             order_id = cell.value
                             new_order = True
                     elif item_col == 3:
@@ -106,15 +105,21 @@ class ProfileMixin(LoginRequiredMixin, View):
                             first_user = {'user': item_user.user.get_full_name(), 'offer': get_product(order)}
                             money_distribution(marketing_money=money.reward, rest_of_money=money.reward,
                                                first_user=first_user, item_user=item_user.user,
-                                               id=0, status=order.status)
+                                               level_struct=0, order=order)
                         elif new_order:
                             # Отчета нет в системе, создание нового
                             confirmed[item_user] = cell.value
-                            order = IDOrders.objects.create(order_id=order_id, offer_id=offer_id, status=cell.value)
+                            order = IDOrders.objects.create(
+                                user=item_user,
+                                order_id=order_id,
+                                offer_id=offer_id,
+                                status=cell.value,
+                                broker=item_user.broker,
+                            )
                             first_user = {'user': item_user.user.get_full_name(), 'offer': get_product(order)}
                             money_distribution(marketing_money=money.reward, rest_of_money=money.reward,
                                                first_user=first_user, item_user=item_user.user,
-                                               id=0, status=order.status)
+                                               level_struct=0, order=order, new_order=True)
             new_upload_order.delete()
 
             # Присвоение статуса брокера для пользователей с подтвержденными заявками

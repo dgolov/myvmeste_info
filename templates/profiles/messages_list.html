@@ -1,16 +1,11 @@
 {% extends 'base.html' %}
-
 {% block content %}
-
     <link rel="stylesheet" type="text/css"
           href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-
     <section class="section_without_color">
-        <div class="container mb-5 mt-4">
+        <div class="container mb-5 margin-top-90">
             <div class="row">
-
                 {% include 'profiles/inc/profile_navbar.html' %}
-
                 <div class="col-md-9">
                     <h3>Сообщения</h3>
                     {% autoescape off %}
@@ -19,11 +14,9 @@
                             <hr>
                         {% endfor %}
                     {% endautoescape %}
-
                     {% include 'profiles/inc/paginator.html' %}
                 </div>
             </div>
         </div>
     </section>
-
 {% endblock %}

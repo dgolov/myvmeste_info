@@ -162,6 +162,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 
+# Email
 DEFAULT_FROM_EMAIL = 'mail@myvmeste.info'
 EMAIL_HOST = 'mail.myvmeste.info'
 EMAIL_PORT = 465
@@ -171,6 +172,7 @@ EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 
 
+# CKEditor
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_CONFIGS = {
     'default': {
@@ -237,10 +239,13 @@ CKEDITOR_CONFIGS = {
     }
 }
 
-CELERY_BROKER_URL = 'redis://localhost:6379'
 
+# CELERY
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
 CELERY_BEAT_SCHEDULE = {
     'second-task': {
         'task': 'web.tasks.my_first_task',

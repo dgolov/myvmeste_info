@@ -6,19 +6,24 @@
         <div class="home-section-overlay"></div>
         <div class="container">
             <div class="row">
+                <div class="col-md-7">
+                    <img src="{% static 'img/2-13.png' %}" width="100%" style="padding-top: 50px;">
+                </div>
+                <div class="col-md-5">
+                    <img src="{% static 'img/3-15.png' %}" width="100%">
+                </div>
+                <hr style="width: 99%;">
                 <div class="col-md-12">
-                    <p class="hero-text">МЫ СФОРМИРОВАЛИ НОВОЕ ПРЕДСТАВЛЕНИЕ О ДОХОДЕ</p>
-                    <h1>ПРОЕКТ <span class="red">«МЫВМЕСТЕ»</span></h1>
-                    <p class="hero-text">Стань участником нашей команды и начни воплощать свои цели в реальность.</p>
                     <div class="container popup-gallery-wrapper">
                         <div class="row">
                             <div class="col-md-4"></div>
                             <div class="col-md-8">
                                 <div class="popup-gallery">
-                                    <a class="popup4 video-icon" href="">
-                                        <i class="fa fa-play"></i></a>
+                                    <a class="popup4 video-icon-red" href="">
+                                        <i class="fa fa-play"></i>
+                                    </a>
                                 </div>
-                                <div class="popup-video-text" >Посмотреть видео презентацию проекта</div>
+                                <div class="popup-video-text-dark">Посмотреть видео презентацию проекта</div>
                             </div>
                         </div>
                     </div>
@@ -27,50 +32,115 @@
         </div>
     </section>
     <main>
-	    <section class="section_without_color">
-	        <div class="container">
-	            <div class="row">
-	                <div class="col">
-	                    <h3>МЫ РАДЫ ПРИВЕТСТВОВАТЬ ВАС НА УНИКАЛЬНОМ ПРОЕКТЕ <span class="red">«МЫВМЕСТЕ»</span></h3>
-	                    <p class="word-spacing-align">
-	                        "МЫВМЕСТЕ" - это первая в России площадка-агрегатор банковских продуктов с функцией выплаты
-	                        вознаграждений. Наша команда с 2016 года работает в сфере рекламы финансовых продуктов, и мы
-	                        создали этот проект чтобы каждый из вас смог начать зарабатывать вместе с нами. Все просто!
-	                        Банки платят за то, что вы становитесь их клиентом и пользуетесь их продуктами. Например, за то
-	                        что вы оформляете дебетовые или кредитные карты, микрозаймы и даже страховку, рекламодатели
-	                        (банки, микрофинансовые организации, страховые) платят за это вознаграждения до 4 тысяч рублей за
-	                        один продукт. Очень многие об этом даже и не подозревают. И за ваши
-	                        <span class="red">действия</span> получают деньги другие люди (сотрудники банков, вэб-мастера и
-	                        т.д.), но не ВЫ. Наш проект призван поменять данную несправедливость.
-	                    </p>
-	                    <p class="word-spacing-align">Более того! Развивая проект <span class="red">"МЫВМЕСТЕ"</span>
-	                        каждый сможет зарабатывать десятки, сотни и даже миллионы рублей. Многие активные участники уже
-	                        давно нигде не работают и имеют очень хороший доход только с нашей площадки. И мы гарантируем,
-	                        что любой участник нашего проекта сможет так же!
-	                    </p>
-                        <img src="{% static 'img/main-icons.svg' %}" width="100%" style="margin: 5% 0;">
-	                </div>
-	            </div>
-	        </div>
-	    </section>
-	    <section class="small-home-section">
-	        <div class="container">
-	            <div class="row">
-	                <div class="col-md-10">
-	                    <h6>СТАНЬ УЧАСТНИКОМ, РАССКАЖИ О ПРОЕКТЕ ПЯТИ ДРУЗЬЯМ И ЗАРАБОТАЙ 750 ТЫСЯЧ РУБЛЕЙ УЖЕ ЧЕРЕЗ ДВА МЕСЯЦА.</h6>
-	                </div>
-	                {% if user.is_anonymous %}
-                        {% if referred_user and referred_user %}
-                            <div class="col-md-2 small-home-section-button">
-                                <a href="{% url 'signup' %}" class="btn btn-danger">Зарегистрироваться</a>
+        <section class="section_without_color">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <h1>МЫ РАДЫ ПРИВЕТСТВОВАТЬ ВАС НА УНИКАЛЬНОМ ПРОЕКТЕ «МЫВМЕСТЕ»</h1>
+                        <p class="word-spacing-align">
+                            <span class="bold">"МЫВМЕСТЕ"</span> - это уникальная площадка-агрегатор банковских
+                            продуктов с функцией выплаты
+                            вознаграждений. Наша команда с 2016 года работает в сфере рекламы финансовых продуктов, и
+                            мы создали этот проект чтобы каждый из вас смог начать зарабатывать вместе с нами. Все
+                            просто! Банки платят за то, что вы становитесь их клиентом и пользуетесь их продуктами.
+                            Например, за то что вы оформляете банковские карты, кредиты наличными или микрозаймы,
+                            рекламодатели платят за это хорошие вознаграждения до 5 тысяч рублей за один продукт.
+                            Возможно вы видели рекламу от известных блоггеров с призывом оформить банковскую карту,
+                            пройдя по их ссылке. Соответственно они за вас получают вознаграждение. У нас это
+                            вознаграждение вы забираете себе. Для участия в проекте не требуются никакие вложения.
+                            Мы гарантируем, что любой участник нашего проекта сможет заработать!
+                        </p>
+                    </div>
+                    <div id="carouselExampleIndicators" class="carousel slide home-icons-carousel"
+                         data-ride="carousel">
+                        <ol class="carousel-indicators margin-top-30">
+                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="center margin-top-40 margin-bottom-30">
+                                    <img src="{% static 'img/main-icons/19-19.png' %}">
+                                    <p class="center margin-top-20">Пятилетний опыт работы</p>
+                                </div>
                             </div>
-                        {% endif %}
-		            {% endif %}
-	            </div>
-	        </div>
-	    </section>
-        <section id="marketing">
-            <div class="services-wrapper margin-top-70">
+                            <div class="carousel-item">
+                                <div class="center margin-top-40 margin-bottom-30">
+                                    <img src="{% static 'img/main-icons/20-20.png' %}">
+                                    <p class="center margin-top-20">Оплачиваемая корпоративная связь</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="center margin-top-40 margin-bottom-30">
+                                    <img src="{% static 'img/main-icons/20-21.png' %}">
+                                    <p class="center margin-top-20">Тренинги и обучения</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="center margin-top-40 margin-bottom-30">
+                                    <img src="{% static 'img/main-icons/20-22.png' %}">
+                                    <p class="center margin-top-20">Техническая поддержка</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="center margin-top-40 margin-bottom-30">
+                                    <img src="{% static 'img/main-icons/20-23.png' %}">
+                                    <p class="center margin-top-20">Самостоятельное планирование времени</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="center margin-top-40 margin-bottom-30">
+                                    <img src="{% static 'img/main-icons/20-24.png' %}">
+                                    <p class="center margin-top-20">Работа в команде лучших</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="left carousel-control" href="#carouselExampleIndicators" role="button"
+                           data-slide="prev" style="background-image: none; color: #0f74a8;">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#carouselExampleIndicators" role="button"
+                           data-slide="next" style="background-image: none; color: #0f74a8;">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                    <div class="row margin-bottom-50 home-icons">
+                        <div class="col-md-4 center margin-top-40">
+                            <img src="{% static 'img/main-icons/19-19.png' %}">
+                            <p class="center margin-top-20">Пятилетний опыт работы</p>
+                        </div>
+                        <div class="col-md-4 center margin-top-40">
+                            <img src="{% static 'img/main-icons/20-20.png' %}">
+                            <p class="center margin-top-20">Оплачиваемая корпоративная связь</p>
+                        </div>
+                        <div class="col-md-4 center margin-top-40">
+                            <img src="{% static 'img/main-icons/20-21.png' %}">
+                            <p class="center margin-top-20">Тренинги и обучения</p>
+                        </div>
+                        <div class="col-md-4 center margin-top-40">
+                            <img src="{% static 'img/main-icons/20-22.png' %}">
+                            <p class="center margin-top-20">Техническая поддержка</p>
+                        </div>
+                        <div class="col-md-4 center margin-top-40">
+                            <img src="{% static 'img/main-icons/20-23.png' %}">
+                            <p class="center margin-top-20">Самостоятельное планирование времени</p>
+                        </div>
+                        <div class="col-md-4 center margin-top-40">
+                            <img src="{% static 'img/main-icons/20-24.png' %}">
+                            <p class="center margin-top-20">Работа в команде лучших</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section-grey" id="marketing">
+            <div class="services-wrapper">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-7">
@@ -81,74 +151,145 @@
                                 <a class="popup4 video-icon-red" href="">
                                     <i class="fa fa-play"></i></a>
                             </div>
-                            <div class="popup-video-text-dark" >Посмотреть видео-описание маркетинга</div>
+                            <div class="popup-video-text-dark">Посмотреть видео-описание маркетинга</div>
                         </div>
                     </div>
                     {% include 'web/inc/marketing.html' %}
                 </div>
             </div>
         </section>
-	    <section class="small-home-section">
-	        <div class="container">
-	            <div class="row">
-	                <div class="col-md-10">
-	                    <h6>БУДЬ АКТИВНЫМ, РАЗВИВАЙ ПРОЕКТ, ПРИГЛАШАЙ НОВЫХ УЧАСТНИКОВ И ЗАРАБАТЫВАЙ МИЛЛИОНЫ.</h6>
-	                </div>
-	                {% if user.is_anonymous and referred_user %}
-                        <div class="col-md-2 small-home-section-button">
-                            <a href="{% url 'signup' %}" class="btn btn-danger">Зарегистрироваться</a>
+        <section id="marketing" class="margin-bottom-50">
+            <div class="services-wrapper margin-top-70">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 margin-bottom-20">
+                            <h2 class="center">ДЛЯ УЧАСТИЯ В ПРОЕКТЕ НЕОБХОДИМО:</h2>
                         </div>
-		            {% endif %}
-	            </div>
-	        </div>
-	    </section>
-	    <section id="marketing" class="margin-bottom-50">
-	        <div class="services-wrapper margin-top-70">
-	            <div class="container">
-	                <div class="row">
-	                    <div class="col-md-12 margin-bottom-20">
-	                        <h2 class="center">ДЛЯ УЧАСТИЯ В ПРОЕКТЕ НЕОБХОДИМО:</h2>
-	                    </div>
-	                    <div class="col-md-3">
-	                        <h3><span class="home-numbers">1</span></h3>
-	                        <h5>ПРОЙТИ РЕГИСТРАЦИЮ НА САЙТЕ</h5>
-	                    </div>
-	                    <div class="col-md-3">
-	                        <h3><span class="home-numbers">2</span></h3>
-	                        <h5>ИЗУЧИТЬ ПРАВИЛА ПРОЕКТА И ПОДПИСАТЬСЯ НА НАШ TELEGRAM КАНАЛ</h5>
-	                    </div>
-	                    <div class="col-md-3">
-	                        <h3><span class="home-numbers">3</span></h3>
-	                        <h5>ОФОРМИТЬ СЕБЕ ЛЮБОЙ ПРОДУКТ</h5>
-	                        <ul>
-	                            <li class="small">- Выберите банковский продукт в разделе "Офферы".</li>
-	                            <li class="small">- Нажмите на кнопку "Оформить  заявку".</li>
-	                            <li class="small">- Оформите продукт и выполните по нему целевое действие.</li>
-	                        </ul>
-	                    </div>
-	                    <div class="col-md-3">
-	                        <h3><span class="home-numbers">4</span></h3>
-	                        <h5>ПРИГЛАСИТЬ НОВЫХ УЧАСТНИКОВ</h5>
-	                        <p class="small">После оформления приглашайте новых участников в проект  по своей
-	                            реферальной ссылке</p>
-	                    </div>
-	                    <div class="col-md-12">
-	                        <div class="popup-gallery">
-	                            <a class="popup4 video-icon-red" href="">
-	                                <i class="fa fa-play"></i></a>
-	                        </div>
-	                        <div class="popup-video-text-dark" >Посмотреть видео-обучение</div>
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
-	    </section>
-	    <section class="margin-bottom-50">
-	        <div class="container">
-	            <div class="row">
-	                <div class="col-md-12">
-	                    <h3>ПОЧЕМУ ИНТЕРЕСНО ЗАРАБАТЫВАТЬ ИМЕННО У НАС</h3>
-                        <img src="{% static 'img/down_block.svg' %}" width="100%" style="margin: 5% 0;">
+                        <div class="col-md-3">
+                            <h3 class="center"><span class="home-numbers">1</span></h3>
+                            <h5 class="center" style="color: dimgrey">ПРОЙТИ РЕГИСТРАЦИЮ НА САЙТЕ</h5>
+                        </div>
+                        <div class="col-md-3">
+                            <h3 class="center"><span class="home-numbers">2</span></h3>
+                            <h5 class="center" style="color: dimgrey">ИЗУЧИТЬ ПРАВИЛА ПРОЕКТА И ПОДПИСАТЬСЯ НА НАШ
+                                TELEGRAM КАНАЛ</h5>
+                        </div>
+                        <div class="col-md-3">
+                            <h3 class="center"><span class="home-numbers">3</span></h3>
+                            <h5 class="center" style="color: dimgrey">ОФОРМИТЬ СЕБЕ ЛЮБОЙ ПРОДУКТ</h5>
+                            <ul>
+                                <li class="small">- Выберите банковский продукт в разделе "Офферы".</li>
+                                <li class="small">- Нажмите на кнопку "Оформить заявку".</li>
+                                <li class="small">- Оформите продукт и выполните по нему целевое действие.</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3">
+                            <h3 class="center"><span class="home-numbers">4</span></h3>
+                            <h5 class="center" style="color: dimgrey">ПРИГЛАСИТЬ НОВЫХ УЧАСТНИКОВ</h5>
+                            <p class="small">После оформления приглашайте новых участников в проект по своей
+                                реферальной ссылке</p>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="popup-gallery">
+                                <a class="popup4 video-icon-red" href="">
+                                    <i class="fa fa-play"></i></a>
+                            </div>
+                            <div class="popup-video-text-dark">Посмотреть видео-обучение</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section_without_color">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>ПОЧЕМУ С НАМИ ИНТЕРЕСНО ЗАРАБАТЫВАТЬ</h3>
+                        <div id="carousel-example-generic" class="carousel slide down-home-icons-carousel"
+                             data-ride="carousel">
+                            <ol class="carousel-indicators margin-top-30">
+                                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="5"></li>
+                            </ol>
+                            <div class="carousel-inner" role="listbox">
+                                <div class="carousel-item active">
+                                    <div class="center margin-top-40 margin-bottom-30">
+                                        <img src="{% static 'img/main-icons/20-25.png' %}">
+                                        <p class="center margin-top-20">Заработок на пассиве</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="center margin-top-40 margin-bottom-30">
+                                        <img src="{% static 'img/main-icons/20-26.png' %}">
+                                        <p class="center margin-top-20">Без вложений</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="center margin-top-40 margin-bottom-30">
+                                        <img src="{% static 'img/main-icons/20-27.png' %}">
+                                        <p class="center margin-top-20">Долгосрочность поекта</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="center margin-top-40 margin-bottom-30">
+                                        <img src="{% static 'img/main-icons/20-28.png' %}">
+                                        <p class="center margin-top-20">Простой алгоритм действий</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="center margin-top-40 margin-bottom-30">
+                                        <img src="{% static 'img/main-icons/20-29.png' %}">
+                                        <p class="center margin-top-20">Без продаж</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="center margin-top-40 margin-bottom-30">
+                                        <img src="{% static 'img/main-icons/20-30.png' %}">
+                                        <p class="center margin-top-20">Еженедельные выплаты</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="left carousel-control" href="#carousel-example-generic" role="button"
+                               data-slide="prev" style="background-image: none; color: #0f74a8;">
+                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#carousel-example-generic" role="button"
+                               data-slide="next" style="background-image: none; color: #0f74a8;">
+                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                        <div class="row margin-bottom-50 home-icons">
+                            <div class="col-md-4 center margin-top-40">
+                                <img src="{% static 'img/main-icons/20-25.png' %}">
+                                <p class="center margin-top-20">Заработок на пассиве</p>
+                            </div>
+                            <div class="col-md-4 center margin-top-40">
+                                <img src="{% static 'img/main-icons/20-26.png' %}">
+                                <p class="center margin-top-20">Без вложений</p>
+                            </div>
+                            <div class="col-md-4 center margin-top-40">
+                                <img src="{% static 'img/main-icons/20-27.png' %}">
+                                <p class="center margin-top-20">Долгосрочность проекта</p>
+                            </div>
+                            <div class="col-md-4 center margin-top-40">
+                                <img src="{% static 'img/main-icons/20-28.png' %}">
+                                <p class="center margin-top-20">Простой алгоритм действий</p>
+                            </div>
+                            <div class="col-md-4 center margin-top-40">
+                                <img src="{% static 'img/main-icons/20-29.png' %}">
+                                <p class="center margin-top-20">Без продаж</p>
+                            </div>
+                            <div class="col-md-4 center margin-top-40">
+                                <img src="{% static 'img/main-icons/20-30.png' %}">
+                                <p class="center margin-top-20">Еженедельные выплаты</p>
+                            </div>
+                        </div>
                         {% if user.is_anonymous and referred_user %}
                             <div class="down-home-section-button">
                                 <a href="{% url 'signup' %}" class="btn btn-danger">Начать зарабатывать</a>
@@ -158,5 +299,5 @@
                 </div>
             </div>
         </section>
-	</main>
+    </main>
 {% endblock content %}

@@ -1,6 +1,5 @@
 <nav aria-label="...">
     <ul class="pagination justify-content-center">
-
         {% if page_obj.has_previous %}
             {% if page_obj.number > 3 %}
                 <li class="page-item">
@@ -25,7 +24,6 @@
                 <li class="page-item"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
             {% endif %}
         {% endfor %}
-
         {% if page_obj.has_next %}
             <li class="page-item">
                 <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">

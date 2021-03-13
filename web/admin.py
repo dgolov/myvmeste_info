@@ -205,5 +205,5 @@ class RefinancingAdmin(admin.ModelAdmin):
 
 @admin.register(IDOrders)
 class IDOrdersAdmin(admin.ModelAdmin):
-    list_display = ['order_id', 'offer_id', 'status']
+    list_display = ['user', 'order_id', 'offer_id', 'status', 'broker']
     list_filter = ['status', 'offer_id']

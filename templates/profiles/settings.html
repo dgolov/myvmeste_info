@@ -1,16 +1,11 @@
 {% extends 'base.html' %}
-
 {% block content %}
-
     <link rel="stylesheet" type="text/css"
           href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-
     <section class="section_without_color">
-        <div class="container mb-5 mt-4">
+        <div class="container mb-5 margin-top-90">
             <div class="row">
-
                 {% include 'profiles/inc/profile_navbar.html' %}
-
                 <div class="col-md-9">
                     <div class="row">
                         <div class="col-md-12">
@@ -18,9 +13,7 @@
                         </div>
                         {% include 'profiles/inc/messages.html' %}
                     </div>
-
                     <hr>
-
                     <form action="." method="post">
                         <p>Имя: {{user.first_name}} {{ settings_form.first_name }}</p>
                         <p>Фамилия: {{user.last_name}} {{ settings_form.last_name }}</p>
@@ -36,9 +29,7 @@
                             <button class="btn btn-primary btn-lg" type="submit">Изменить</button>
                         </div>
                     </form>
-
                     <hr>
-
                     <div style="margin-top: 50px;">
                         <table width="100%">
                             <tr>
@@ -53,9 +44,7 @@
                             </tr>
                         </table>
                     </div>
-
                     <hr>
-
                     <h4 style="margin-top: 50px;">Список карт для вывода денежных средств:</h4>
                     <table class="table">
                         <thead>
@@ -77,14 +66,12 @@
                         </tr>
                         {% endfor %}
                     </table>
-
-                    <!-- Кнопка запуска модального окна -->
-                    <p><button type="button" class="btn btn-primary btn-lg" data-toggle="modal"
+                    <p>
+                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal"
                                data-target="#CardModal">
-                      Добавить карту
-                    </button></p>
-
-                    <!-- Модальное окно -->
+                            Добавить карту
+                        </button>
+                    </p>
                     <div class="modal fade mt-5" id="CardModal" tabindex="-1" role="dialog"
                          aria-labelledby="CardModalLabel"
                          aria-hidden="true">
@@ -110,5 +97,4 @@
             </div>
         </div>
     </section>
-
 {% endblock %}
