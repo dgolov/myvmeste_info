@@ -1,16 +1,16 @@
 <div class="col-md-6" align="center">
     <div class="category-card">
         <div class="row">
-            <div class="col-md-4 mr-5">
+            <div class="col-md-4">
                 <a href="{{ category.slug }}">
-                    <img src="{{ category.image.url }}" width="150" height="150" alt="{{ category.name }}">
+                    <img src="{{ category.image.url }}" alt="{{ category.name }}">
                 </a>
             </div>
             <div class="col-md-8">
                 <h5 class="card-title">
                     <a href="{{ category.slug }}">{{ category.name }}</a>
                 </h5>
-                <div class="category-card-body">
+                <div class="category-cart-body">
                     <table class="table mt-4">
                         <tr>
                             <td>
@@ -24,7 +24,7 @@
                                     <p>Выплата до {{ credits.reward__max }} ₽</p>
                                 {% elif category.name == 'Ипотечные кредиты' %}
                                     <p>Выплата до {{ ipoteka.reward__max }} ₽</p>
-                                {% elif category.name == 'Рассчетно кассовое обслуживание' %}
+                                {% elif category.name == 'Расчетно-кассовое обслуживание' %}
                                     <p>Выплата до {{ rko.reward__max }} ₽</p>
                                 {% elif category.name == 'Рефинансирование' %}
                                     <p>Выплата до {{ refenancing.reward__max }} ₽</p>
@@ -43,7 +43,7 @@
                                     <p>Процентная ставка от {{ credits.percents__min }} %</p>
                                 {% elif category.name == 'Ипотечные кредиты' %}
                                     <p>Процентная ставка от {{ ipoteka.percents__min }} %</p>
-                                {% elif category.name == 'Рассчетно кассовое обслуживание' %}
+                                {% elif category.name == 'Расчетно-кассовое обслуживание' %}
                                     <p>Стоимость обслуживания от {{ rko.service_cost__min }} ₽</p>
                                 {% elif category.name == 'Рефинансирование' %}
                                     <p>Процентная ставка от {{ refenancing.percents__min }} %</p>

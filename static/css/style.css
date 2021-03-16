@@ -1262,10 +1262,11 @@ a.btn-white:visited, a.btn-white:focus {
 
 .category-card img {
     align: center;
-    margin: 20px;
+    margin: 5px;
     border: none;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
     border-radius: 100%;
+    width: 90%;
 }
 
 .category-card h5 {
@@ -1281,20 +1282,8 @@ a.btn-white:visited, a.btn-white:focus {
     color: #1d9b8f;
 }
 
-.category-cart-body {
-    padding: 20px 25px 15px 25px;
-    border-top: solid gray;
-    font-family: 'Open Sans', sans-serif;
+.category-cart-body p{
     font-size: 16px;
-    color: #1e0037;
-    font-style: italic;
-}
-
-.category-cart-body p {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 16px;
-    color: #1e0037;
-    font-style: italic;
 }
 
 
@@ -1581,6 +1570,15 @@ ul.benefits.white li i {
 
     #contact-form {
         margin-bottom: 55px;
+    }
+
+    .category-card img {
+        align: center;
+        margin: 20px;
+        border: none;
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+        border-radius: 100%;
+        width: 150px;
     }
 
 }

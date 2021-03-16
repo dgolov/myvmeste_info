@@ -29,7 +29,7 @@ E-mail: {}
 
 TOKEN = 'ed8d9b747dd38505c298310009c45a3f'
 URL = 'http://api.leads.su'
-LEADS_STATUS = {'pending': 'Ожидает подтверждения', 'approved': 'Подтвержден', 'rejected ': 'Отклонен'}
+LEADS_STATUS = {'pending': 'Ожидает подтверждения', 'approved': 'Подтвержден', 'rejected': 'Отклонен'}
 today = date.today()
 
 
@@ -44,16 +44,18 @@ class ProfileView(ProfileMixin, View):
 
     def get(self, request, *args, **kwargs):
         self.get_context_data(request)
-        # response = requests.get(f'{URL}/webmaster/conversions?start_date=2021-02-01&end_date={today}&token={TOKEN}')
-        # for conversion in response.json()['data']:
-        #     try:
-        #         user = Profile.objects.get(pk=conversion['aff_sub1'])
-        #         order_id = conversion['id']
-        #         status = LEADS_STATUS[conversion['status']]
-        #         offer_id = conversion['offer_id']
-        #         automatic_report(order_id, user.user, status, offer_id)
-        #     except (Profile.DoesNotExist, ValueError):
-        #         continue
+        try:
+            response = requests.get(f'{URL}/webmaster/conversions?start_date=2021-02-01&end_date={today}&token={TOKEN}')
+            for conversion in response.json()['data']:
+                try:
+                    user = Profile.objects.get(pk=conversion['aff_sub1'])
+                    order_id = conversion['id']
+                    status = LEADS_STATUS[conversion['status']]
+                    offer_id = conversion['offer_id']
+                    automatic_report(order_id, user.user, status, offer_id)
+                except (Profile.DoesNotExist, ValueError):
+                    continue
+        except: pass
         return render(request, 'profiles/profile.html', self.context)
 
     def post(self, request, *args, **kwargs):

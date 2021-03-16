@@ -25,7 +25,7 @@ SECRET_KEY = '14^_0(u&34(5yn#a$d6e!b43hgps*e9^h2kw8$e8#ycnt$kes0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['myvmeste.info', 'www.myvmeste.info', '127.0.0.1']
 
 
 # Application definition

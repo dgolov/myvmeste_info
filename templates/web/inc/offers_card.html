@@ -31,7 +31,7 @@
             <div class="container mt-3">
                 <div class="row">
                     <div class="col-md-6">
-                        {% if product.category.name == 'Рассчетно кассовое обслуживание' %}
+                        {% if product.category.name == 'Расчетно-кассовое обслуживание' %}
                             <p>Платежи</p>
                             <h6>от {{ product.payments }} ₽</h6>
                         {% else %}
@@ -56,13 +56,13 @@
                         {% elif product.category.name == 'Ипотечные кредиты' %}
                             <p style="margin-bottom: auto; line-height: normal;">Кредитный лимит</p>
                             <h6>от {{ product.limit }} ₽</h6>
-                        {% elif product.category.name == 'Рассчетно кассовое обслуживание' %}
+                        {% elif product.category.name == 'Расчетно-кассовое обслуживание' %}
                             <p style="margin-bottom: auto; line-height: normal;">Внесение наличных</p>
                             <h6>от {{ product.cash_deposit }} ₽/мес.</h6>
                         {% endif %}
                     </div>
                     <div class="col-md-6">
-                        {% if product.category.name == 'Дебетовые карты' or product.category.name == 'Рассчетно кассовое обслуживание' %}
+                        {% if product.category.name == 'Дебетовые карты' or product.category.name == 'Расчетно-кассовое обслуживание' %}
                             <p style="margin-bottom: auto; line-height: normal;">Стоимость обслуживания</p>
                             {% if product.service_cost > 1 %}
                                 <h6>от {{ product.service_cost }} ₽</h6>
@@ -101,7 +101,7 @@
                         {% elif product.category.name == 'Кредитные карты' %}
                             <p style="margin-bottom: auto; line-height: normal;">Кредитный лимит</p>
                             <h6>До {{ product.limit }} ₽</h6>
-                        {% elif product.category.name == 'Рассчетно кассовое обслуживание' %}
+                        {% elif product.category.name == 'Расчетно-кассовое обслуживание' %}
                             <p style="margin-bottom: auto; line-height: normal;">Снятие наличных</p>
                             <h6>До {{ product.cash_withdrawal }} ₽/мес.</h6>
                         {% elif product.category.name == 'МФО' or product.category.name == 'Потребительские кредиты' or product.category.name == 'Рефинансирование' or product.category.name == 'Ипотечные кредиты' %}

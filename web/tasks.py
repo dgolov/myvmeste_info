@@ -5,27 +5,45 @@ from profiles.models import Profile
 import requests
 from web.utils import automatic_report
 
-TOKEN = 'ed8d9b747dd38505c298310009c45a3f'
-URL = 'http://api.leads.su'
-LEADS_STATUS = {'pending': 'Ожидает подтверждения', 'approved': 'Подтвержден', 'rejected ': 'Отклонен'}
-today = date.today()
+
+API_LEADS_CONF = {
+    # http://api.leads.su/webmaster/conversions?start_date=2014-02-01&end_date=2014-02-20&offset=847&token=YOUR_TOKEN
+    'token': 'ed8d9b747dd38505c298310009c45a3f',
+    'url': 'http://api.leads.su/webmaster/conversions',
+    'status': {
+        'pending': 'Ожидает подтверждения',
+        'approved': 'Подтвержден',
+        'rejected ': 'Отклонен'
+    }
+}
+
+API_URU_CONF = {
+    # https://api.guruleads.ru/1.0/stats/conversions?access-token=YOUR_TOKEN&date_start=DATE&date_end=DATE
+    'tocken': 'ca917561b32c1620512547d9ca8be01d',
+    'url': 'https://api.guruleads.ru/1.0/stats/conversions',
+    'status': {
+        '2': 'Ожидает подтверждения',
+        '1': 'Подтвержден',
+        '3 ': 'Отклонен',
+    }
+}
+
 
 @shared_task
 def my_first_task():
-    response = requests.get(f'{URL}/webmaster/conversions?start_date=2021-02-01&end_date={today}&token={TOKEN}')
-    print(response.json())
+    print('task')
+    end_date = date.today()
+    response = requests.get(
+        f"{API_LEADS_CONF['url']}?start_date=2021-02-01&end_date={end_date}&token={API_LEADS_CONF['token']}"
+    )
     for conversion in response.json()['data']:
         try:
             user = Profile.objects.get(pk=conversion['aff_sub1'])
             order_id = conversion['id']
-            status = LEADS_STATUS[conversion['status']]
+            conversion_status = conversion['status']
+            status = API_LEADS_CONF['status'][conversion_status]
+            print(status)
             offer_id = conversion['offer_id']
             automatic_report(order_id, user.user, status, offer_id)
         except:
             continue
-    print('This is my first task!')
-
-
-@shared_task
-def add(x, y):
-    return x + y
