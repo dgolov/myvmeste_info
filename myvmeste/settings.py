@@ -102,6 +102,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.mysql',
+        # 'NAME': 'u1267572_db_myvmeste',
+        # 'USER': 'u1267572_db2',
+        # 'PASSWORD': 'zAg8k!PI',
+        # 'HOST': 'localhost',
     }
 }
 
