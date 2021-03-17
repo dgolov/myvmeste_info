@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.db.models import Max, Min
 from django.http import HttpResponseRedirect
@@ -106,6 +107,33 @@ class OffersRedirectView(UserMixin, View):
             url = '{}?aff_sub1={}'
         elif domain == 'gl.guruleads.ru':
             url = '{}?sub1={}'
+        if self.user.profile.struct == 1 and url:
+            url = url.format(self.offer.referral_slug, self.user.profile.pk)
+            # message = f'Переход по ссылке на {self.offer}'
+            # add_to_user_history_list(self.user, message)
+        elif self.user.profile.struct == 2 and url:
+            url = url.format(self.offer.referral_slug_2, self.user.profile.pk)
+        else:
+            url = self.offer.referral_slug
+        return HttpResponseRedirect(url)
+
+
+class PersonalSaleRedirectView(View):
+    """ Редирект на страницу банка при нажатии кнопки "Оформить заявку"
+    """
+    def dispatch(self, request, *args, **kwargs):
+        self.model = CT_MODEL_MODEL_CLASS[request.GET.get('category', '')]
+        self.offer = self.model.objects.get(pk=request.GET.get('product', ''))
+        self.user = User.objects.get(pk=request.GET.get('pk', ''))
+        return super().dispatch(request, *args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        url = None
+        domain = urlparse(self.offer.referral_slug).netloc
+        if domain == 'pxl.leads.su':
+            url = '{}?aff_sub2={}'
+        elif domain == 'gl.guruleads.ru':
+            url = '{}?sub2={}'
         if self.user.profile.struct == 1 and url:
             url = url.format(self.offer.referral_slug, self.user.profile.pk)
             # message = f'Переход по ссылке на {self.offer}'

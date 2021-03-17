@@ -15,13 +15,13 @@
                             {% endif %}
                         </div>
                         {% if user.is_staff %}
-                        <div class="col-md-6" style="text-align: right">
-                            <img src="{% static 'img/struct_status/st0.png' %}" width="7px">
-                            <small style="margin-right: 15px">{{ users_counts.count }}</small>
-                            <img src="{% static 'img/struct_status/st2.png' %}" width="7px">
-                            <small style="margin-right: 15px">{{ active_users_counts.count }}</small>
-                            <small>Всего: {{ users_counts.count|add:active_users_counts.count }}</small>
-                        </div>
+                            <div class="col-md-6" style="text-align: right">
+                                <img src="{% static 'img/struct_status/st0.png' %}" width="7px">
+                                <small style="margin-right: 15px">{{ users_counts.count }}</small>
+                                <img src="{% static 'img/struct_status/st2.png' %}" width="7px">
+                                <small style="margin-right: 15px">{{ active_users_counts.count }}</small>
+                                <small>Всего: {{ users_counts.count|add:active_users_counts.count }}</small>
+                            </div>
                         {% endif %}
                         {% include 'profiles/inc/messages.html' %}
                     </div>
@@ -105,29 +105,6 @@
                             </tr>
                             </tbody>
                         </table>
-                        <h3 class="margin-top-20">Доход со структуры</h3>
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th scope="col" style="width: 70%"></th>
-                                <th scope="col" style="width: 30%">Сумма</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <th scope="row" style="width: 70%">
-                                    <span title="Денежные средства ожидающие подтверждения целевого действия от рекламодателя">
-                                        На рассмотрении:
-                                    </span>
-                                </th>
-                                <td style="width: 30%">{{ user.profile.balance.under_consideration }} ₽</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" style="width: 70%">Средства на балансе:</th>
-                                <td style="width: 30%">{{ user.profile.balance.available }} ₽</td>
-                            </tr>
-                            </tbody>
-                        </table>
                         <h3 class="margin-top-20">Личный доход</h3>
                         <table class="table">
                             <thead>
@@ -148,6 +125,29 @@
                             <tr>
                                 <th scope="row" style="width: 70%">Средства на балансе:</th>
                                 <td style="width: 30%">{{ user.profile.balance.self_available }} ₽</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <h3 class="margin-top-20">Доход со структуры</h3>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col" style="width: 70%"></th>
+                                <th scope="col" style="width: 30%">Сумма</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row" style="width: 70%">
+                                    <span title="Денежные средства ожидающие подтверждения целевого действия от рекламодателя">
+                                        На рассмотрении:
+                                    </span>
+                                </th>
+                                <td style="width: 30%">{{ user.profile.balance.under_consideration }} ₽</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="width: 70%">Средства на балансе:</th>
+                                <td style="width: 30%">{{ user.profile.balance.available }} ₽</td>
                             </tr>
                             </tbody>
                         </table>
@@ -281,11 +281,4 @@
             </div>
         </div>
     </section>
-    <script>
-        function CopySlug() {
-            var copyText = document.getElementById("SlugInput");
-            copyText.select();
-            document.execCommand("copy");
-        }
-    </script>
 {% endblock %}

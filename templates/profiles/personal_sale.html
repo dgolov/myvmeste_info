@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+    <link rel="stylesheet" type="text/css"
+          href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <section class="section_without_color">
+        <div class="container mb-5 margin-top-90">
+            <div class="row">
+                {% include 'profiles/inc/profile_navbar.html' %}
+                <div class="col-md-9">
+                    {% if user.is_authenticated %}
+                        <div class="col-md-12">
+                            <h3>Личные продажи</h3>
+                            {% for category in categories %}
+                                <div class="row" id="debit-cards">
+                                    <div class="col-md-12 margin-top-30">
+                                        <h5>{{ category.name }}</h5>
+                                    </div>
+                                    {% if category.name == 'Дебетовые карты' %}
+                                        <table class="table">
+                                        {% for product in debit_cards %}
+                                            <tr>
+                                                <td>{{ product.card_name }}</td>
+                                                <td>{{ product.reward }} рублей</td>
+                                                <td>
+                                                    <a class="btn btn-outline-primary" href="#" data-toggle="modal"
+                                                        data-target="#ProductModal{{ category.slug }}{{ product.pk }}">
+                                                        Получить ссылку
+                                                    </a>
+                                                    {% include 'profiles/inc/sale_modal.html' %}
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </table>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

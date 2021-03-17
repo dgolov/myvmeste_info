@@ -77,6 +77,7 @@
       });
     });
 
+
     $('.carousel').carousel({
         interval: 3000,
         pause: false,
@@ -91,6 +92,13 @@
     hammer.on("swiperight", function () {
         $carousel.carousel("prev");
     });
+
+
+    function CopySlug() {
+        var copyText = document.getElementById("SlugInput");
+        copyText.select();
+        document.execCommand("copy");
+    }
 </script>
 </body>
 </html>

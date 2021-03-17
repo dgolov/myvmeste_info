@@ -1,0 +1,86 @@
+<div class="modal fade mt-5 mb-5" id="ProductModal{{ category.slug }}{{ product.pk }}" tabindex="-1" role="dialog"
+     aria-labelledby="ProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="container">
+                    <button type="button" class="close-message" data-dismiss="modal" aria-label="Close"
+                            style="float: right;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <h4 class="modal-title" id="ProductModalLabel">
+                                {% if product.card_name %}
+                                    {{ product.card_name }}
+                                {% else %}
+                                    {{ product.bank_name }}
+                                {% endif %}
+                            </h4>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="mt-2 mr-3" align="right">{{ product.category }}</p>
+                        </div>
+                        <div class="col-md-1">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="container mb-4 mt-3">
+                    <h5>Целевое действие</h5>
+                    <p>{{ product.short_condition }}</p>
+                </div>
+                <input class="form-control" type="text"
+                       value="http://127.0.0.1:8000/sale?category={{ category.slug }}&product={{ product.pk }}&pk={{ user.pk }}"
+                       id="SaleSlugInput" readonly style="color: #0b0b0b; width: 100%;">
+                <button onclick="CopySaleSlug()" class="btn btn-outline-success my-2 my-sm-0 width-100">
+                    Скопировать ссылку
+                </button>
+                <hr>
+                {% if product.main_characteristics %}
+                    <div class="container mb-5 mt-5">
+                        <h5>Основные характеристики</h5>
+                        {% autoescape off %}
+                            {{ product.main_characteristics }}
+                        {% endautoescape %}
+                    </div>
+                {% endif %}
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="accordion-item">
+                        <h5 class="accordion-header" id="flush-heading{{ product.pk }}">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapse{{ product.pk }}" aria-expanded="false"
+                                    aria-controls="flush-collapse{{ product.pk }}">
+                                Описание продукта
+                            </button>
+                        </h5>
+                        <div id="flush-collapse{{ product.pk }}" class="accordion-collapse collapse"
+                             aria-labelledby="flush-heading{{ product.pk }}"
+                             data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                {% autoescape off %}
+                                    {{ product.condition }}
+                                {% endautoescape %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer mb-5">
+                {% if user.is_authenticated %}
+
+                {% endif %}
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function CopySaleSlug() {
+        var copyText = document.getElementById("SaleSlugInput");
+        copyText.select();
+        document.execCommand("copy");
+    }
+</script>

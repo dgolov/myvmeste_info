@@ -243,7 +243,7 @@ def create_user_profile(sender, instance, created, **kwargs):
             paid_out=0
         )
         # balance = Money.objects.get(user=instance)
-        Profile.objects.create(user=instance, balance=balance, referrer=f'http://myvmeste.info?r={code.code}')
+        Profile.objects.create(user=instance, balance=balance, referrer=f'https://myvmeste.info?r={code.code}')
 
 
 @receiver(post_save, sender=User)

@@ -1,7 +1,7 @@
 from django.urls import path
 from django.views.decorators.cache import cache_page
 from .views import MainView, CategoryDetailView, FAQAsView, RegulationsView, OffersView, AboutAsView, \
-    OffersRedirectView, SearchView, ImportantAsView
+    OffersRedirectView, SearchView, ImportantAsView, PersonalSaleRedirectView
 
 
 urlpatterns = [
@@ -12,6 +12,7 @@ urlpatterns = [
     path('regulations/important', ImportantAsView.as_view(), name='important'),
     path('contacts', AboutAsView.as_view(), name='contacts'),
     path('faq', FAQAsView.as_view(), name='faq'),
+    path('sale', PersonalSaleRedirectView.as_view(), name='personal_sale_redirect'),
     path('offer-redirect/<str:ct_model>/<int:product_id>', OffersRedirectView.as_view(), name='redirect_offer'),
     path('search/', SearchView.as_view(), name='search'),
 ]

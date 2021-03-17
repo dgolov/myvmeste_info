@@ -1,7 +1,7 @@
 from django.contrib.auth import views
 from django.urls import path
 from .views import ProfileView, RegisterView, SettingsView, DeleteCard, GetApplicationsReport, MessagesView, \
-    FeedbackView, ChangePhoneView
+    FeedbackView, ChangePhoneView, PersonalSaleView
 from .utils import generate_qr
 
 
@@ -11,6 +11,7 @@ urlpatterns = [
     path('settings/', SettingsView.as_view(), name='settings'),
     path('messages/', MessagesView.as_view(), name='messages'),
     path('feedback/', FeedbackView.as_view(), name='feedback'),
+    path('personal-sale/', PersonalSaleView.as_view(), name='personal_sale'),
     path('change-phone/', ChangePhoneView.as_view(), name='change_phone'),
     path('login/', views.LoginView.as_view(), name='login'),
     path('logout/', views.LogoutView.as_view(), name='logout'),

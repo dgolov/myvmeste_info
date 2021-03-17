@@ -8,6 +8,7 @@ from django.views import View
 from django.views.generic import ListView, CreateView
 from datetime import datetime, date
 from web.utils import automatic_report
+from web.models import Categories, DebitCards, CreditCards, PotrebCredits, Mortgages, RKO, Refinancing, MFO
 from .forms import *
 from .models import Profile, ApplicationsForMoney, Cards, History, FeedBackRequests
 from .mixins import ProfileMixin
@@ -45,7 +46,7 @@ class ProfileView(ProfileMixin, View):
     def get(self, request, *args, **kwargs):
         self.get_context_data(request)
         try:
-            response = requests.get(f'{URL}/webmaster/conversions?start_date=2021-02-01&end_date={today}&token={TOKEN}')
+            response = requests.get(f'{URL}/webmaster/conversions?start_date=2021-02-15&end_date={today}&token={TOKEN}')
             for conversion in response.json()['data']:
                 try:
                     user = Profile.objects.get(pk=conversion['aff_sub1'])
@@ -336,3 +337,24 @@ class ChangePhoneView(LoginRequiredMixin, View):
         else:
             messages.add_message(request, messages.ERROR, f'Указанный номер телефона уже зарегистрирован в системе.')
         return HttpResponseRedirect('/profile/settings')
+
+
+class PersonalSaleView(ListView, ProfileMixin):
+    model = Categories
+    template_name = 'profiles/personal_sale.html'
+    context_object_name = 'categories'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(PersonalSaleView, self).get_context_data()
+        context['title'] = 'Личные продажи'
+        context['debit_cards'] = DebitCards.objects.filter(is_active=True)
+        context['credit_cards'] = CreditCards.objects.filter(is_active=True)
+        context['credits'] = PotrebCredits.objects.filter(is_active=True)
+        context['ipoteka'] = Mortgages.objects.filter(is_active=True)
+        context['rko'] = RKO.objects.filter(is_active=True)
+        context['refenancing'] = Refinancing.objects.filter(is_active=True)
+        context['mfo'] = MFO.objects.filter(is_active=True)
+        return context
+
+    def get_queryset(self):
+        return Categories.objects.filter(is_active=True).order_by('name')

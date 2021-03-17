@@ -4,10 +4,11 @@ from web.models import Offers, IDOrders
 
 
 def automatic_report(order_id, user, status, offer_id):
-    # print(order_id, user, status, offer_id)
+    # print(order_id, user.profile.pk, status, offer_id)
     new_order = False
     try:
         money = Offers.objects.get(offer_id=offer_id)
+        # print(money.reward)
     except Offers.DoesNotExist:
         return
     try:

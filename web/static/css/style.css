@@ -51,14 +51,14 @@ ul li i {
     padding-right: 5px;
 }
 
-ol {
-    list-style-type: none;
-    counter-reset: num;
-    position: relative;
-    margin: 0 0 0 60px;
-    padding: 15px 0 5px 0;
-    font-size: 16px;
-}
+/*ol {*/
+/*    list-style-type: none;*/
+/*    counter-reset: num;*/
+/*    position: relative;*/
+/*    margin: 0 0 0 60px;*/
+/*    padding: 15px 0 5px 0;*/
+/*    font-size: 16px;*/
+/*}*/
 
 p {
     font-size: 18px;
@@ -1595,6 +1595,15 @@ ul.benefits.white li i {
 
     .home-icons-carousel {
         display: inline;
+    }
+
+    .home-icons-carousel p{
+        font-size: 14px;
+    }
+
+    .home-icons-carousel img{
+        width: 100%;
+        height: 335px;
     }
 
     .down-home-icons-carousel {
