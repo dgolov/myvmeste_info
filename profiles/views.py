@@ -46,7 +46,7 @@ class ProfileView(ProfileMixin, View):
     def get(self, request, *args, **kwargs):
         self.get_context_data(request)
         try:
-            response = requests.get(f'{URL}/webmaster/conversions?start_date=2021-02-15&end_date={today}&token={TOKEN}')
+            response = requests.get(f'{URL}/webmaster/conversions?start_date=2021-03-01&end_date={today}&token={TOKEN}')
             for conversion in response.json()['data']:
                 try:
                     user = Profile.objects.get(pk=conversion['aff_sub1'])

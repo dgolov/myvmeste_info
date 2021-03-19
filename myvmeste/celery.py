@@ -18,8 +18,12 @@ app.autodiscover_tasks()
 
 
 app.conf.beat_schedule = {
-    'applications-from-leads': {
-        'task': 'web.tasks.my_first_task',
+    'reports-from-debit-leads': {
+        'task': 'web.tasks.get_reports_from_debit_leads_task',
         'schedule': 180.0,
-    }
+    },
+    'reports-from-guru': {
+        'task': 'web.tasks.get_reports_from_guru_task',
+        'schedule': 180.0,
+    },
 }
