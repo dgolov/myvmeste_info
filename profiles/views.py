@@ -6,15 +6,13 @@ from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import ListView, CreateView
-from datetime import datetime, date
-from web.utils import automatic_report
+from datetime import datetime
 from web.models import Categories, DebitCards, CreditCards, PotrebCredits, Mortgages, RKO, Refinancing, MFO
 from .forms import *
 from .models import Profile, ApplicationsForMoney, Cards, History, FeedBackRequests
 from .mixins import ProfileMixin
 from .utils import get_referred_user, create_referral_struct
 import xlwt
-import requests
 
 
 FEEDBACK_MESSAGE_TEMPLATE = '''Категория сообщения: "{}"
@@ -28,11 +26,6 @@ E-mail: {}
 Сообщение:
 {}'''
 
-TOKEN = 'ed8d9b747dd38505c298310009c45a3f'
-URL = 'http://api.leads.su'
-LEADS_STATUS = {'pending': 'Ожидает подтверждения', 'approved': 'Подтвержден', 'rejected': 'Отклонен'}
-today = date.today()
-
 
 class ProfileView(ProfileMixin, View):
     """ Представление страницы личного кабинета
@@ -45,18 +38,6 @@ class ProfileView(ProfileMixin, View):
 
     def get(self, request, *args, **kwargs):
         self.get_context_data(request)
-        try:
-            response = requests.get(f'{URL}/webmaster/conversions?start_date=2021-03-01&end_date={today}&token={TOKEN}')
-            for conversion in response.json()['data']:
-                try:
-                    user = Profile.objects.get(pk=conversion['aff_sub1'])
-                    order_id = conversion['id']
-                    status = LEADS_STATUS[conversion['status']]
-                    offer_id = conversion['offer_id']
-                    automatic_report(order_id, user.user, status, offer_id)
-                except (Profile.DoesNotExist, ValueError):
-                    continue
-        except: pass
         return render(request, 'profiles/profile.html', self.context)
 
     def post(self, request, *args, **kwargs):

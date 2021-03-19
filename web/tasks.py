@@ -8,7 +8,6 @@ from web.utils import automatic_report
 
 API_LEADS_CONF = {
     # http://api.leads.su/webmaster/conversions?start_date=2014-02-01&end_date=2014-02-20&offset=847&token=YOUR_TOKEN
-    'token': 'ed8d9b747dd38505c298310009c45a3f',
     'url': 'http://api.leads.su/webmaster/conversions',
     'status': {
         'pending': 'Ожидает подтверждения',
@@ -28,7 +27,12 @@ API_GURU_CONF = {
     },
     'offers': {
         # На разных площадках офферы имеют разные id. Здесь подбивается под одно
-        541: 9385
+        # Райф
+        541: 9385,
+        # Росбанк
+        435: 8836,
+        # Восточный
+        398: 9483,
     }
 }
 
@@ -37,8 +41,35 @@ end_date = date.today()
 
 @shared_task
 def get_reports_from_debit_leads_task():
+    """ Получение отчета с партнерской программы leads.su из кабинета с дебетовыми картами
+    """
+    token = 'ed8d9b747dd38505c298310009c45a3f'
+    get_leads_reports(token=token)
+
+
+@shared_task
+def get_reports_from_credit_leads_task():
+    """ Получение отчета с партнерской программы leads.su из кабинета с кредитными картами
+    """
+    token = '748af342bf59219c186b487f14c42c81'
+    get_leads_reports(token=token)
+
+
+@shared_task
+def get_reports_from_mfo_leads_task():
+    """ Получение отчета с партнерской программы leads.su из кабинета с МФО
+    """
+    token = 'ced4854fb6f47ffb82d0f7e100956f28'
+    get_leads_reports(token=token)
+
+
+def get_leads_reports(token):
+    """ Получение отчета с партнерской программы leads.su
+        ОБЩАЯ ЛОГИКА ЗАПРОСА
+    """
+    month = f'0{end_date.month}' if int(end_date.month) < 10 else f'{end_date.month}'
     response = requests.get(
-        f"{API_LEADS_CONF['url']}?start_date=2021-02-01&end_date={end_date}&token={API_LEADS_CONF['token']}"
+        f"{API_LEADS_CONF['url']}?start_date={end_date.year}-{month}-01&end_date={end_date}&token={token}"
     )
     for conversion in response.json()['data']:
         try:
@@ -54,6 +85,8 @@ def get_reports_from_debit_leads_task():
 
 @shared_task
 def get_reports_from_guru_task():
+    """ Получение отчета с партнерской программы guruleads.ru
+    """
     response = requests.get(
         f"{API_GURU_CONF['url']}?access-token={API_GURU_CONF['tocken']}&date_start=2021-03-16&date_end={end_date}")
     for conversion in response.json()['data']['items']:

@@ -22,6 +22,14 @@ app.conf.beat_schedule = {
         'task': 'web.tasks.get_reports_from_debit_leads_task',
         'schedule': 180.0,
     },
+    'reports-from-credit-leads': {
+        'task': 'web.tasks.get_reports_from_credit_leads_task',
+        'schedule': 180.0,
+    },
+    'reports-from-mfo-leads': {
+        'task': 'web.tasks.get_reports_from_mfo_leads_task',
+        'schedule': 180.0,
+    },
     'reports-from-guru': {
         'task': 'web.tasks.get_reports_from_guru_task',
         'schedule': 180.0,
