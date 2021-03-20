@@ -201,7 +201,9 @@ class AboutAsView(CreateView, UserMixin, View):
                     feed_back.theme,
                     feed_back.message
                     ),
-                'mail@myvmeste.info', ['dgolov@icloud.com'], fail_silently=False
+                'myvmeste_info@mail.ru',
+                ['dgolov@icloud.com', 'pestoffsn@gmail.com', 'myvmeste_info@mail.ru'],
+                fail_silently=False
                 )
             messages.add_message(request, messages.INFO, 'Ваше сообщение успешно отправлено')
         else:
