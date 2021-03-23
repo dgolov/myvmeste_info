@@ -34,3 +34,15 @@ def automatic_report(order_id, user, status, offer_id):
         first_user = {'user': user.get_full_name(), 'offer': get_product(order)}
         money_distribution(marketing_money=money.reward, rest_of_money=money.reward,
                            first_user=first_user, item_user=user, level_struct=0, order=order)
+
+
+def make_url_to_leads(user, offer, url):
+    if user.profile.struct == 1 and url:
+        generated_url = url.format(offer.referral_slug, user.profile.pk)
+        # message = f'Переход по ссылке на {self.offer}'
+        # add_to_user_history_list(self.user, message)
+    elif user.profile.struct == 2 and url:
+        generated_url = url.format(offer.referral_slug_2, user.profile.pk)
+    else:
+        generated_url = offer.referral_slug
+    return generated_url

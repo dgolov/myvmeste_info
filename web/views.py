@@ -11,6 +11,7 @@ from profiles.models import ReferralCodes, FeedBackRequests
 from profiles.views import FEEDBACK_MESSAGE_TEMPLATE
 from .models import DebitCards, CreditCards, Categories, PotrebCredits, Mortgages, MFO, RKO, Refinancing
 from .mixins import CategoryDetailMixin, UserMixin, CT_MODEL_MODEL_CLASS
+from .utils import make_url_to_leads
 from urllib.parse import urlparse
 
 
@@ -107,14 +108,9 @@ class OffersRedirectView(UserMixin, View):
             url = '{}?aff_sub1={}'
         elif domain == 'gl.guruleads.ru':
             url = '{}?sub1={}'
-        if self.user.profile.struct == 1 and url:
-            url = url.format(self.offer.referral_slug, self.user.profile.pk)
-            # message = f'Переход по ссылке на {self.offer}'
-            # add_to_user_history_list(self.user, message)
-        elif self.user.profile.struct == 2 and url:
-            url = url.format(self.offer.referral_slug_2, self.user.profile.pk)
-        else:
-            url = self.offer.referral_slug
+        elif domain == 'vlead.ru':
+            url = '{}?sub_id={}'
+        url = make_url_to_leads(user=self.user, offer=self.offer, url=url)
         return HttpResponseRedirect(url)
 
 
@@ -134,14 +130,9 @@ class PersonalSaleRedirectView(View):
             url = '{}?aff_sub2={}'
         elif domain == 'gl.guruleads.ru':
             url = '{}?sub2={}'
-        if self.user.profile.struct == 1 and url:
-            url = url.format(self.offer.referral_slug, self.user.profile.pk)
-            # message = f'Переход по ссылке на {self.offer}'
-            # add_to_user_history_list(self.user, message)
-        elif self.user.profile.struct == 2 and url:
-            url = url.format(self.offer.referral_slug_2, self.user.profile.pk)
-        else:
-            url = self.offer.referral_slug
+        elif domain == 'vlead.ru':
+            url = '{}?sub_id2={}'
+        url = make_url_to_leads(user=self.user, offer=self.offer, url=url)
         return HttpResponseRedirect(url)
 
 
