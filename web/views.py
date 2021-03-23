@@ -109,7 +109,7 @@ class OffersRedirectView(UserMixin, View):
         elif domain == 'gl.guruleads.ru':
             url = '{}?sub1={}'
         elif domain == 'vlead.ru':
-            url = '{}?sub_id={}'
+            url = '{}&sub_id={}'
         url = make_url_to_leads(user=self.user, offer=self.offer, url=url)
         return HttpResponseRedirect(url)
 
@@ -131,7 +131,7 @@ class PersonalSaleRedirectView(View):
         elif domain == 'gl.guruleads.ru':
             url = '{}?sub2={}'
         elif domain == 'vlead.ru':
-            url = '{}?sub_id2={}'
+            url = '{}&sub_id2={}'
         url = make_url_to_leads(user=self.user, offer=self.offer, url=url)
         return HttpResponseRedirect(url)
 
