@@ -12,27 +12,33 @@ class UserRegistrationForm(UserCreationForm):
     """
     username = forms.CharField(
         label='Логин',
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Логин...', 'style': 'width: 96%;'}))
+        widget=forms.TextInput(
+            attrs={'class': 'form-control', 'placeholder': 'Логин...', 'style': 'width: 96%;'}))
     email = forms.EmailField(
         label='Email',
-        widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email...', 'style': 'width: 96%;'}))
+        widget=forms.EmailInput(
+            attrs={'class': 'form-control', 'placeholder': 'Email...', 'style': 'width: 96%;'}))
     first_name = forms.CharField(
         label='Имя',
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Имя...', 'style': 'width: 96%;'}))
+        widget=forms.TextInput(
+            attrs={'class': 'form-control', 'placeholder': 'Имя...', 'style': 'width: 96%;'}))
     last_name = forms.CharField(
         label='Фамилия',
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Фамилия...', 'style': 'width: 96%;'}))
+        widget=forms.TextInput(
+            attrs={'class': 'form-control', 'placeholder': 'Фамилия...', 'style': 'width: 96%;'}))
     location = forms.CharField(
         label='Город',
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Город...', 'style': 'width: 96%;'}))
+        widget=forms.TextInput(
+            attrs={'class': 'form-control', 'placeholder': 'Город...', 'style': 'width: 96%;'}))
     phone = PhoneNumberField(
         label='Номер телефона',
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Номер телефона...',
-                                      'style': 'width: 96%;'}),
-        error_messages={NON_FIELD_ERRORS: {'Введите номе телефона',}})
+        widget=forms.TextInput(
+            attrs={'class': 'form-control', 'placeholder': 'Номер телефона...', 'style': 'width: 96%;'}),
+        error_messages={NON_FIELD_ERRORS: {'Введите номе телефона', }})
     password1 = forms.CharField(
         label='Пароль',
-        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Пароль...', 'style': 'width: 96%;'}))
+        widget=forms.PasswordInput(
+            attrs={'class': 'form-control', 'placeholder': 'Пароль...', 'style': 'width: 96%;'}))
     password2 = forms.CharField(
         label='Повтор пароля',
         widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Повтор пароля...',
@@ -72,6 +78,23 @@ class UserRegistrationForm(UserCreationForm):
         elif len(password2) < 8:
             raise forms.ValidationError('Пароль должен содержать не менее 8 символов.')
         return password2
+
+
+class AuthForm(forms.Form):
+    """ Форма входа пользователя
+    """
+    username = forms.CharField(
+        label='Логин',
+        widget=forms.TextInput(
+            attrs={'class': 'form-control', 'placeholder': 'Логин, телефон или email...', 'style': 'width: 96%;'}
+        )
+    )
+    password = forms.CharField(
+        label='Пароль',
+        widget=forms.PasswordInput(
+            attrs={'class': 'form-control', 'placeholder': 'Пароль...', 'style': 'width: 96%;'}
+        )
+    )
 
 
 class UserSettingsForm(forms.ModelForm):

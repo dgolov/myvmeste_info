@@ -1,8 +1,8 @@
 from django.contrib import messages
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import ListView, CreateView
@@ -52,6 +52,48 @@ class ProfileView(ProfileMixin, View):
         self.context['struct3'] = self.user.profile.struct3.all().select_related('profile', 'profile__referred')
         self.context['struct4'] = self.user.profile.struct4.all().select_related('profile', 'profile__referred')
         self.context['struct5'] = self.user.profile.struct5.all().select_related('profile', 'profile__referred')
+
+
+class ProfileLoginView(View):
+    """Идентификация и аутентификация пользователя по логину, номеру телефона и электронной почте
+    """
+    def get(self, request, *args, **kwargs):
+        auth_form = AuthForm
+        context = {
+            'title': "Вход",
+            'form': auth_form
+        }
+        return render(request, 'registration/login.html', context)
+
+    def post(self, request, *args, **kwargs):
+        auth_form = AuthForm(request.POST)
+        if auth_form.is_valid():
+            username = auth_form.cleaned_data['username']
+            password = auth_form.cleaned_data['password']
+            try:
+                profile = Profile.objects.get(phone=username)
+                username = profile.user.username
+            except Profile.DoesNotExist:
+                pass
+            try:
+                user = User.objects.get(email=username)
+                username = user.username
+            except User.DoesNotExist:
+                pass
+            user = authenticate(username=username, password=password)
+            if user:
+                if user.is_active:
+                    login(request, user)
+                    return HttpResponseRedirect('/profile')
+                else:
+                    auth_form.add_error('__all__', 'Ошибка! Учетная запись пользователя не активна')
+            else:
+                auth_form.add_error('__all__', 'Ошибка! Проверьте правильность ввода данных')
+        context = {
+            'title': "Вход",
+            'form': auth_form
+        }
+        return render(request, 'registration/login.html', context)
 
 
 class RegisterView(View):

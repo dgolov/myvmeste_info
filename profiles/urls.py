@@ -1,7 +1,7 @@
 from django.contrib.auth import views
 from django.urls import path
 from .views import ProfileView, RegisterView, SettingsView, DeleteCard, GetApplicationsReport, MessagesView, \
-    FeedbackView, ChangePhoneView, PersonalSaleView
+    FeedbackView, ChangePhoneView, PersonalSaleView, ProfileLoginView
 from .utils import generate_qr
 
 
@@ -13,7 +13,7 @@ urlpatterns = [
     path('feedback/', FeedbackView.as_view(), name='feedback'),
     path('personal-sale/', PersonalSaleView.as_view(), name='personal_sale'),
     path('change-phone/', ChangePhoneView.as_view(), name='change_phone'),
-    path('login/', views.LoginView.as_view(), name='login'),
+    path('login/', ProfileLoginView.as_view(), name='login'),
     path('logout/', views.LogoutView.as_view(), name='logout'),
     path('password-change', views.PasswordChangeView.as_view(), name='password_change'),
     path('password-change/done', views.PasswordChangeDoneView.as_view(), name='password_change_done'),
