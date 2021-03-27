@@ -1,0 +1,90 @@
+ 
+ -------------- celery@89-108-71-180.cloudvps.regruhosting.ru v5.0.5 (singularity)
+--- ***** ----- 
+-- ******* ---- Linux-5.4.0-67-generic-x86_64-with-glibc2.31 2021-03-27 17:16:46
+- *** --- * --- 
+- ** ---------- [config]
+- ** ---------- .> app:         myvmeste:0x7f00510ced30
+- ** ---------- .> transport:   redis://localhost:6379/0
+- ** ---------- .> results:     redis://localhost:6379/0
+- *** --- * --- .> concurrency: 4 (solo)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . web.tasks.get_reports_from_credit_leads_task
+  . web.tasks.get_reports_from_debit_leads_task
+  . web.tasks.get_reports_from_guru_task
+  . web.tasks.get_reports_from_mfo_leads_task
+
+[2021-03-27 17:16:46,413: INFO/MainProcess] Connected to redis://localhost:6379/0
+[2021-03-27 17:16:46,422: INFO/MainProcess] mingle: searching for neighbors
+[2021-03-27 17:16:47,442: INFO/MainProcess] mingle: all alone
+[2021-03-27 17:16:47,455: INFO/MainProcess] celery@89-108-71-180.cloudvps.regruhosting.ru ready.
+[2021-03-27 17:22:49,057: WARNING/MainProcess] consumer: Connection to broker lost. Trying to re-establish the connection...
+Traceback (most recent call last):
+  File "/home/www/env/lib/python3.9/site-packages/celery/worker/consumer/consumer.py", line 311, in start
+    blueprint.start(self)
+  File "/home/www/env/lib/python3.9/site-packages/celery/bootsteps.py", line 116, in start
+    step.start(parent)
+  File "/home/www/env/lib/python3.9/site-packages/celery/worker/consumer/consumer.py", line 592, in start
+    c.loop(*c.loop_args())
+  File "/home/www/env/lib/python3.9/site-packages/celery/worker/loops.py", line 81, in asynloop
+    next(loop)
+  File "/home/www/env/lib/python3.9/site-packages/kombu/asynchronous/hub.py", line 361, in create_loop
+    cb(*cbargs)
+  File "/home/www/env/lib/python3.9/site-packages/kombu/transport/redis.py", line 1087, in on_readable
+    self.cycle.on_readable(fileno)
+  File "/home/www/env/lib/python3.9/site-packages/kombu/transport/redis.py", line 358, in on_readable
+    chan.handlers[type]()
+  File "/home/www/env/lib/python3.9/site-packages/kombu/transport/redis.py", line 692, in _receive
+    ret.append(self._receive_one(c))
+  File "/home/www/env/lib/python3.9/site-packages/kombu/transport/redis.py", line 702, in _receive_one
+    response = c.parse_response()
+  File "/home/www/env/lib/python3.9/site-packages/redis/client.py", line 3505, in parse_response
+    response = self._execute(conn, conn.read_response)
+  File "/home/www/env/lib/python3.9/site-packages/redis/client.py", line 3479, in _execute
+    return command(*args, **kwargs)
+  File "/home/www/env/lib/python3.9/site-packages/redis/connection.py", line 739, in read_response
+    response = self._parser.read_response()
+  File "/home/www/env/lib/python3.9/site-packages/redis/connection.py", line 324, in read_response
+    raw = self._buffer.readline()
+  File "/home/www/env/lib/python3.9/site-packages/redis/connection.py", line 256, in readline
+    self._read_from_socket()
+  File "/home/www/env/lib/python3.9/site-packages/redis/connection.py", line 201, in _read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+[2021-03-27 17:22:49,089: ERROR/MainProcess] consumer: Cannot connect to redis://localhost:6379/0: Error 111 connecting to localhost:6379. Connection refused..
+Trying again in 2.00 seconds... (1/100)
+
+
+worker: Warm shutdown (MainProcess)
+ 
+ -------------- celery@89-108-71-180.cloudvps.regruhosting.ru v5.0.5 (singularity)
+--- ***** ----- 
+-- ******* ---- Linux-5.4.0-67-generic-x86_64-with-glibc2.31 2021-03-27 17:23:02
+- *** --- * --- 
+- ** ---------- [config]
+- ** ---------- .> app:         myvmeste:0x7f4b1af9cd30
+- ** ---------- .> transport:   redis://localhost:6379/0
+- ** ---------- .> results:     redis://localhost:6379/0
+- *** --- * --- .> concurrency: 4 (solo)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . web.tasks.get_reports_from_credit_leads_task
+  . web.tasks.get_reports_from_debit_leads_task
+  . web.tasks.get_reports_from_guru_task
+  . web.tasks.get_reports_from_mfo_leads_task
+
+[2021-03-27 17:23:03,175: INFO/MainProcess] Connected to redis://localhost:6379/0
+[2021-03-27 17:23:03,187: INFO/MainProcess] mingle: searching for neighbors
+[2021-03-27 17:23:04,206: INFO/MainProcess] mingle: all alone
+[2021-03-27 17:23:04,216: INFO/MainProcess] celery@89-108-71-180.cloudvps.regruhosting.ru ready.

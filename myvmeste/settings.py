@@ -24,10 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '14^_0(u&34(5yn#a$d6e!b43hgps*e9^h2kw8$e8#ycnt$kes0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['myvmeste.info', 'www.myvmeste.info', '127.0.0.1']
-
+ALLOWED_HOSTS = ['myvmeste.info', 'www.myvmeste.info', '127.0.0.1', '89.108.71.180']
 
 # Application definition
 
@@ -101,16 +100,13 @@ WSGI_APPLICATION = 'myvmeste.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-        # 'ENGINE': 'django.db.backends.mysql',
-        # 'NAME': 'u1267572_db_myvmeste',
-        # 'USER': 'u1267572_db2',
-        # 'PASSWORD': 'zAg8k!PI',
-        # 'HOST': 'localhost',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'db',
+        'USER': 'www',
+        'PASSWORD': 'Dima5671313',
+        'HOST': 'localhost',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
