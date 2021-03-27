@@ -72,7 +72,6 @@ def get_leads_reports(token):
         f"{API_LEADS_CONF['url']}?start_date={end_date.year}-{month}-01&end_date={end_date}&token={token}&limit=500"
     )
     for conversion in response.json()['data']:
-        print(conversion['aff_sub1'])
         try:
             user = Profile.objects.get(pk=conversion['aff_sub1'])
             order_id = conversion['id']

@@ -1,5 +1,5 @@
 <div class="modal fade mt-5 mb-5" id="ProductModal{{ category.slug }}{{ product.pk }}" tabindex="-1" role="dialog"
-     aria-labelledby="ProductModalLabel" aria-hidden="true">
+     aria-labelledby="ProductModalLabel" aria-hidden="true" style="padding-top: 40px;">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -30,13 +30,47 @@
                 <div class="container mb-4 mt-3">
                     <h5>Целевое действие</h5>
                     <p>{{ product.short_condition }}</p>
+                    <h5 class="margin-top-20">Ссылка для личной продажи</h5>
+                    {% if user.profile.status %}
+                        <input type="text" readonly style="color: #0b0b0b; width: 100%; margin-bottom: 10px;"
+                               {% if product.category.name == 'Дебетовые карты' %}
+                                    class="form-control DebitCardSlugInput"
+                               {% elif product.category.name == 'Кредитные карты' %}
+                                    class="form-control CreditCardSlugInput"
+                               {% elif product.category.name == 'Ипотечные кредиты' %}
+                                    class="form-control IpotekaSlugInput"
+                               {% elif product.category.name == 'МФО' %}
+                                    class="form-control MFOSlugInput"
+                               {% elif product.category.name == 'Потребительские кредиты' %}
+                                    class="form-control PotrebSlugInput"
+                               {% elif product.category.name == 'Расчетно-кассовое обслуживание' %}
+                                    class="form-control RKOSlugInput"
+                               {% elif product.category.name == 'Рефенансирование' %}
+                                    class="form-control RefinansingSlugInput"
+                               {% endif %}
+                               value="https://myvmeste.info/sale?category={{ category.slug }}&product={{ product.pk }}&pk={{ user.pk }}">
+                        <button class="btn btn-outline-success my-2 my-sm-0 width-100"
+                        {% if product.category.name == 'Дебетовые карты' %}
+                            onclick="CopyDebitCardSaleSlug{{ forloop.counter0 }}()"
+                        {% elif product.category.name == 'Кредитные карты' %}
+                            onclick="CopyCreditCardSaleSlug{{ forloop.counter0 }}()"
+                        {% elif product.category.name == 'Ипотечные кредиты' %}
+                            onclick="CopyIpotekaSaleSlug{{ forloop.counter0 }}()"
+                        {% elif product.category.name == 'МФО' %}
+                            onclick="CopyMFOSaleSlug{{ forloop.counter0 }}()"
+                        {% elif product.category.name == 'Потребительские кредиты' %}
+                            onclick="CopyPotrebSaleSlug{{ forloop.counter0 }}()"
+                        {% elif product.category.name == 'Расчетно-кассовое обслуживание' %}
+                            onclick="CopyRKOSaleSlug{{ forloop.counter0 }}()"
+                        {% elif product.category.name == 'Рефенансирование' %}
+                            onclick="CopyRefinansingSaleSlug{{ forloop.counter0 }}()"
+                        {% endif %}>
+                            Скопировать ссылку
+                        </button>
+                    {% else %}
+                        <p class="bold">Для осуществления личных продаж необходимо оформить любой банковский продукт</p>
+                    {% endif %}
                 </div>
-                <input class="form-control" type="text"
-                       value="http://127.0.0.1:8000/sale?category={{ category.slug }}&product={{ product.pk }}&pk={{ user.pk }}"
-                       id="SaleSlugInput" readonly style="color: #0b0b0b; width: 100%;">
-                <button onclick="CopySaleSlug()" class="btn btn-outline-success my-2 my-sm-0 width-100">
-                    Скопировать ссылку
-                </button>
                 <hr>
                 {% if product.main_characteristics %}
                     <div class="container mb-5 mt-5">
@@ -67,7 +101,7 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer mb-5">
+            <div class="modal-footer">
                 {% if user.is_authenticated %}
 
                 {% endif %}
@@ -78,8 +112,38 @@
 </div>
 
 <script>
-    function CopySaleSlug() {
-        var copyText = document.getElementById("SaleSlugInput");
+    function CopyDebitCardSaleSlug{{ forloop.counter0 }}() {
+        var copyText = document.getElementsByClassName("DebitCardSlugInput")[{{ forloop.counter0 }}];
+        copyText.select();
+        document.execCommand("copy");
+    }
+    function CopyCreditCardSaleSlug{{ forloop.counter0 }}() {
+        var copyText = document.getElementsByClassName("CreditCardSlugInput")[{{ forloop.counter0 }}];
+        copyText.select();
+        document.execCommand("copy");
+    }
+    function CopyRefinansingSaleSlug{{ forloop.counter0 }}() {
+        var copyText = document.getElementsByClassName("RefinansingSlugInput")[{{ forloop.counter0 }}];
+        copyText.select();
+        document.execCommand("copy");
+    }
+    function CopyIpotekaSaleSlug{{ forloop.counter0 }}() {
+        var copyText = document.getElementsByClassName("IpotekaSlugInput")[{{ forloop.counter0 }}];
+        copyText.select();
+        document.execCommand("copy");
+    }
+    function CopyMFOSaleSlug{{ forloop.counter0 }}() {
+        var copyText = document.getElementsByClassName("MFOSlugInput")[{{ forloop.counter0 }}];
+        copyText.select();
+        document.execCommand("copy");
+    }
+    function CopyPotrebSaleSlug{{ forloop.counter0 }}() {
+        var copyText = document.getElementsByClassName("PotrebSlugInput")[{{ forloop.counter0 }}];
+        copyText.select();
+        document.execCommand("copy");
+    }
+    function CopyRKOSaleSlug{{ forloop.counter0 }}() {
+        var copyText = document.getElementsByClassName("RKOSlugInput")[{{ forloop.counter0 }}];
         copyText.select();
         document.execCommand("copy");
     }

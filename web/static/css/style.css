@@ -2156,3 +2156,12 @@ input[type=text]:focus {
     visibility: visible;
     opacity: 1;
 }
+
+/* Личные продажи */
+
+.personal-sale {
+    margin: 30px 0 20px 25px;
+}
+.personal-sale li {
+    list-style-type: disc;
+}

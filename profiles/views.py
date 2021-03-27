@@ -7,6 +7,7 @@ from django.shortcuts import render
 from django.views import View
 from django.views.generic import ListView, CreateView
 from datetime import datetime
+from myvmeste.settings import DEBUG
 from web.models import Categories, DebitCards, CreditCards, PotrebCredits, Mortgages, RKO, Refinancing, MFO
 from .forms import *
 from .models import Profile, ApplicationsForMoney, Cards, History, FeedBackRequests
@@ -142,7 +143,7 @@ class RegisterView(View):
             send_mail(
                 'Регистрация в проекте "МыВместе"',
                 self.message.format(new_user.get_full_name()),
-                'mail@myvmeste.info',
+                'myvmeste_info@mail.ru',
                 ['{}'.format(new_user.email)],
                 fail_silently=False
             )
@@ -278,8 +279,8 @@ class GetApplicationsReport(View):
             application.save()
             num += 1
         date = datetime.now()
-
-        report.save("media/downloads/report{}.xls".format(date.strftime("%Y%m%d%H%M")))
+        path = "media/downloads/report{}.xls" if DEBUG else "/home/www/site/myvmeste_info/media/downloads/report{}.xls"
+        report.save(path.format(date.strftime("%Y%m%d%H%M")))
         return HttpResponseRedirect('/media/downloads/report{}.xls'.format(date.strftime("%Y%m%d%H%M")))
 
 
@@ -324,7 +325,9 @@ class FeedbackView(CreateView, ProfileMixin):
                     feed_back.theme,
                     feed_back.message
                     ),
-                'mail@myvmeste.info', ['dgolov@icloud.com'], fail_silently=False
+                'myvmeste_info@mail.ru',
+                ['dgolov@icloud.com', 'pestoffsn@gmail.com', 'myvmeste_info@mail.ru'],
+                fail_silently=False
                 )
             messages.add_message(request, messages.INFO, 'Ваше сообщение успешно отправлено')
         else:

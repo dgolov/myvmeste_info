@@ -221,6 +221,7 @@ class IDOrders(models.Model):
     offer_id = models.PositiveIntegerField(verbose_name='ID Оффера')
     status = models.CharField(max_length=250, db_index=True, verbose_name='Статус')
     broker = models.BooleanField(default=False, verbose_name='Брокерская заявка')
+    is_personal_sale = models.BooleanField(default=False, verbose_name='Личная продажа')
 
     class Meta:
         verbose_name = 'Отчет'

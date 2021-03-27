@@ -1,11 +1,10 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import View
+from myvmeste.settings import DEBUG
 from .models import Profile, Orders, ApplicationsForMoney, Cards
 from .forms import ApplicationsForMoneyForm, UploadFileForm, UploadOrderPayForm
-from .utils import get_product
-from web.mixins import money_distribution
-from web.models import IDOrders, Offers
+from web.utils import automatic_report
 from openpyxl import load_workbook
 
 
@@ -61,24 +60,21 @@ class ProfileMixin(LoginRequiredMixin, View):
         self.context['user'] = self.user
 
     def download_report(self, request):
-        """ Загрузка отчета партнерки
+        """ Загрузка и парсинг отчета партнерки в формате excel
         """
         item_row, item_user, money = 0, 0, 0
-        order_id, offer_id = None, None
         self.order_form = UploadFileForm(request.POST, request.FILES)
-        order = IDOrders()
         new_upload_order = Orders()
-
         if self.order_form.is_valid():
             new_upload_order.order = request.FILES['report']
             new_upload_order.save()
-            ex_data = load_workbook('./media/uploads/{}'.format(request.FILES['report']))
+            path = './media/uploads/{}' if DEBUG else '/home/www/site/myvmeste_info/media/uploads/{}'
+            ex_data = load_workbook(path.format(request.FILES['report']))
             first_sheet = ex_data.get_sheet_names()[0]
             worksheet = ex_data.get_sheet_by_name(first_sheet)
-            confirmed = {}
 
             for row in worksheet.iter_rows():
-                new_order = False
+                is_personal_sale, order_id, status, offer_id = False, None, None, None
                 item_row += 1
                 if item_row == 1:
                     continue
@@ -86,47 +82,27 @@ class ProfileMixin(LoginRequiredMixin, View):
                 for cell in row:
                     item_col += 1
                     if item_col == 1:
-                        try:
-                            order = IDOrders.objects.get(order_id=cell.value)
-                        except IDOrders.DoesNotExist:
-                            order_id = cell.value
-                            new_order = True
+                        order_id = cell.value
                     elif item_col == 3:
                         offer_id = int(cell.value.split(',')[0])
-                        money = Offers.objects.get(offer_id=offer_id)
                     elif item_col == 6:
-                        item_user = Profile.objects.get(id=int(cell.value))
+                        item_user = self.get_user_from_table_data(cell)
+                    elif item_col == 7:
+                        sub2_value = self.get_user_from_table_data(cell)
+                        if sub2_value:
+                            item_user = sub2_value
+                            is_personal_sale = True
                     elif item_col == 11:
-                        if not new_order and order.status != cell.value:
-                            # Отчет уже есть, но статус изменен
-                            confirmed[item_user] = cell.value
-                            order.status = cell.value
-                            order.save()
-                            first_user = {'user': item_user.user.get_full_name(), 'offer': get_product(order)}
-                            money_distribution(marketing_money=money.reward, rest_of_money=money.reward,
-                                               first_user=first_user, item_user=item_user.user,
-                                               level_struct=0, order=order)
-                        elif new_order:
-                            # Отчета нет в системе, создание нового
-                            confirmed[item_user] = cell.value
-                            order = IDOrders.objects.create(
-                                user=item_user,
-                                order_id=order_id,
-                                offer_id=offer_id,
-                                status=cell.value,
-                                broker=item_user.broker,
-                            )
-                            first_user = {'user': item_user.user.get_full_name(), 'offer': get_product(order)}
-                            money_distribution(marketing_money=money.reward, rest_of_money=money.reward,
-                                               first_user=first_user, item_user=item_user.user,
-                                               level_struct=0, order=order, new_order=True)
+                        status = cell.value
+                automatic_report(order_id, item_user.user, status, offer_id, is_personal_sale)
             new_upload_order.delete()
 
-            # Присвоение статуса брокера для пользователей с подтвержденными заявками
-            for user, status in confirmed.items():
-                if status == 'Подтвержден':
-                    user.broker = True
-                    user.save()
+    def get_user_from_table_data(self, cell):
+        try:
+            item_user = Profile.objects.get(pk=int(cell.value))
+        except TypeError:
+            return None
+        return item_user
 
     def download_report_pay(self, request):
         """ Загрузка отчета выплаченных средств
@@ -141,7 +117,8 @@ class ProfileMixin(LoginRequiredMixin, View):
         if self.order_form_pay.is_valid():
             new_upload_order.order = request.FILES['report_pay']
             new_upload_order.save()
-            ex_data = load_workbook('./media/uploads/{}'.format(request.FILES['report_pay']))
+            path = './media/uploads/{}' if DEBUG else '/home/www/site/myvmeste_info/media/uploads/{}'
+            ex_data = load_workbook(path.format(request.FILES['report_pay']))
             first_sheet = ex_data.get_sheet_names()[0]
             worksheet = ex_data.get_sheet_by_name(first_sheet)
 

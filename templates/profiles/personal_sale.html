@@ -10,6 +10,17 @@
                     {% if user.is_authenticated %}
                         <div class="col-md-12">
                             <h3>Личные продажи</h3>
+                            <p>
+                                Вознаграждение полученное с личных продаж не расределяется по маркетинговым уровням,
+                                здесь ты забираешь себе всю прибыль. Чтобы начать зарабатывать на распространении
+                                банковских продуктов следуй простому алгоритму действий:
+                            </p>
+                            <ul class="personal-sale">
+                                <li>Выбери продукт которым заинтересован твой клиент</li>
+                                <li>Нажми на кнопку "Получить ссылку"</li>
+                                <li>В появившемся онке будет доступна ссылка ведущая на форму заполнения заявки</li>
+                                <li>Нажми на кнопку "скопировать ссылку" и отправь её клиенту для заполнения заявки</li>
+                            </ul>
                             {% for category in categories %}
                                 <div class="row" id="debit-cards">
                                     <div class="col-md-12 margin-top-30">
@@ -17,19 +28,192 @@
                                     </div>
                                     {% if category.name == 'Дебетовые карты' %}
                                         <table class="table">
-                                        {% for product in debit_cards %}
+                                            <thead>
                                             <tr>
-                                                <td>{{ product.card_name }}</td>
-                                                <td>{{ product.reward }} рублей</td>
-                                                <td>
-                                                    <a class="btn btn-outline-primary" href="#" data-toggle="modal"
-                                                        data-target="#ProductModal{{ category.slug }}{{ product.pk }}">
-                                                        Получить ссылку
-                                                    </a>
-                                                    {% include 'profiles/inc/sale_modal.html' %}
-                                                </td>
+                                                <th></th>
+                                                <th>Наименование</th>
+                                                <th>Вознагражденине</th>
+                                                <th></th>
                                             </tr>
-                                        {% endfor %}
+                                            </thead>
+                                            {% for product in debit_cards %}
+                                                <tr>
+                                                    <td>
+                                                        <img src="{{ product.image.url }}" style="width: 50px;">
+                                                    </td>
+                                                    <td>{{ product.card_name }}</td>
+                                                    <td>{{ product.reward }} рублей</td>
+                                                    <td>
+                                                        <a class="btn btn-outline-primary" href="#" data-toggle="modal"
+                                                           data-target="#ProductModal{{ category.slug }}{{ product.pk }}">
+                                                            Получить ссылку
+                                                        </a>
+                                                        {% include 'profiles/inc/sale_modal.html' %}
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </table>
+                                    {% elif category.name == 'Кредитные карты' %}
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Наименование</th>
+                                                <th>Вознагражденине</th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+                                            {% for product in credit_cards %}
+                                                <tr>
+                                                    <td>
+                                                        <img src="{{ product.image.url }}" style="width: 50px;">
+                                                    </td>
+                                                    <td>{{ product.card_name }}</td>
+                                                    <td>{{ product.reward }} рублей</td>
+                                                    <td>
+                                                        <a class="btn btn-outline-primary" href="#" data-toggle="modal"
+                                                           data-target="#ProductModal{{ category.slug }}{{ product.pk }}">
+                                                            Получить ссылку
+                                                        </a>
+                                                        {% include 'profiles/inc/sale_modal.html' %}
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </table>
+                                    {% elif category.name == 'МФО' %}
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Наименование</th>
+                                                <th>Вознагражденине</th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+                                            {% for product in mfo %}
+                                                <tr>
+                                                    <td>
+                                                        <img src="{{ product.image.url }}" style="width: 50px;">
+                                                    </td>
+                                                    <td>{{ product.bank_name }}</td>
+                                                    <td>{{ product.reward }} рублей</td>
+                                                    <td>
+                                                        <a class="btn btn-outline-primary" href="#" data-toggle="modal"
+                                                           data-target="#ProductModal{{ category.slug }}{{ product.pk }}">
+                                                            Получить ссылку
+                                                        </a>
+                                                        {% include 'profiles/inc/sale_modal.html' %}
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </table>
+                                    {% elif category.name == 'Ипотечные кредиты' %}
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Наименование</th>
+                                                <th>Вознагражденине</th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+                                            {% for product in ipoteka %}
+                                                <tr>
+                                                    <td>
+                                                        <img src="{{ product.image.url }}" style="width: 50px;">
+                                                    </td>
+                                                    <td>{{ product.bank_name }}</td>
+                                                    <td>{{ product.reward }} рублей</td>
+                                                    <td>
+                                                        <a class="btn btn-outline-primary" href="#" data-toggle="modal"
+                                                           data-target="#ProductModal{{ category.slug }}{{ product.pk }}">
+                                                            Получить ссылку
+                                                        </a>
+                                                        {% include 'profiles/inc/sale_modal.html' %}
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </table>
+                                    {% elif category.name == 'Потребительские кредиты' %}
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Наименование</th>
+                                                <th>Вознагражденине</th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+                                            {% for product in credits %}
+                                                <tr>
+                                                    <td>
+                                                        <img src="{{ product.image.url }}" style="width: 50px;">
+                                                    </td>
+                                                    <td>{{ product.bank_name }}</td>
+                                                    <td>{{ product.reward }} рублей</td>
+                                                    <td>
+                                                        <a class="btn btn-outline-primary" href="#" data-toggle="modal"
+                                                           data-target="#ProductModal{{ category.slug }}{{ product.pk }}">
+                                                            Получить ссылку
+                                                        </a>
+                                                        {% include 'profiles/inc/sale_modal.html' %}
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </table>
+                                    {% elif category.name == 'Расчетно-кассовое обслуживание' %}
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Наименование</th>
+                                                <th>Вознагражденине</th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+                                            {% for product in rko %}
+                                                <tr>
+                                                    <td>
+                                                        <img src="{{ product.image.url }}" style="width: 50px;">
+                                                    </td>
+                                                    <td>{{ product.bank_name }}</td>
+                                                    <td>{{ product.reward }} рублей</td>
+                                                    <td>
+                                                        <a class="btn btn-outline-primary" href="#" data-toggle="modal"
+                                                           data-target="#ProductModal{{ category.slug }}{{ product.pk }}">
+                                                            Получить ссылку
+                                                        </a>
+                                                        {% include 'profiles/inc/sale_modal.html' %}
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </table>
+                                    {% elif category.name == 'Рефенансирование' %}
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Наименование</th>
+                                                <th>Вознагражденине</th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+                                            {% for product in refenancing %}
+                                                <tr>
+                                                    <td>
+                                                        <img src="{{ product.image.url }}" style="width: 50px;">
+                                                    </td>
+                                                    <td>{{ product.bank_name }}</td>
+                                                    <td>{{ product.reward }} рублей</td>
+                                                    <td>
+                                                        <a class="btn btn-outline-primary" href="#" data-toggle="modal"
+                                                           data-target="#ProductModal{{ category.slug }}{{ product.pk }}">
+                                                            Получить ссылку
+                                                        </a>
+                                                        {% include 'profiles/inc/sale_modal.html' %}
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
                                         </table>
                                     {% endif %}
                                 </div>

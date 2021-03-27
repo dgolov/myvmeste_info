@@ -129,7 +129,7 @@
             </form>
         </div>
         <div class="modal fade mt-5 mb-5" id="ProductModal{{ product.pk }}" tabindex="-1" role="dialog"
-             aria-labelledby="ProductModalLabel" aria-hidden="true">
+             aria-labelledby="ProductModalLabel" aria-hidden="true" style="padding-top: 30px;">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -201,7 +201,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer mb-5">
+                    <div class="modal-footer">
                         {% if user.is_authenticated %}
                             <form action="{% url 'redirect_offer' ct_model=product.category.slug product_id=product.pk %}"
                                   method="get">
