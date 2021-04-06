@@ -1,3 +1,8 @@
 /env/
 /db.sqlite3
 /celerybeat-schedule.db
+/celery_beat.log
+/celery_worker.log
+/celerybeat-schedule.bak
+/celerybeat-schedule.dat
+/celerybeat-schedule.dir

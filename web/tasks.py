@@ -18,7 +18,7 @@ API_LEADS_CONF = {
 
 API_GURU_CONF = {
     # https://api.guruleads.ru/1.0/stats/conversions?access-token=YOUR_TOKEN&date_start=DATE&date_end=DATE
-    'tocken': 'ca917561b32c1620512547d9ca8be01d',
+    'token': 'ca917561b32c1620512547d9ca8be01d',
     'url': 'https://api.guruleads.ru/1.0/stats/conversions',
     'status': {
         2: 'Ожидает подтверждения',
@@ -73,7 +73,10 @@ def get_leads_reports(token):
     )
     for conversion in response.json()['data']:
         try:
-            user = Profile.objects.get(pk=conversion['aff_sub1'])
+            if conversion['aff_sub1']:
+                user = Profile.objects.get(pk=conversion['aff_sub1'])
+            else:
+                user = Profile.objects.get(pk=conversion['aff_sub2'])
             order_id = conversion['id']
             conversion_status = conversion['status']
             status = API_LEADS_CONF['status'][conversion_status]
@@ -88,10 +91,13 @@ def get_reports_from_guru_task():
     """ Получение отчета с партнерской программы guruleads.ru
     """
     response = requests.get(
-        f"{API_GURU_CONF['url']}?access-token={API_GURU_CONF['tocken']}&date_start=2021-03-16&date_end={end_date}")
+        f"{API_GURU_CONF['url']}?access-token={API_GURU_CONF['token']}&date_start=2021-03-16&date_end={end_date}")
     for conversion in response.json()['data']['items']:
         try:
-            user = Profile.objects.get(pk=conversion['sub1'])
+            if conversion['sub1']:
+                user = Profile.objects.get(pk=conversion['sub1'])
+            else:
+                user = Profile.objects.get(pk=conversion['sub2'])
             order_id = conversion['external_id']
             conversion_status = conversion['status']
             status = API_GURU_CONF['status'][conversion_status]

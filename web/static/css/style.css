@@ -51,15 +51,6 @@ ul li i {
     padding-right: 5px;
 }
 
-/*ol {*/
-/*    list-style-type: none;*/
-/*    counter-reset: num;*/
-/*    position: relative;*/
-/*    margin: 0 0 0 60px;*/
-/*    padding: 15px 0 5px 0;*/
-/*    font-size: 16px;*/
-/*}*/
-
 p {
     font-size: 18px;
     line-height: 30px;
@@ -783,11 +774,6 @@ span.template-name {
 .home-images-center {
     margin: 3rem 0 3rem 0 !important;
     text-align: center;
-}
-
-.section_without_color p.word-spacing-align {
-    text-align: justify;
-    word-spacing: -1px;
 }
 
 .home-numbers {
