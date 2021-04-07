@@ -75,13 +75,15 @@ def get_leads_reports(token):
         try:
             if conversion['aff_sub1']:
                 user = Profile.objects.get(pk=conversion['aff_sub1'])
+                is_personal_sale = False
             else:
                 user = Profile.objects.get(pk=conversion['aff_sub2'])
+                is_personal_sale = True
             order_id = conversion['id']
             conversion_status = conversion['status']
             status = API_LEADS_CONF['status'][conversion_status]
             offer_id = conversion['offer_id']
-            automatic_report(order_id, user.user, status, offer_id)
+            automatic_report(order_id, user.user, status, offer_id, is_personal_sale)
         except:
             continue
 
@@ -96,12 +98,14 @@ def get_reports_from_guru_task():
         try:
             if conversion['sub1']:
                 user = Profile.objects.get(pk=conversion['sub1'])
+                is_personal_sale = False
             else:
                 user = Profile.objects.get(pk=conversion['sub2'])
+                is_personal_sale = True
             order_id = conversion['external_id']
             conversion_status = conversion['status']
             status = API_GURU_CONF['status'][conversion_status]
             offer_id = API_GURU_CONF['offers'][conversion['offer_id']]
-            automatic_report(order_id, user.user, status, offer_id)
+            automatic_report(order_id, user.user, status, offer_id, is_personal_sale)
         except:
             continue
