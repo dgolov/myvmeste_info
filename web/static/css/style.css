@@ -960,7 +960,7 @@ span.template-name {
 .video-icon i {
     font-size: 26px;
     line-height: 56px;
-    color: #e52a3d;
+    color: #02BAE8;
     margin-left: 18px;
     transition: all 0.4s ease-in-out;
     -webkit-transition: all 0.4s ease-in-out;
@@ -1040,7 +1040,7 @@ span.template-name {
 }
 
 .video-icon-red:hover i {
-    color: #e52a3d;
+    color: #02BAE8;
 }
 
 .popup-video-text {
@@ -1060,6 +1060,7 @@ span.template-name {
     padding-left: 20px;
     font-size: 18px;
     line-height: 28px;
+    display: inline;
     color: #1e0037;
     text-decoration: underline;
 }
