@@ -162,11 +162,11 @@ MEDIA_URL = '/media/'
 
 
 # Email
-DEFAULT_FROM_EMAIL = 'myvmeste_info@mail.ru'
+DEFAULT_FROM_EMAIL = ''
 EMAIL_HOST = 'smtp.mail.ru'
 EMAIL_PORT = 465
-EMAIL_HOST_USER = 'myvmeste_info@mail.ru'
-EMAIL_HOST_PASSWORD = 'Dima5671313'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 
